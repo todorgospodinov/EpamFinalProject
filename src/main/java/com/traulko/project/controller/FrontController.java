@@ -32,6 +32,7 @@ public class FrontController extends HttpServlet {
         Optional<CustomCommand> commandOptional = CommandProvider.defineCommand(commandName);
         CustomCommand command = commandOptional.orElseThrow(IllegalArgumentException::new);
         String page = command.execute(request);
+        // TODO: 12.10.2020 session 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request, response);
     }

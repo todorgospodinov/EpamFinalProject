@@ -5,9 +5,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public interface MainDao {
     default void close(Statement statement) {
@@ -26,17 +25,6 @@ public interface MainDao {
         if (connection != null) {
             try {
                 connection.close();
-            } catch (SQLException e) {
-                logger.log(Level.ERROR, "Statement hasn't been closed");
-            }
-        }
-    }
-
-    default void close(ResultSet resultSet) {
-        final Logger logger = LogManager.getLogger(MainDao.class);
-        if (resultSet != null) {
-            try {
-                resultSet.close();
             } catch (SQLException e) {
                 logger.log(Level.ERROR, "Statement hasn't been closed");
             }

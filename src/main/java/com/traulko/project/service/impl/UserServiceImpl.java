@@ -14,22 +14,77 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
+    private UserDao userDao = new UserDaoImpl();
 
     @Override
-    public boolean isUserExists(String login, String password) throws ServiceException {
+    public boolean isEmailFree(String email) throws ServiceException {
         UserValidator userValidator = new UserValidatorImpl();
-        UserDao userDao = new UserDaoImpl();
         boolean result = false;
-        if (userValidator.isLoginValid(login) && userValidator.isPasswordValid(password)) {
+        if (userValidator.isEmailValid(email)) {
             try {
-                Optional<User> optionalUser = userDao.findByLogin(login);
-                if (optionalUser.isPresent()) {
-                    User user = optionalUser.get();
-                    CustomCipher customCipher = new CustomCipher();
-                    String encryptedPassword = customCipher.encrypt(password);
-                    result = user.getLogin().equals(login) &&
-                            user.getPassword().equals(encryptedPassword);
+                Optional<User> optionalUser = userDao.findByEmail(email);
+                result = optionalUser.isPresent() ? true : false;
+            } catch (DaoException e) {
+                throw new ServiceException("Error while checking free email " +
+                        "for presence in database", e);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public User getUserByEmail(String email) throws ServiceException {
+        User user;
+        try {
+            Optional<User> optionalUser = userDao.findByEmail(email);
+            user = optionalUser.get();
+        } catch (DaoException e) {
+            throw new ServiceException("Error while getting user by email", e);
+        }
+        return user;
+    }
+
+    @Override
+    public boolean isPasswordValid(String password) {
+        UserValidator userValidator = new UserValidatorImpl();
+        return userValidator.isPasswordValid(password);
+    }
+
+    @Override
+    public boolean activateUser(String email) throws ServiceException {
+        boolean result = false;
+        try {
+            Optional<User> optionalUser = userDao.findByEmail(email);
+            if (optionalUser.isPresent()) {
+                User user = optionalUser.get();
+                user.setStatus(User.Status.ENABLE);
+                if (userDao.updateUser(user)) {
+                    result = true;
                 }
+            }
+        } catch (DaoException e) {
+            throw new ServiceException("Error while updating user", e);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean isEmailValid(String email) {
+        UserValidator userValidator = new UserValidatorImpl();
+        return userValidator.isEmailValid(email);
+    }
+
+
+    @Override
+    public boolean isUserExists(String email, String password) throws ServiceException {
+        UserValidator userValidator = new UserValidatorImpl();
+        boolean result = false;
+        if (userValidator.isEmailValid(email) && userValidator.isPasswordValid(password)) {
+            try {
+                CustomCipher cipher = new CustomCipher();
+                String encryptedPassword = cipher.encrypt(password);
+                Optional<User> optionalUser = userDao.findByEmailAndPassword(email, encryptedPassword);
+                result = optionalUser.isPresent() ? true : false;
             } catch (DaoException | NoSuchAlgorithmException e) {
                 throw new ServiceException("Error while checking user " +
                         "for presence in database", e);
@@ -39,12 +94,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerUser(String login, String password, boolean isEnable) throws ServiceException {
-        UserDao userDao = new UserDaoImpl();
-        User user = new User(login, password, isEnable);
+    public void registerUser(String email, String password,
+                             String name, String surname, String patronymic) throws ServiceException {
         try {
-            userDao.addUser(user);
-        } catch (DaoException e) {
+            CustomCipher cipher = new CustomCipher();
+            String encryptedPassword = cipher.encrypt(password);
+            userDao.addUser(email, encryptedPassword, name, surname, patronymic);
+        } catch (DaoException | NoSuchAlgorithmException e) {
             throw new ServiceException("Error while adding user", e);
         }
     }
