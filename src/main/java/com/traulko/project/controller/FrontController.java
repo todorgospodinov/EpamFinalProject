@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -29,10 +30,14 @@ public class FrontController extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String commandName = request.getParameter(RequestParameter.COMMAND_NAME);
-        Optional<CustomCommand> commandOptional = CommandProvider.defineCommand(commandName);
-        CustomCommand command = commandOptional.orElseThrow(IllegalArgumentException::new);
+        CustomCommand command = CommandProvider.defineCommand(commandName);
         String page = command.execute(request);
-        // TODO: 12.10.2020 session 
+        HttpSession session = request.getSession();
+        session.setAttribute(RequestParameter.CURRENT_PAGE, page);
+        RequestAttributeHandler requestAttributeHandler = new RequestAttributeHandler();
+        requestAttributeHandler.setAttributes(request);
+        session.setAttribute(RequestParameter.REQUEST_ATTRIBUTE_HANDLER,
+                requestAttributeHandler);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request, response);
     }

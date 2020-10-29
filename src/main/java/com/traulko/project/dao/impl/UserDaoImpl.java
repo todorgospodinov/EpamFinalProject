@@ -8,6 +8,8 @@ import com.traulko.project.exception.ConnectionDatabaseException;
 import com.traulko.project.exception.DaoException;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
@@ -19,17 +21,22 @@ public class UserDaoImpl implements UserDao {
             " surname, patronymic, role, status) values (?, ?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_USER = "UPDATE users set email = ?, name = ?, surname = ?," +
             " patronymic = ?, role = ?, status = ? where id = ?";
+    private static final String FIND_ALL_USERS = "SELECT id, email, name, surname, patronymic," +
+            " role, status FROM users";
+    private static final String FIND_USERS_BY_SEARCH_QUERY = "SELECT id, email, name, surname, " +
+            "patronymic, role, status FROM users where concat(id, email, name, surname," +
+            " patronymic, role, status) like ?";
+    private static final String PERCENT = "%";
 
     public Optional<User> findByEmailAndPassword(String email, String password) throws DaoException {
         Connection connection = null;
         PreparedStatement statement = null;
-        ResultSet resultSet = null;
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(FIND_USER_BY_EMAIL_AND_PASSWORD);
             statement.setString(1, email);
             statement.setString(2, password);
-            resultSet = statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery();
             Optional<User> userOptional = Optional.empty();
             if (resultSet.next()) {
                 User user = createUserFromResultSet(resultSet);
@@ -44,10 +51,10 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    public boolean updateUser(User user) throws DaoException {
+    public boolean update(User user) throws DaoException {
         Connection connection = null;
         PreparedStatement statement = null;
-        boolean result = false;
+        boolean result;
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(UPDATE_USER);
@@ -66,6 +73,51 @@ public class UserDaoImpl implements UserDao {
             close(connection);
         }
         return result;
+    }
+
+    @Override
+    public List<User> findAll() throws DaoException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            statement = connection.prepareStatement(FIND_ALL_USERS);
+            ResultSet resultSet = statement.executeQuery();
+            List<User> userList = new ArrayList<>();
+            while (resultSet.next()) {
+                User user = createUserFromResultSet(resultSet);
+                userList.add(user);
+            }
+            return userList;
+        } catch (SQLException | ConnectionDatabaseException e) {
+            throw new DaoException("Finding all users error", e);
+        } finally {
+            close(statement);
+            close(connection);
+        }
+    }
+
+    @Override
+    public List<User> findBySearchQuery(String searchQuery) throws DaoException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            statement = connection.prepareStatement(FIND_USERS_BY_SEARCH_QUERY);
+            statement.setString(1, PERCENT + searchQuery + PERCENT);
+            ResultSet resultSet = statement.executeQuery();
+            List<User> userList = new ArrayList<>();
+            while (resultSet.next()) {
+                User user = createUserFromResultSet(resultSet);
+                userList.add(user);
+            }
+            return userList;
+        } catch (SQLException | ConnectionDatabaseException e) {
+            throw new DaoException("Finding users by search query error", e);
+        } finally {
+            close(statement);
+            close(connection);
+        }
     }
 
     public Optional<User> findByEmail(String email) throws DaoException {
@@ -91,11 +143,11 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean addUser(String email, String password, String name,
-                           String surname, String patronymic) throws DaoException {
+    public boolean add(String email, String password, String name,
+                       String surname, String patronymic) throws DaoException {
         Connection connection = null;
         PreparedStatement statement = null;
-        boolean result = false;
+        boolean result;
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(ADD_USER);

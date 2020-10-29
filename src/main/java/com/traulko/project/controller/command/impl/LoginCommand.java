@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 
 public class LoginCommand implements CustomCommand {
     private static final String ATTRIBUTE_USER = "user";
+    private static final UserService userService = new UserServiceImpl();
 
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
 
     public String execute(HttpServletRequest request) {
-        UserService userService = new UserServiceImpl();
         String page;
         String email = request.getParameter(RequestParameter.EMAIL);
         String password = request.getParameter(RequestParameter.PASSWORD);

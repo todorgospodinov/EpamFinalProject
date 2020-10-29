@@ -16,6 +16,12 @@ public class RequestParameter {
     public static final String MAIL_MESSAGE = "Register in online store\nTo make your account enable, follow this link";
     public static final String MAIL_MESSAGE_LINK = "http://localhost:8080/EpamFinalProject_1_0_SNAPSHOT_war/" +
             "controller?commandName=activate_account&email=";
+    public static final String REQUEST_ATTRIBUTE_HANDLER = "requestAttributeHandler";
+    public static final String CURRENT_PAGE = "currentPage";
+    public static final String NEW_LOCALE = "newLocale";
+    public static final String CURRENT_LOCALE = "currentLocale";
+    public static final String USERS = "users";
+    public static final String SEARCH_USERS_QUERY = "searchUsersQuery";
 
     private RequestParameter() {
     }

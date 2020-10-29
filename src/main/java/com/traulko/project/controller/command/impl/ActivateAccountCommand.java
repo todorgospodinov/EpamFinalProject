@@ -13,12 +13,12 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 public class ActivateAccountCommand implements CustomCommand {
+    private static final UserService userService = new UserServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();
     @Override
     public String execute(HttpServletRequest request) {
         String page;
         String email = request.getParameter(RequestParameter.EMAIL);
-        UserService userService = new UserServiceImpl();
         try {
             userService.activateUser(email);
             page = PagePath.MAIN;

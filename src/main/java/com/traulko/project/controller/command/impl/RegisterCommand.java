@@ -17,9 +17,10 @@ import java.io.IOException;
 
 public class RegisterCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger();
+    private static final UserService userService = new UserServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) {
-        UserService userService = new UserServiceImpl();
         String page;
         String email = request.getParameter(RequestParameter.REGISTER_EMAIL);
         String password = request.getParameter(RequestParameter.REGISTER_PASSWORD);

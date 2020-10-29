@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
+body, header {
+    background-color: lightblue;
+    font-family: "Oswald";
+    font-weight: 3000;
+    font-size: 16px;
+    color: black;
+    margin-top: 20px;
+}
+
+form {
+    margin: 10px;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.navbar {
+    font-weight: 800;
+    font-size: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.navbar-inverse {
+    background-color: azure;
+    border: azure;
+}
+
+.wrapper {
+    color: #1c7430;
+    display: flex;
+}

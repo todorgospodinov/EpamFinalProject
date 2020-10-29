@@ -2,21 +2,24 @@ package com.traulko.project.controller.command.type;
 
 import com.traulko.project.controller.command.CustomCommand;
 import com.traulko.project.controller.command.impl.*;
-import com.traulko.project.controller.command.impl.transition.GoToLoginPageCommand;
-import com.traulko.project.controller.command.impl.transition.GoToMainPageCommand;
-import com.traulko.project.controller.command.impl.transition.GoToRegistrationPageCommand;
+import com.traulko.project.controller.command.impl.page.*;
 
 public enum CommandType {
     LOGIN_COMMAND(new LoginCommand()),
     REGISTER_COMMAND(new RegisterCommand()),
     LOGOUT_COMMAND(new LogoutCommand()),
-    TEST_COMMAND(new TestCommand()),
     ACTIVATE_ACCOUNT(new ActivateAccountCommand()),
+    FIND_USERS_COMMAND(new FindUsersCommand()),
 
 
-    GO_TO_MAIN_PAGE(new GoToMainPageCommand()),
-    GO_TO_LOGIN_PAGE(new GoToLoginPageCommand()),
-    GO_TO_REGISTRATION_PAGE(new GoToRegistrationPageCommand());
+    SWITCH_LANGUAGE(new SwitchLanguageCommand()),
+
+
+    MAIN_PAGE(new MainPageCommand()),
+    LOGIN_PAGE(new LoginPageCommand()),
+    PERSONAL_ACCOUNT_PAGE(new PersonalAccountPageCommand()),
+    ADMIN_PAGE(new AdminPageCommand()),
+    REGISTRATION_PAGE(new RegistrationPageCommand());
 
     private final CustomCommand command;
 

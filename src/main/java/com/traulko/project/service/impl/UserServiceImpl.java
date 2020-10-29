@@ -11,6 +11,7 @@ import com.traulko.project.validator.UserValidator;
 import com.traulko.project.validator.impl.UserValidatorImpl;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
@@ -58,7 +59,7 @@ public class UserServiceImpl implements UserService {
             if (optionalUser.isPresent()) {
                 User user = optionalUser.get();
                 user.setStatus(User.Status.ENABLE);
-                if (userDao.updateUser(user)) {
+                if (userDao.update(user)) {
                     result = true;
                 }
             }
@@ -66,6 +67,26 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException("Error while updating user", e);
         }
         return result;
+    }
+
+    @Override
+    public List<User> findAll() throws ServiceException {
+        try {
+            List<User> userList = userDao.findAll();
+            return userList;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding all users in batabase", e);
+        }
+    }
+
+    @Override
+    public List<User> findBySearchQuery(String searchQuery) throws ServiceException {
+        try {
+            List<User> userList = userDao.findBySearchQuery(searchQuery);
+            return userList;
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding users by search query in batabase", e);
+        }
     }
 
     @Override
@@ -99,7 +120,7 @@ public class UserServiceImpl implements UserService {
         try {
             CustomCipher cipher = new CustomCipher();
             String encryptedPassword = cipher.encrypt(password);
-            userDao.addUser(email, encryptedPassword, name, surname, patronymic);
+            userDao.add(email, encryptedPassword, name, surname, patronymic);
         } catch (DaoException | NoSuchAlgorithmException e) {
             throw new ServiceException("Error while adding user", e);
         }
