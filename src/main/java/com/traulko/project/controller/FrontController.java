@@ -2,6 +2,7 @@ package com.traulko.project.controller;
 
 import com.traulko.project.controller.command.CommandProvider;
 import com.traulko.project.controller.command.CustomCommand;
+import com.traulko.project.dao.connection.ConnectionPool;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,5 +41,11 @@ public class FrontController extends HttpServlet {
                 requestAttributeHandler);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request, response);
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        ConnectionPool.getInstance().destroyPool();
     }
 }

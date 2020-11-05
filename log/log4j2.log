@@ -1,15 +1,48 @@
-2020-09-17 09:50:10 [main] INFO  com.traulko.project.connection.ConnectionPool - Connection pool has been filled
-2020-09-17 09:52:28 [main] INFO  com.traulko.project.connection.ConnectionPool - Connection pool has been filled
-2020-09-17 09:53:47 [main] INFO  com.traulko.project.connection.ConnectionPool - Connection pool has been filled
-2020-09-17 09:55:01 [main] INFO  com.traulko.project.connection.ConnectionPool - Connection pool has been filled
-2020-09-17 09:56:05 [main] INFO  com.traulko.project.connection.ConnectionPool - Connection pool has been filled
-2020-09-17 09:57:00 [main] INFO  com.traulko.project.connection.ConnectionPool - Connection pool has been filled
-2020-09-17 09:59:22 [main] INFO  com.traulko.project.connection.ConnectionPool - Connection pool has been filled
-2020-09-17 09:59:55 [main] INFO  com.traulko.project.connection.ConnectionPool - Connection pool has been filled
-2020-09-17 10:02:55 [main] INFO  com.traulko.project.connection.ConnectionPool - Connection pool has been filled
-2020-09-17 10:03:16 [main] INFO  com.traulko.project.connection.ConnectionPool - Connection pool has been filled
-2020-09-17 10:05:44 [main] INFO  com.traulko.project.connection.ConnectionPool - Connection pool has been filled
-2020-09-22 02:16:27 [main] INFO  com.traulko.project.connection.ConnectionPool - Connection pool has been filled
-2020-09-22 02:17:10 [main] INFO  com.traulko.project.connection.ConnectionPool - Connection pool has been filled
-2020-09-22 02:17:43 [main] INFO  com.traulko.project.connection.ConnectionPool - Connection pool has been filled
-2020-09-22 02:22:19 [main] INFO  com.traulko.project.connection.ConnectionPool - Connection pool has been filled
+2020-10-29 09:41:51 [main] INFO  traulko.project.task.parser.DomParser - Start DOM
+2020-10-29 09:41:52 [main] ERROR traulko.project.task.parser.DomParser - Error getData DOM Parserorg.xml.sax.SAXParseException; systemId: file:///C:\Users\ян\Desktop\EpamFinalProject\target\test-classes\error.xml; lineNumber: 1; columnNumber: 1; Premature end of file.
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Start DOM
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to Name1
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to Minsk
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to One
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to ground
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to Red
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to 120
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to 23.5
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to true
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to 30
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to seeds
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to 2002-06-23
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to Name2
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to Minsk
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to Two
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to ground
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to Red
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to 120
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to 23.5
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to true
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to 30
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to seeds
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to 2001-03-12
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Start DOM
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to Name1
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to Minsk
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to One
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to ground
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to Red
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to 120
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to 23.5
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to true
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to 30
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to seeds
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to 2002-06-23
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to Name2
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to Minsk
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to Two
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to ground
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to Red
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to 120
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to 23.5
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to true
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to 30
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to seeds
+2020-10-29 09:41:52 [main] INFO  traulko.project.task.parser.DomParser - Add to 2001-03-12

@@ -16,10 +16,10 @@ public class SwitchLanguageCommand implements CustomCommand {
         session.setAttribute(RequestParameter.CURRENT_LOCALE, locale);
         RequestAttributeHandler requestAttributeHandler =
                 (RequestAttributeHandler) session.getAttribute(RequestParameter.REQUEST_ATTRIBUTE_HANDLER);
-//        Map<String, Object> attributes = requestAttributeHandler.getAttributes();
-//        for (Map.Entry<String, Object> entry : attributes.entrySet()) {
-//            request.setAttribute(entry.getKey(), entry.getValue());
-//        }
+        Map<String, Object> attributes = requestAttributeHandler.getAttributes();
+        for (Map.Entry<String, Object> entry : attributes.entrySet()) {
+            request.setAttribute(entry.getKey(), entry.getValue());
+        }
         return (String) session.getAttribute(RequestParameter.CURRENT_PAGE);
     }
 }

@@ -7,7 +7,7 @@ public class User {
     public enum Status {
         ENABLE, BLOCKED, NOT_CONFIRMED;
     }
-    private Integer id;
+    private Integer userId;
     private String name;
     private String surname;
     private String patronymic;
@@ -15,8 +15,8 @@ public class User {
     private Role role;
     private Status status;
 
-    public User(Integer id, String email, String name, String surname, String patronymic, Role role, Status status) {
-        this.id = id;
+    public User(Integer userId, String email, String name, String surname, String patronymic, Role role, Status status) {
+        this.userId = userId;
         this.email = email;
         this.name = name;
         this.surname = surname;
@@ -25,12 +25,12 @@ public class User {
         this.status = status;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -100,11 +100,11 @@ public class User {
         } else if (!email.equals(other.email)) {
             return false;
         }
-        if (id == null) {
-            if (other.id != null) {
+        if (userId == null) {
+            if (other.userId != null) {
                 return false;
             }
-        } else if (!id.equals(other.id)) {
+        } else if (!userId.equals(other.userId)) {
             return false;
         }
         if (name == null) {
@@ -150,7 +150,7 @@ public class User {
         int prime = 31;
         int result = 1;
         result = prime * result + ((email == null) ? 0 : email.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((userId == null) ? 0 : userId.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((patronymic == null) ? 0 : patronymic.hashCode());
         result = prime * result + ((role == null) ? 0 : role.hashCode());
@@ -162,7 +162,7 @@ public class User {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("User{");
-        sb.append("id=").append(id);
+        sb.append("id=").append(userId);
         sb.append(", name='").append(name).append('\'');
         sb.append(", surname='").append(surname).append('\'');
         sb.append(", patronymic='").append(patronymic).append('\'');

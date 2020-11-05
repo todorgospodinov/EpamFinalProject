@@ -7,6 +7,7 @@ public class UserValidatorImpl implements UserValidator {
     //Password must contain at least one letter, at least one number, and be longer
     //than six characters and less than sixteen.
     private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9]+\\.[A-Za-z0-9]+$";
+    private static final String NAME_REGEX = "^\\p{L}{2,25}$";
 
     @Override
     public boolean isPasswordValid(String password) {
@@ -22,6 +23,15 @@ public class UserValidatorImpl implements UserValidator {
         boolean isCorrect = false;
         if (email != null) {
             isCorrect = email.matches(EMAIL_REGEX);
+        }
+        return isCorrect;
+    }
+
+    @Override
+    public boolean isNameValid(String name) {
+        boolean isCorrect = false;
+        if (name != null) {
+            isCorrect = name.matches(NAME_REGEX);
         }
         return isCorrect;
     }

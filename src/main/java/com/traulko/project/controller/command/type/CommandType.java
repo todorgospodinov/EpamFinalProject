@@ -10,9 +10,12 @@ public enum CommandType {
     LOGOUT_COMMAND(new LogoutCommand()),
     ACTIVATE_ACCOUNT(new ActivateAccountCommand()),
     FIND_USERS_COMMAND(new FindUsersCommand()),
+    DELETE_USER_COMMAND(new DeleteUserCommand()),
+    BLOCK_USER_COMMAND(new BlockUserCommand()),
+    UNBLOCK_USER_COMMAND(new UnblockUserCommand()),
 
 
-    SWITCH_LANGUAGE(new SwitchLanguageCommand()),
+    SWITCH_LANGUAGE_COMMAND(new SwitchLanguageCommand()),
 
 
     MAIN_PAGE(new MainPageCommand()),

@@ -1,12 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald');
 
-body, header {
-    background-color: lightblue;
+body {
+    background-image: url("../image/font.jpg");
     font-family: "Oswald";
     font-weight: 3000;
     font-size: 16px;
     color: black;
     margin-top: 20px;
+}
+
+td {
+    vertical-align: middle;
 }
 
 form {
@@ -30,11 +34,12 @@ hr {
 }
 
 .navbar-inverse {
-    background-color: azure;
-    border: azure;
+    background-color: rgba(112,112,112,0.65);
 }
 
 .wrapper {
     color: #1c7430;
     display: flex;
 }
+
+

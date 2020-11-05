@@ -14,7 +14,6 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 public class LoginCommand implements CustomCommand {
-    private static final String ATTRIBUTE_USER = "user";
     private static final UserService userService = new UserServiceImpl();
 
     private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
@@ -25,39 +24,24 @@ public class LoginCommand implements CustomCommand {
         String password = request.getParameter(RequestParameter.PASSWORD);
         try {
             if (userService.isUserExists(email, password)) {
-                User user = userService.getUserByEmail(email);
-                User.Status status = user.getStatus();
-                switch (status) {
+                User user = userService.findUserByEmail(email);
+                switch (user.getStatus()) {
                     case ENABLE -> {
-                        request.getSession().setAttribute(ATTRIBUTE_USER, user);
-                        if (user.getRole() == User.Role.ADMIN) {
-                            // ADMIN
-                            // TODO: 22.09.2020  
-                            page = PagePath.MAIN;
-                        } else {
-                            // USER
-                            // TODO: 22.09.2020
-                            page = PagePath.MAIN;
-                        }
+                        request.getSession().setAttribute(RequestParameter.USER, user);
+                        page = PagePath.MAIN;
                     }
                     case BLOCKED -> {
-                        request.setAttribute(RequestParameter.ERROR_LOGIN_PASSWORD_MESSAGE,
-                                "Account is blocked");
-                        page = PagePath.LOGIN;
+                        request.setAttribute(RequestParameter.USER_LOGIN_BLOCKED, true);
+                        page = PagePath.MESSAGE;
                     }
                     case NOT_CONFIRMED -> {
-                        request.setAttribute(RequestParameter.ERROR_LOGIN_PASSWORD_MESSAGE,
-                                "Account is not confirmed. Check email.");
-                        page = PagePath.LOGIN;
+                        request.setAttribute(RequestParameter.USER_CONFIRM_REGISTRATION_LETTER, true);
+                        page = PagePath.MESSAGE;
                     }
-                    default -> {
-                        page = PagePath.ERROR;
-                        // TODO: 22.09.2020  
-                    }
+                    default -> page = PagePath.MAIN;
                 }
             } else {
-                request.setAttribute(RequestParameter.ERROR_LOGIN_PASSWORD_MESSAGE,
-                        "Incorrect login or password");
+                request.setAttribute(RequestParameter.USER_DATA_INCORRECT, true);
                 page = PagePath.LOGIN;
             }
         } catch (ServiceException e) {
