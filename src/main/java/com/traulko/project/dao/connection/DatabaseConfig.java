@@ -9,7 +9,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class DatabaseConfig {
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger(DatabaseConfig.class);
     private static final String FILE_NAME = "property/database.properties";
     private static final String DATABASE_DRIVER_NAME = "database.driverClassName";
     private static final String DATABASE_URL = "database.url";

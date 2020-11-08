@@ -2,7 +2,7 @@ package com.traulko.project.entity;
 
 public class User {
     public enum Role {
-        ADMIN, USER;
+        ADMIN, USER, GUEST;
     }
     public enum Status {
         ENABLE, BLOCKED, NOT_CONFIRMED;

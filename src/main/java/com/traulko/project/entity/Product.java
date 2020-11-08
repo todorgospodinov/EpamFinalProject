@@ -1,15 +1,13 @@
 package com.traulko.project.entity;
 
-import java.sql.Blob;
-
 public class Product {
     private Integer productId;
     private String title;
     private double price;
     private String description;
-    private Blob image;
+    private Image image;
 
-    public Product(Integer productId, String title, double price, String description, Blob image) {
+    public Product(Integer productId, String title, double price, String description, Image image) {
         this.productId = productId;
         this.title = title;
         this.price = price;
@@ -17,11 +15,11 @@ public class Product {
         this.image = image;
     }
 
-    public Blob getImage() {
+    public Image getImage() {
         return image;
     }
 
-    public void setImage(Blob image) {
+    public void setImage(Image image) {
         this.image = image;
     }
 

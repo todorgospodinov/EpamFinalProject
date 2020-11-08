@@ -4,11 +4,12 @@ import com.traulko.project.entity.User;
 import com.traulko.project.exception.ServiceException;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     boolean isUserExists(String email, String password) throws ServiceException;
 
-    void sendConfirmRegistrationLetter(String email, String url) throws ServiceException;
+    void sendLetter(User user, String url) throws ServiceException;
 
     boolean activateUser(String email) throws ServiceException;
 
@@ -16,7 +17,11 @@ public interface UserService {
 
     List<User> findBySearchQuery(String searchQuery) throws ServiceException;
 
-    User findUserByEmail(String email) throws ServiceException;
+    boolean changePassword(String email, String password, String passwordRepeat) throws ServiceException;
+
+    Optional<User> findUserByEmail(String email) throws ServiceException;
+
+    Optional<User> findUserByAccessCode(String code, List<User> userList) throws ServiceException;
 
     boolean remove(String email) throws ServiceException;
 

@@ -16,5 +16,7 @@ public interface UserDao extends MainDao {
     List<User> findAll() throws DaoException;
     List<User> findBySearchQuery(String searchQuery) throws DaoException;
 
+    boolean changePassword(String email, String password) throws DaoException;
+
     boolean add(User user, String encryptedPassword) throws DaoException;
 }

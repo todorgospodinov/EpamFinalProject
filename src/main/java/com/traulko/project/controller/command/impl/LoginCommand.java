@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 public class LoginCommand implements CustomCommand {
     private static final UserService userService = new UserServiceImpl();
@@ -24,10 +25,12 @@ public class LoginCommand implements CustomCommand {
         String password = request.getParameter(RequestParameter.PASSWORD);
         try {
             if (userService.isUserExists(email, password)) {
-                User user = userService.findUserByEmail(email);
+                Optional<User> optionalUser = userService.findUserByEmail(email);
+                User user = optionalUser.get();
                 switch (user.getStatus()) {
                     case ENABLE -> {
                         request.getSession().setAttribute(RequestParameter.USER, user);
+                        request.getSession().setAttribute(RequestParameter.ROLE, user.getRole().toString());
                         page = PagePath.MAIN;
                     }
                     case BLOCKED -> {

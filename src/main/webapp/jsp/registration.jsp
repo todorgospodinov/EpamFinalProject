@@ -27,7 +27,7 @@
                 </div>
                 <div>
                     <label><fmt:message key="registration_page.repeat_password"/></label>
-                    <input class="form-control" type="text" name="repeat_password"/><br/>
+                    <input class="form-control" type="text" name="password_repeat"/><br/>
                 </div>
                 <div>
                     <label><fmt:message key="registration_page.name"/></label>
@@ -44,6 +44,11 @@
                 <c:if test="${userDataIncorrect}">
                     <div style="color: red">
                         <p><fmt:message key="registration_page.incorrect_data"/></p>
+                    </div>
+                </c:if>
+                <c:if test="${incorrectImageMessage}">
+                    <div style="color: red">
+                        <p><fmt:message key="registration_page.incorrect_image"/></p>
                     </div>
                 </c:if>
                 <div class="form-row text-center">

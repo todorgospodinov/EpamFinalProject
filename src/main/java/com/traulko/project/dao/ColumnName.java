@@ -13,7 +13,9 @@ public class ColumnName {
     public static final String PRODUCT_TITLE = "product_title";
     public static final String PRODUCT_PRICE = "product_price";
     public static final String PRODUCT_DESCRIPTION = "product_description";
-    public static final String PRODUCT_IMAGE = "product_image";
+
+    public static final String IMAGE_ID = "image_id";
+    public static final String IMAGE_NAME = "image_name";
 
     private ColumnName() {
     }

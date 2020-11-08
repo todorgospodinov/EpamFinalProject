@@ -38,6 +38,14 @@
                         </button>
                     </div>
                 </div>
+                <div class="form-row text-center">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-secondary"
+                                name="commandName" value="forgot_password_page">
+                            <fmt:message key="login_page.forgot_password_button"/>
+                        </button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

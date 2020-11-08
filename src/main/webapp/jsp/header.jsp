@@ -33,7 +33,7 @@
                     <li class="nav-item">
                         <form method="post" action="controller">
                             <button class="btn btn-secondary nav-link" name="commandName"
-                                    value="main_page"><fmt:message key="header.catalog_button"/> </button>
+                                    value="catalog_page"><fmt:message key="header.catalog_button"/> </button>
                         </form>
                     </li>
                     <c:if test="${sessionScope.user != null}">

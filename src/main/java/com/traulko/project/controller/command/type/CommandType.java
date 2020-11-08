@@ -8,11 +8,14 @@ public enum CommandType {
     LOGIN_COMMAND(new LoginCommand()),
     REGISTER_COMMAND(new RegisterCommand()),
     LOGOUT_COMMAND(new LogoutCommand()),
-    ACTIVATE_ACCOUNT(new ActivateAccountCommand()),
+    ACCOUNT_ACCESS_COMMAND(new AccountAccessCommand()),
     FIND_USERS_COMMAND(new FindUsersCommand()),
     DELETE_USER_COMMAND(new DeleteUserCommand()),
     BLOCK_USER_COMMAND(new BlockUserCommand()),
     UNBLOCK_USER_COMMAND(new UnblockUserCommand()),
+    ADD_PRODUCT_COMMAND(new AddProductCommand()),
+    FORGOT_PASSWORD_COMMAND(new ForgotPasswordCommand()),
+    CHANGE_PASSWORD_COMMAND(new ChangePasswordCommand()),
 
 
     SWITCH_LANGUAGE_COMMAND(new SwitchLanguageCommand()),
@@ -22,7 +25,10 @@ public enum CommandType {
     LOGIN_PAGE(new LoginPageCommand()),
     PERSONAL_ACCOUNT_PAGE(new PersonalAccountPageCommand()),
     ADMIN_PAGE(new AdminPageCommand()),
-    REGISTRATION_PAGE(new RegistrationPageCommand());
+    REGISTRATION_PAGE(new RegistrationPageCommand()),
+    CATALOG_PAGE(new CatalogPageCommand()),
+    FORGOT_PASSWORD_PAGE(new ForgotPasswordPageCommand()),
+    ADD_PRODUCT_PAGE(new AddProductPageCommand());
 
     private final CustomCommand command;
 

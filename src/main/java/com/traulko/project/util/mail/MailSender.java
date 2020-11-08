@@ -19,8 +19,7 @@ public class MailSender {
     private static final Logger LOGGER = LogManager.getLogger(MailSender.class);
     private static final String PROPERTY_NAME = "property/mail.properties";
     private static final String MAIL_SUBJECT = "Online store";
-    private static final String MAIL_MESSAGE = "Register in online store\nTo make your account enable, follow this link\n";
-    private static final String MAIL_MESSAGE_LINK = "%s?commandName=activate_account&email=";
+    private static final String MAIL_MESSAGE_LINK = "%s?commandName=account_access_command&accessCode=";
 
     private MimeMessage message;
     private String sendToEmail;
@@ -28,10 +27,10 @@ public class MailSender {
     private String mailText;
     private Properties properties;
 
-    public MailSender(String email, String url) {
+    public MailSender(String email, String url, String code) {
         this.sendToEmail = email;
         this.mailSubject = MAIL_SUBJECT;
-        this.mailText = MAIL_MESSAGE + String.format(MAIL_MESSAGE_LINK, url) + email;
+        this.mailText = String.format(MAIL_MESSAGE_LINK, url) + code;
         properties = getProperties();
     }
 

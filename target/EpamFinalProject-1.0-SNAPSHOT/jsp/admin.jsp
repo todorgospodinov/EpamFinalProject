@@ -32,13 +32,6 @@
                             </button>
                         </div>
                     </div>
-<%--                    <div>--%>
-<%--                        <label><fmt:message key="admin_page.user_search"/></label>--%>
-<%--                        <input type="text" class="form-control" name="searchUsersQuery"/><br/>--%>
-<%--                    </div>--%>
-<%--                    <button class="btn btn-secondary nav-link" name="commandName"--%>
-<%--                            value="find_users_command"><fmt:message key="admin_page.search"/>--%>
-<%--                    </button>--%>
                 </form>
             </div>
             <c:if test="${users.size() != 0}">
@@ -61,7 +54,12 @@
                 <p>No result</p>
             </c:if>
         </div>
+        <form method="post" action="controller">
+            <button class="btn btn-secondary nav-link" name="commandName"
+                    value="add_product_page"><fmt:message key="admin_page.add_product"/></button>
+        </form>
     </div>
+
 </main>
 <footer>
     <jsp:include page="footer.jsp"/>

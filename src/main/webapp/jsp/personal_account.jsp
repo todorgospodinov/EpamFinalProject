@@ -14,13 +14,14 @@
     <jsp:include page="header.jsp"/>
 </header>
 <main>
-    <h1>Hello, ${user.name} ${user.patronymic}</h1>
     <div class="container">
-        <div class="row">
-            <!-- Первый блок -->
-            <div class="col-4 ml-auto mr-3 bg-success" style="height: 200px;">111</div>
-            <!-- Второй блок -->
-            <div class="col-4 mr-auto ml-3 bg-danger" style="height: 200px;">222</div>
+        <div class="col-4 mx-auto my-lg-4 p-3 bg-light">
+            <h1 class="display-3">${user.getName()} ${user.getSurname()} ${user.getPatronymic()}</h1>
+            <h3 class="lead">${user.getEmail()}</h3>
+            <button type="submit" class="btn btn-secondary"
+                    name="commandName" value="change_password_command">
+                <fmt:message key="add_product.add_button"/>
+            </button>
         </div>
     </div>
 </main>

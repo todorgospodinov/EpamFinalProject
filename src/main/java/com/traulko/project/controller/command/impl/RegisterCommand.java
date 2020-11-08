@@ -3,6 +3,7 @@ package com.traulko.project.controller.command.impl;
 import com.traulko.project.controller.PagePath;
 import com.traulko.project.controller.RequestParameter;
 import com.traulko.project.controller.command.CustomCommand;
+import com.traulko.project.entity.User;
 import com.traulko.project.exception.ServiceException;
 import com.traulko.project.service.UserService;
 import com.traulko.project.service.impl.UserServiceImpl;
@@ -13,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 public class RegisterCommand implements CustomCommand {
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger(RegisterCommand.class);
     private static final UserService userService = new UserServiceImpl();
 
     @Override
@@ -27,7 +28,8 @@ public class RegisterCommand implements CustomCommand {
         String patronymic = request.getParameter(RequestParameter.PATRONYMIC);
         try {
             if (userService.add(email, password, passwordRepeat, name, surname, patronymic)) {
-                userService.sendConfirmRegistrationLetter(email, request.getRequestURL().toString());
+                User user = userService.findUserByEmail(email).get();
+                userService.sendLetter(user, request.getRequestURL().toString());
                 request.setAttribute(RequestParameter.USER_CONFIRM_REGISTRATION_LETTER, true);
                 page = PagePath.MESSAGE;
             } else {

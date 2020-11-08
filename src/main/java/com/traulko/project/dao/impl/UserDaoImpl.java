@@ -1,6 +1,5 @@
 package com.traulko.project.dao.impl;
 
-import com.traulko.project.builder.UserBuilder;
 import com.traulko.project.dao.connection.ConnectionPool;
 import com.traulko.project.dao.ColumnName;
 import com.traulko.project.dao.UserDao;
@@ -32,14 +31,12 @@ public class UserDaoImpl implements UserDao {
     private static final String DELETE_USER_BY_EMAIL = "DELETE FROM users where user_email = ?";
     private static final String BLOCK_USER = "UPDATE users SET user_status = \"BLOCKED\" where user_email = ?";
     private static final String UNBLOCK_USER = "UPDATE users SET user_status = \"ENABLE\" where user_email = ?";
+    private static final String CHANGE_PASSWORD = "UPDATE users SET user_password = ? where user_email = ?";
     private static final String PERCENT = "%";
 
     public Optional<User> findByEmailAndPassword(String email, String password) throws DaoException {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = ConnectionPool.getInstance().getConnection();
-            statement = connection.prepareStatement(FIND_USER_BY_EMAIL_AND_PASSWORD);
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_USER_BY_EMAIL_AND_PASSWORD)) {
             statement.setString(1, email);
             statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
@@ -51,9 +48,6 @@ public class UserDaoImpl implements UserDao {
             return userOptional;
         } catch (SQLException | ConnectionDatabaseException e) {
             throw new DaoException("Finding user by email and password error", e);
-        } finally {
-            close(statement);
-            close(connection);
         }
     }
 
@@ -183,6 +177,7 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    @Override
     public Optional<User> findByEmail(String email) throws DaoException {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -203,6 +198,26 @@ public class UserDaoImpl implements UserDao {
             close(statement);
             close(connection);
         }
+    }
+
+    @Override
+    public boolean changePassword(String email, String password) throws DaoException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        boolean result;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            statement = connection.prepareStatement(CHANGE_PASSWORD);
+            statement.setString(1, password);
+            statement.setString(2, email);
+            result = statement.executeUpdate() > 0;
+        } catch (SQLException | ConnectionDatabaseException e) {
+            throw new DaoException("Changing password error", e);
+        } finally {
+            close(statement);
+            close(connection);
+        }
+        return result;
     }
 
     @Override
@@ -238,14 +253,6 @@ public class UserDaoImpl implements UserDao {
         String name = resultSet.getString(ColumnName.USER_NAME);
         String surname = resultSet.getString(ColumnName.USER_SURNAME);
         String patronymic = resultSet.getString(ColumnName.USER_PATRONYMIC);
-        UserBuilder userBuilder = new UserBuilder();
-        userBuilder.setUserId(id);
-        userBuilder.setEmail(email);
-        userBuilder.setRole(role);
-        userBuilder.setStatus(status);
-        userBuilder.setName(name);
-        userBuilder.setSurname(surname);
-        userBuilder.setPatronymic(patronymic);
-        return userBuilder.getUser();
+        return new User(id, email, name, surname, patronymic, role, status);
     }
 }

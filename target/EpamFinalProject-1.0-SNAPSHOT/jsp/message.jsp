@@ -48,6 +48,30 @@
                 <c:if test="${userLoginBlocked}">
                     <h2><fmt:message key="message_page.user_login_blocked"/></h2>
                 </c:if>
+
+                <c:if test="${userSuccessConfirmRegistrationLetter}">
+                    <h2><fmt:message key="message_page.user_success_confirm_registration_letter"/></h2>
+                </c:if>
+
+                <c:if test="${userCodeNotFound}">
+                    <h2><fmt:message key="message_page.user_code_not_found"/></h2>
+                </c:if>
+
+                <c:if test="${userSuccessChangePassword}">
+                    <h2><fmt:message key="message_page.user_success_change_password"/></h2>
+                </c:if>
+
+                <c:if test="${userErrorChangePassword}">
+                    <h2><fmt:message key="message_page.user_error_change_password"/></h2>
+                </c:if>
+
+                <c:if test="${userSuccessChangePasswordLetter}">
+                    <h2><fmt:message key="message_page.user_success_change_password_letter"/></h2>
+                </c:if>
+
+                <c:if test="${userEmailIsNotFound}">
+                    <h2><fmt:message key="message_page.user_email_is_not_found"/></h2>
+                </c:if>
             </div>
         </div>
     </section>

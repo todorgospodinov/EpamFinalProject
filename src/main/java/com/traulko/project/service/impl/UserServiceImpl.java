@@ -1,6 +1,5 @@
 package com.traulko.project.service.impl;
 
-import com.traulko.project.builder.UserBuilder;
 import com.traulko.project.dao.UserDao;
 import com.traulko.project.dao.impl.UserDaoImpl;
 import com.traulko.project.entity.User;
@@ -13,7 +12,6 @@ import com.traulko.project.util.mail.MailSender;
 import com.traulko.project.validator.UserValidator;
 import com.traulko.project.validator.impl.UserValidatorImpl;
 
-import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
@@ -22,15 +20,47 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao = new UserDaoImpl();
 
     @Override
-    public User findUserByEmail(String email) throws ServiceException {
-        User user;
+    public boolean changePassword(String email, String password, String passwordRepeat) throws ServiceException {
+        UserValidator userValidator = new UserValidatorImpl();
+        boolean result = false;
         try {
-            Optional<User> optionalUser = userDao.findByEmail(email);
-            user = optionalUser.get();
+            if (userValidator.isPasswordValid(password) && password.equals(passwordRepeat)) {
+                CustomCipher cipher = new CustomCipher();
+                String encryptedPassword = cipher.encrypt(password);
+                result = userDao.changePassword(email, encryptedPassword);
+            }
+        } catch (DaoException | NoSuchAlgorithmException e) {
+            throw new ServiceException("Error while changing password", e);
+        }
+        return result;
+    }
+
+    @Override
+    public Optional<User> findUserByEmail(String email) throws ServiceException {
+        Optional<User> optionalUser;
+        try {
+            optionalUser = userDao.findByEmail(email);
         } catch (DaoException e) {
             throw new ServiceException("Error while getting user by email", e);
         }
-        return user;
+        return optionalUser;
+    }
+
+    @Override
+    public Optional<User> findUserByAccessCode(String code, List<User> userList) throws ServiceException {
+        Optional<User> optionalUser = Optional.empty();
+        CustomCipher cipher = new CustomCipher();
+        try {
+            for (User user : userList) {
+                if (cipher.encrypt(user.toString()).equals(code)) {
+                    optionalUser = Optional.of(user);
+                    break;
+                }
+            }
+        } catch (NoSuchAlgorithmException e) {
+            throw new ServiceException("Error while finding user by access code", e);
+        }
+        return optionalUser;
     }
 
     @Override
@@ -67,11 +97,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void sendConfirmRegistrationLetter(String email, String url) throws ServiceException {
+    public void sendLetter(User user, String url) throws ServiceException {
         try {
-            MailSender sender = new MailSender(email, url);
+            CustomCipher cipher = new CustomCipher();
+            String code = cipher.encrypt(user.toString());
+            MailSender sender = new MailSender(user.getEmail(), url, code);
             sender.send();
-        } catch (SendMailException e) {
+        } catch (SendMailException | NoSuchAlgorithmException e) {
             throw new ServiceException("Error while sending message", e);
         }
     }
@@ -144,15 +176,8 @@ public class UserServiceImpl implements UserService {
                 isEmailFree(email)) {
             try {
                 String encryptedPassword = CustomCipher.encrypt(password);
-                UserBuilder userBuilder = new UserBuilder();
-                userBuilder.setEmail(email);
-                userBuilder.setName(name);
-                userBuilder.setSurname(surname);
-                userBuilder.setPatronymic(patronymic);
-                userBuilder.setRole(User.Role.USER);
-                userBuilder.setStatus(User.Status.NOT_CONFIRMED);
-                User user = userBuilder.getUser();
-                if(userDao.add(user, encryptedPassword)) {
+                User user = new User(null, email, name, surname, patronymic, User.Role.USER, User.Status.NOT_CONFIRMED);
+                if (userDao.add(user, encryptedPassword)) {
                     result = true;
                 }
             } catch (DaoException | NoSuchAlgorithmException e) {
