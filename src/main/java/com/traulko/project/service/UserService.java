@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface UserService {
     boolean isUserExists(String email, String password) throws ServiceException;
 
+    boolean fillUpBalance(User user, String moneyAmount) throws ServiceException;
+
     void sendLetter(User user, String url) throws ServiceException;
 
     boolean activateUser(String email) throws ServiceException;

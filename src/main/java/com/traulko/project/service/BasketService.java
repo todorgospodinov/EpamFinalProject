@@ -9,6 +9,8 @@ public interface BasketService {
 
     boolean add(Integer userId, String productId) throws ServiceException;
 
+    double calculateTotalPrice(List<Basket> basketList);
+
     boolean remove(Integer userId, String productId) throws ServiceException;
 
     List<Basket> getBasketsByUserId(Integer id) throws ServiceException;

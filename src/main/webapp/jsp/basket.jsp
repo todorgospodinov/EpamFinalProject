@@ -60,6 +60,9 @@
                         </div>
                     </c:forEach>
                 </c:if>
+                <c:if test="${totalPrice != 0}">
+                    <p><fmt:message key="basket_page.total_price"/> ${totalPrice}</p>
+                </c:if>
             </div>
         </div>
     </div>

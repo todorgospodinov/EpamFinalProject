@@ -8,6 +8,7 @@ public class ColumnName {
     public static final String USER_NAME = "user_name";
     public static final String USER_SURNAME = "user_surname";
     public static final String USER_PATRONYMIC = "user_patronymic";
+    public static final String USER_BALANCE = "user_balance";
 
     public static final String PRODUCT_ID = "product_id";
     public static final String PRODUCT_TITLE = "product_title";

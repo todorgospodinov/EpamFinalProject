@@ -13,15 +13,15 @@ public class RequestParameter {
     public static final String PRICE = "price";
     public static final String SURNAME = "surname";
     public static final String REQUEST_ATTRIBUTE_HANDLER = "requestAttributeHandler";
-    public static final String PREVIOUS_REQUEST_ATTRIBUTE_HANDLER = "previousRequestAttributeHandler";
+    public static final String TOTAL_PRICE = "totalPrice";
     public static final String CURRENT_PAGE = "currentPage";
-    public static final String PREVIOUS_PAGE = "previousPage";
     public static final String NEW_LOCALE = "newLocale";
     public static final String CURRENT_LOCALE = "currentLocale";
     public static final String USERS = "users";
     public static final String PRODUCTS = "products";
     public static final String USER = "user";
     public static final String ROLE = "role";
+    public static final String MONEY_AMOUNT = "moneyAmount";
     public static final String ACCESS_CODE = "accessCode";
     public static final String SEARCH_USERS_QUERY = "searchUsersQuery";
     public static final String PRODUCT_ID = "productId";
@@ -55,6 +55,9 @@ public class RequestParameter {
     public static final String ADD_PRODUCT_TO_BASKET_ERROR = "addProductToBasketError";
     public static final String REMOVE_PRODUCT_FROM_BASKET_SUCCESS = "removeProductFromBasketSuccess";
     public static final String REMOVE_PRODUCT_FROM_BASKET_ERROR = "removeProductFromBasketError";
+
+    public static final String FILL_UP_BALANCE_SUCCESS = "fillUpBalanceSuccess";
+    public static final String INCORRECT_MONEY_AMOUNT = "incorrectMoneyAmount";
 
 
     private RequestParameter() {

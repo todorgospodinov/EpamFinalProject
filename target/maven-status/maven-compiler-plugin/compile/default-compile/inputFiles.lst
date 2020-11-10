@@ -1,7 +1,6 @@
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\entity\CustomImage.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\util\FileLoader.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\page\LoginPageCommand.java
-C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\page\PreviousPageCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\page\BasketPageCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\exception\ServiceException.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\AddProductCommand.java
@@ -41,6 +40,7 @@ C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\entity\
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\AccountAccessCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\dao\connection\ConnectionPool.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\CustomCommand.java
+C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\FillUpBalanceCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\service\impl\UserServiceImpl.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\RequestAttributeHandler.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\dao\connection\ProxyConnection.java
@@ -51,6 +51,7 @@ C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\excepti
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\dao\connection\DatabaseConfig.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\util\mail\MailSender.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\UnblockUserCommand.java
+C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\page\FillUpBalancePageCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\FindUsersCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\LogoutCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\dao\impl\BasketDaoImpl.java
@@ -63,9 +64,9 @@ C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\service
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\LoginCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\page\AddProductPageCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\dao\BasketDao.java
+C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\entity\CustomOrder.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\ForgotPasswordCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\entity\User.java
-C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\dao\MainDao.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\page\MainPageCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\page\AdminPageCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\DeleteUserCommand.java

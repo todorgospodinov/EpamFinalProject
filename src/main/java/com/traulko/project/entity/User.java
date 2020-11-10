@@ -14,10 +14,12 @@ public class User {
     private String email;
     private Role role;
     private Status status;
+    private double balance;
 
     public User() {}
 
-    public User(Integer userId, String email, String name, String surname, String patronymic, Role role, Status status) {
+    public User(Integer userId, String email, String name, String surname, String patronymic, Role role,
+                Status status, double balance) {
         this.userId = userId;
         this.email = email;
         this.name = name;
@@ -25,6 +27,15 @@ public class User {
         this.patronymic = patronymic;
         this.role = role;
         this.status = status;
+        this.balance = balance;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
     public Integer getUserId() {
@@ -144,6 +155,9 @@ public class User {
         } else if (status != other.status) {
             return false;
         }
+        if (Double.compare(other.balance, balance) != 0) {
+            return false;
+        }
         return true;
     }
 
@@ -158,19 +172,22 @@ public class User {
         result = prime * result + ((role == null) ? 0 : role.hashCode());
         result = prime * result + ((surname == null) ? 0 : surname.hashCode());
         result = prime * result + ((status == null) ? 0 : status.hashCode());
+        long temp = Double.doubleToLongBits(balance);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("User{");
-        sb.append("id=").append(userId);
+        sb.append("userId=").append(userId);
         sb.append(", name='").append(name).append('\'');
         sb.append(", surname='").append(surname).append('\'');
         sb.append(", patronymic='").append(patronymic).append('\'');
         sb.append(", email='").append(email).append('\'');
         sb.append(", role=").append(role);
         sb.append(", status=").append(status);
+        sb.append(", balance=").append(balance);
         sb.append('}');
         return sb.toString();
     }

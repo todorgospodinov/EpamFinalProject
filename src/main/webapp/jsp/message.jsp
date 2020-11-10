@@ -100,6 +100,11 @@
                 <c:if test="${removeProductFromBaksetError}">
                     <h2><fmt:message key="message_page.remove_basket_error"/></h2>
                 </c:if>
+
+                <c:if test="${fillUpBalanceSuccess}">
+                    <h2><fmt:message key="message_page.fill_up_success"/></h2>
+                </c:if>
+
             </div>
         </div>
     </section>

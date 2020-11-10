@@ -21,7 +21,6 @@ com\traulko\project\validator\UserValidator.class
 com\traulko\project\service\impl\UserServiceImpl.class
 com\traulko\project\controller\command\impl\DeleteUserCommand.class
 com\traulko\project\dao\BasketDao.class
-com\traulko\project\dao\MainDao.class
 com\traulko\project\entity\CustomImage.class
 com\traulko\project\dao\UserDao.class
 com\traulko\project\exception\SendMailException.class
@@ -56,12 +55,14 @@ com\traulko\project\exception\TransactionException.class
 com\traulko\project\controller\command\impl\LogoutCommand.class
 com\traulko\project\dao\impl\BasketDaoImpl.class
 com\traulko\project\service\ProductService.class
+com\traulko\project\controller\command\impl\FillUpBalanceCommand.class
 com\traulko\project\service\UserService.class
 com\traulko\project\dao\connection\ConnectionPool.class
 com\traulko\project\controller\command\impl\page\ChangePasswordPageCommand.class
 com\traulko\project\controller\command\impl\AccountAccessCommand.class
 com\traulko\project\controller\command\CommandProvider.class
 com\traulko\project\controller\command\impl\page\MainPageCommand.class
+com\traulko\project\controller\command\impl\page\FillUpBalancePageCommand.class
 com\traulko\project\service\impl\ProductServiceImpl.class
 com\traulko\project\validator\ProductValidator.class
 com\traulko\project\controller\command\impl\ForgotPasswordCommand.class
@@ -72,4 +73,5 @@ com\traulko\project\controller\command\impl\UnblockUserCommand.class
 com\traulko\project\dao\ImageDao.class
 com\traulko\project\entity\User$Role.class
 com\traulko\project\validator\ProjectValidator.class
+com\traulko\project\entity\CustomOrder.class
 com\traulko\project\dao\impl\ProductDaoImpl.class

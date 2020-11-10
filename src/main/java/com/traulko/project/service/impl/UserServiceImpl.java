@@ -9,6 +9,7 @@ import com.traulko.project.exception.ServiceException;
 import com.traulko.project.service.UserService;
 import com.traulko.project.util.CustomCipher;
 import com.traulko.project.util.mail.MailSender;
+import com.traulko.project.validator.ProjectValidator;
 import com.traulko.project.validator.UserValidator;
 
 import java.security.NoSuchAlgorithmException;
@@ -96,6 +97,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean fillUpBalance(User user, String moneyAmount) throws ServiceException {
+        boolean result = false;
+        try {
+            if (ProjectValidator.isCorrectDoubleValue(moneyAmount)) {
+                double amount = Double.parseDouble(moneyAmount);
+                if (amount > 0) {
+                    double newBalance = user.getBalance() + amount;
+                    user.setBalance(newBalance);
+                    userDao.update(user);
+                    result = true;
+                }
+            }
+        } catch (DaoException e) {
+            throw new ServiceException("Error while filling up user balance", e);
+        }
+        return result;
+    }
+
+    @Override
     public void sendLetter(User user, String url) throws ServiceException {
         try {
             CustomCipher cipher = new CustomCipher();
@@ -128,8 +148,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAll() throws ServiceException {
         try {
-            List<User> userList = userDao.findAll();
-            return userList;
+            return userDao.findAll();
         } catch (DaoException e) {
             throw new ServiceException("Error while finding all users in batabase", e);
         }
@@ -138,8 +157,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findBySearchQuery(String searchQuery) throws ServiceException {
         try {
-            List<User> userList = userDao.findBySearchQuery(searchQuery);
-            return userList;
+            return userDao.findBySearchQuery(searchQuery);
         } catch (DaoException e) {
             throw new ServiceException("Error while finding users by search query in batabase", e);
         }
@@ -173,7 +191,14 @@ public class UserServiceImpl implements UserService {
                 isEmailFree(email)) {
             try {
                 String encryptedPassword = CustomCipher.encrypt(password);
-                User user = new User(null, email, name, surname, patronymic, User.Role.USER, User.Status.NOT_CONFIRMED);
+                User user = new User();
+                user.setEmail(email);
+                user.setName(name);
+                user.setSurname(surname);
+                user.setPatronymic(patronymic);
+                user.setStatus(User.Status.NOT_CONFIRMED);
+                user.setRole(User.Role.USER);
+                user.setBalance(0);
                 if (userDao.add(user, encryptedPassword)) {
                     result = true;
                 }

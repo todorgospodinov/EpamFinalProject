@@ -37,6 +37,15 @@ public class BasketServiceImpl implements BasketService {
     }
 
     @Override
+    public double calculateTotalPrice(List<Basket> basketList) {
+        double totalPrice = 0;
+        for (Basket basket : basketList) {
+            totalPrice += basket.getProduct().getPrice();
+        }
+        return totalPrice;
+    }
+
+    @Override
     public boolean remove(Integer userId, String productId) throws ServiceException {
         boolean result = false;
         try {

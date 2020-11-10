@@ -49,6 +49,12 @@
                                         value="logout_command"><fmt:message key="header.logout_button"/> </button>
                             </form>
                         </li>
+                        <li class="nav-item">
+                            <form method="post" action="controller">
+                                <button class="btn btn-secondary nav-link" name="commandName"
+                                        value="fill_up_balance_page">${user.getBalance()} <fmt:message key="header.currency"/></button>
+                            </form>
+                        </li>
                     </c:if>
                     <c:if test="${sessionScope.user == null }">
                         <li class="nav-item">

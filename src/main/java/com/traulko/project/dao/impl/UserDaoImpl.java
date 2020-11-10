@@ -14,20 +14,20 @@ import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
     private static final String FIND_USER_BY_EMAIL_AND_PASSWORD = "SELECT user_id, user_email, " +
-            "user_name, user_surname, user_patronymic, user_role, user_status FROM users" +
+            "user_name, user_surname, user_patronymic, user_role, user_status, user_balance FROM users" +
             " WHERE user_email = ? AND user_password = ?";
     private static final String FIND_USER_BY_EMAIL = "SELECT user_id, user_email, " +
-            "user_password, user_name, user_surname, user_patronymic, user_role, user_status FROM users" +
-            " WHERE user_email = ?";
+            "user_password, user_name, user_surname, user_patronymic, user_role, user_status," +
+            " user_balance FROM users WHERE user_email = ?";
     private static final String ADD_USER = "INSERT INTO users (user_email, user_password, user_name," +
-            " user_surname, user_patronymic, user_role, user_status) values (?, ?, ?, ?, ?, ?, ?)";
+            " user_surname, user_patronymic, user_role, user_status, user_balance) values (?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_USER = "UPDATE users set user_email = ?, user_name = ?, user_surname = ?," +
-            " user_patronymic = ?, user_role = ?, user_status = ? where user_id = ?";
+            " user_patronymic = ?, user_role = ?, user_status = ?, user_balance = ? where user_id = ?";
     private static final String FIND_ALL_USERS = "SELECT user_id, user_email, user_name, user_surname, user_patronymic," +
-            " user_role, user_status FROM users";
+            " user_role, user_status, user_balance FROM users";
     private static final String FIND_USERS_BY_SEARCH_QUERY = "SELECT user_id, user_email, user_name, user_surname, " +
-            "user_patronymic, user_role, user_status FROM users where concat(user_id, user_email, user_name, user_surname," +
-            " user_patronymic, user_role, user_status) like ?";
+            "user_patronymic, user_role, user_status, user_balance FROM users where concat(user_id, user_email, user_name, user_surname," +
+            " user_patronymic, user_role, user_status, user_balance) like ?";
     private static final String DELETE_USER_BY_EMAIL = "DELETE FROM users where user_email = ?";
     private static final String BLOCK_USER = "UPDATE users SET user_status = \"BLOCKED\" where user_email = ?";
     private static final String UNBLOCK_USER = "UPDATE users SET user_status = \"ENABLE\" where user_email = ?";
@@ -60,7 +60,8 @@ public class UserDaoImpl implements UserDao {
             statement.setString(4, user.getPatronymic());
             statement.setString(5, String.valueOf(user.getRole()));
             statement.setString(6, String.valueOf(user.getStatus()));
-            statement.setInt(7, Integer.valueOf(user.getUserId()));
+            statement.setDouble(7, user.getBalance());
+            statement.setInt(8, user.getUserId());
             return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionDatabaseException e) {
             throw new DaoException("Updating user error", e);
@@ -173,6 +174,7 @@ public class UserDaoImpl implements UserDao {
             statement.setString(5, user.getPatronymic());
             statement.setString(6, user.getRole().toString());
             statement.setString(7, user.getStatus().toString());
+            statement.setDouble(8, user.getBalance());
             return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionDatabaseException e) {
             throw new DaoException("Adding user to users table error", e);
@@ -187,6 +189,7 @@ public class UserDaoImpl implements UserDao {
         String name = resultSet.getString(ColumnName.USER_NAME);
         String surname = resultSet.getString(ColumnName.USER_SURNAME);
         String patronymic = resultSet.getString(ColumnName.USER_PATRONYMIC);
-        return new User(id, email, name, surname, patronymic, role, status);
+        double balance = resultSet.getDouble(ColumnName.USER_BALANCE);
+        return new User(id, email, name, surname, patronymic, role, status, balance);
     }
 }

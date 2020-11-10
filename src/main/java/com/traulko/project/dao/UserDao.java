@@ -6,7 +6,7 @@ import com.traulko.project.exception.DaoException;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserDao extends MainDao {
+public interface UserDao {
     Optional<User> findByEmailAndPassword(String login, String password) throws DaoException;
     Optional<User> findByEmail(String login) throws DaoException;
     boolean update(User user) throws DaoException;

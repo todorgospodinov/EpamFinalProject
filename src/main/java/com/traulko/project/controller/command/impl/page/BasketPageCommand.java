@@ -28,6 +28,8 @@ public class BasketPageCommand implements CustomCommand {
         Integer userId = ((User) session.getAttribute(RequestParameter.USER)).getUserId();
         try {
             List<Basket> basketList = basketService.getBasketsByUserId(userId);
+            double totalPrice = basketService.calculateTotalPrice(basketList);
+            request.setAttribute(RequestParameter.TOTAL_PRICE, totalPrice);
             request.setAttribute(RequestParameter.BASKETS, basketList);
             page = PagePath.BASKET;
         } catch (ServiceException e) {
