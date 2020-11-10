@@ -3,6 +3,7 @@ package com.traulko.project.controller.command.impl;
 import com.traulko.project.controller.PagePath;
 import com.traulko.project.controller.RequestParameter;
 import com.traulko.project.controller.command.CustomCommand;
+import com.traulko.project.entity.User;
 import com.traulko.project.exception.ServiceException;
 import com.traulko.project.service.UserService;
 import com.traulko.project.service.impl.UserServiceImpl;
@@ -21,16 +22,23 @@ public class ChangePasswordCommand implements CustomCommand {
     public String execute(HttpServletRequest request) {
         String page;
         HttpSession session = request.getSession();
-        String email = (String) session.getAttribute(RequestParameter.EMAIL);
+        String email = request.getParameter(RequestParameter.EMAIL) != null ?
+                request.getParameter(RequestParameter.EMAIL) :
+                ((User) session.getAttribute(RequestParameter.USER)).getEmail();
         String password = request.getParameter(RequestParameter.PASSWORD);
         String passwordRepeat = request.getParameter(RequestParameter.PASSWORD_REPEAT);
         try {
             if (userService.changePassword(email, password, passwordRepeat)) {
                 request.setAttribute(RequestParameter.USER_SUCCESS_CHANGE_PASSWORD, true);
+                session.removeAttribute(RequestParameter.EMAIL);
+                if (session.getAttribute(RequestParameter.USER) != null) {
+                    session.removeAttribute(RequestParameter.USER);
+                }
+                page = PagePath.LOGIN;
             } else {
                 request.setAttribute(RequestParameter.USER_ERROR_CHANGE_PASSWORD, true);
+                page = PagePath.MESSAGE;
             }
-            page = PagePath.MESSAGE;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while changing password", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);

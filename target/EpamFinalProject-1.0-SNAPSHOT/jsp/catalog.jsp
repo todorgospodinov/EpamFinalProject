@@ -23,31 +23,43 @@
             <div class="row">
                 <c:forEach var="product" items="${products}">
                     <div class="col-sm-4">
-                        <div class="card text-white bg-secondary" style="width: 18rem">
-                            <div class="img_wrap">
-                                <img class="card-img-top" src="image/${product.getImage().getName()}.jpg"
+                        <div class="card text-white bg-secondary">
+                            <div>
+                                <img style="object-fit: cover; height: 200px" class="card-img-top"
+                                     src="image/${product.getImage().getName()}.jpg"
                                      alt="Card image cap">
                             </div>
                             <div class="card-body">
                                 <h5 style="text-align: center" class="card-title">${product.getTitle()}</h5>
                                 <div class="form-row text-center">
                                     <div class="col-12">
-                                        <button type="submit" class="btn btn-light"
-                                                name="commandName" value="product_page">
-                                            <fmt:message key="catalog_page.product_button"/>
-                                        </button>
+                                        <form method="post" action="controller">
+                                            <input type="hidden" name="commandName" value="product_page">
+                                            <button class="btn btn-light nav-link" name="productId"
+                                                    value="${product.getProductId()}"><fmt:message
+                                                    key="catalog_page.product_button"/>
+                                            </button>
+                                        </form>
+                                        <form method="post" action="controller">
+                                            <input type="hidden" name="commandName"
+                                                   value="add_product_to_basket_command">
+                                            <button class="btn btn-light nav-link" name="productId"
+                                                    value="${product.getProductId()}"><fmt:message
+                                                    key="catalog_page.add_product_to_basket"/>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
-<%--                                <c:if test="${role.equals('ADMIN')}">--%>
-<%--                                    <div class="form-row text-center">--%>
-<%--                                        <div class="col-12">--%>
-<%--                                            <button type="submit" class="btn btn-danger"--%>
-<%--                                                    name="commandName" value="product_page">--%>
-<%--                                                <fmt:message key="catalog_page.delete_product_button"/>--%>
-<%--                                            </button>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </c:if>--%>
+                                    <%--                                <c:if test="${role.equals('ADMIN')}">--%>
+                                    <%--                                    <div class="form-row text-center">--%>
+                                    <%--                                        <div class="col-12">--%>
+                                    <%--                                            <button type="submit" class="btn btn-danger"--%>
+                                    <%--                                                    name="commandName" value="product_page">--%>
+                                    <%--                                                <fmt:message key="catalog_page.delete_product_button"/>--%>
+                                    <%--                                            </button>--%>
+                                    <%--                                        </div>--%>
+                                    <%--                                    </div>--%>
+                                    <%--                                </c:if>--%>
                             </div>
                         </div>
                     </div>

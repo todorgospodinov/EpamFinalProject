@@ -16,18 +16,23 @@ public enum CommandType {
     ADD_PRODUCT_COMMAND(new AddProductCommand()),
     FORGOT_PASSWORD_COMMAND(new ForgotPasswordCommand()),
     CHANGE_PASSWORD_COMMAND(new ChangePasswordCommand()),
+    ADD_PRODUCT_TO_BASKET_COMMAND(new AddProductToBasketCommand()),
+    DELETE_PRODUCT_FROM_BASKET_COMMAND(new DeleteProductFromBasketCommand()),
 
 
     SWITCH_LANGUAGE_COMMAND(new SwitchLanguageCommand()),
 
 
     MAIN_PAGE(new MainPageCommand()),
+    PRODUCT_PAGE(new ProductPageCommand()),
     LOGIN_PAGE(new LoginPageCommand()),
     PERSONAL_ACCOUNT_PAGE(new PersonalAccountPageCommand()),
     ADMIN_PAGE(new AdminPageCommand()),
     REGISTRATION_PAGE(new RegistrationPageCommand()),
     CATALOG_PAGE(new CatalogPageCommand()),
     FORGOT_PASSWORD_PAGE(new ForgotPasswordPageCommand()),
+    CHANGE_PASSWORD_PAGE(new ChangePasswordPageCommand()),
+    BASKET_PAGE(new BasketPageCommand()),
     ADD_PRODUCT_PAGE(new AddProductPageCommand());
 
     private final CustomCommand command;

@@ -5,9 +5,11 @@ public class Product {
     private String title;
     private double price;
     private String description;
-    private Image image;
+    private CustomImage image;
 
-    public Product(Integer productId, String title, double price, String description, Image image) {
+    public Product() {}
+
+    public Product(Integer productId, String title, double price, String description, CustomImage image) {
         this.productId = productId;
         this.title = title;
         this.price = price;
@@ -15,11 +17,11 @@ public class Product {
         this.image = image;
     }
 
-    public Image getImage() {
+    public CustomImage getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(CustomImage image) {
         this.image = image;
     }
 

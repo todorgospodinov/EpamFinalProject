@@ -18,28 +18,28 @@
         <div class="col-4 mx-auto my-lg-4 p-3 bg-light">
             <form method="post" action="controller" autocomplete="off">
                 <div>
-                    <label><fmt:message key="registration_page.email"/></label>
-                    <input class="form-control" type="text" name="email"/><br/>
+                    <label for="email"><fmt:message key="registration_page.email"/></label>
+                    <input id="email" class="form-control" type="text" name="email"/><br/>
                 </div>
                 <div>
-                    <label><fmt:message key="registration_page.password"/></label>
-                    <input class="form-control" type="text" name="password"/><br/>
+                    <label for="password"><fmt:message key="registration_page.password"/></label>
+                    <input id="password" class="form-control" type="text" name="password"/><br/>
                 </div>
                 <div>
-                    <label><fmt:message key="registration_page.repeat_password"/></label>
-                    <input class="form-control" type="text" name="password_repeat"/><br/>
+                    <label for="password_repeat"><fmt:message key="registration_page.repeat_password"/></label>
+                    <input id="password_repeat" class="form-control" type="text" name="password_repeat"/><br/>
                 </div>
                 <div>
-                    <label><fmt:message key="registration_page.name"/></label>
-                    <input class="form-control" type="text" name="name"/><br/>
+                    <label for="name"><fmt:message key="registration_page.name"/></label>
+                    <input id="name" class="form-control" type="text" name="name"/><br/>
                 </div>
                 <div>
-                    <label><fmt:message key="registration_page.surname"/></label>
-                    <input class="form-control" type="text" name="surname"/><br/>
+                    <label for="surname"><fmt:message key="registration_page.surname"/></label>
+                    <input id="surname" class="form-control" type="text" name="surname"/><br/>
                 </div>
                 <div>
-                    <label><fmt:message key="registration_page.patronymic"/></label>
-                    <input class="form-control" type="text" name="patronymic"/><br/>
+                    <label for="patronymic"><fmt:message key="registration_page.patronymic"/></label>
+                    <input id="patronymic" class="form-control" type="text" name="patronymic"/><br/>
                 </div>
                 <c:if test="${userDataIncorrect}">
                     <div style="color: red">

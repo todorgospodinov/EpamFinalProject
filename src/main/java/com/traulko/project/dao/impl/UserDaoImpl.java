@@ -52,12 +52,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     public boolean update(User user) throws DaoException {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        boolean result;
-        try {
-            connection = ConnectionPool.getInstance().getConnection();
-            statement = connection.prepareStatement(UPDATE_USER);
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_USER)) {
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getName());
             statement.setString(3, user.getSurname());
@@ -65,80 +61,49 @@ public class UserDaoImpl implements UserDao {
             statement.setString(5, String.valueOf(user.getRole()));
             statement.setString(6, String.valueOf(user.getStatus()));
             statement.setInt(7, Integer.valueOf(user.getUserId()));
-            result = statement.executeUpdate() > 0 ? true : false;
+            return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionDatabaseException e) {
             throw new DaoException("Updating user error", e);
-        } finally {
-            close(statement);
-            close(connection);
         }
-        return result;
     }
 
     @Override
     public boolean remove(String email) throws DaoException {
-        boolean result = false;
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = ConnectionPool.getInstance().getConnection();
-            statement = connection.prepareStatement(DELETE_USER_BY_EMAIL);
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(DELETE_USER_BY_EMAIL)) {
             statement.setString(1, email);
-            result = statement.executeUpdate() > 0;
+            return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionDatabaseException e) {
             throw new DaoException("Removing user by email error", e);
-        } finally {
-            close(statement);
-            close(connection);
         }
-        return result;
     }
 
     @Override
     public boolean block(String email) throws DaoException {
-        boolean result = false;
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = ConnectionPool.getInstance().getConnection();
-            statement = connection.prepareStatement(BLOCK_USER);
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(BLOCK_USER)) {
             statement.setString(1, email);
-            result = statement.executeUpdate() > 0;
+            return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionDatabaseException e) {
             throw new DaoException("Blocking user error", e);
-        } finally {
-            close(statement);
-            close(connection);
         }
-        return result;
     }
 
     @Override
     public boolean unblock(String email) throws DaoException {
-        boolean result = false;
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = ConnectionPool.getInstance().getConnection();
-            statement = connection.prepareStatement(UNBLOCK_USER);
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(UNBLOCK_USER)) {
             statement.setString(1, email);
-            result = statement.executeUpdate() > 0;
+            return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionDatabaseException e) {
             throw new DaoException("Unblocking user error", e);
-        } finally {
-            close(statement);
-            close(connection);
         }
-        return result;
     }
 
     @Override
     public List<User> findAll() throws DaoException {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = ConnectionPool.getInstance().getConnection();
-            statement = connection.prepareStatement(FIND_ALL_USERS);
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_ALL_USERS)) {
             ResultSet resultSet = statement.executeQuery();
             List<User> userList = new ArrayList<>();
             while (resultSet.next()) {
@@ -148,19 +113,13 @@ public class UserDaoImpl implements UserDao {
             return userList;
         } catch (SQLException | ConnectionDatabaseException e) {
             throw new DaoException("Finding all users error", e);
-        } finally {
-            close(statement);
-            close(connection);
         }
     }
 
     @Override
     public List<User> findBySearchQuery(String searchQuery) throws DaoException {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = ConnectionPool.getInstance().getConnection();
-            statement = connection.prepareStatement(FIND_USERS_BY_SEARCH_QUERY);
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_USERS_BY_SEARCH_QUERY)) {
             statement.setString(1, PERCENT + searchQuery + PERCENT);
             ResultSet resultSet = statement.executeQuery();
             List<User> userList = new ArrayList<>();
@@ -171,19 +130,13 @@ public class UserDaoImpl implements UserDao {
             return userList;
         } catch (SQLException | ConnectionDatabaseException e) {
             throw new DaoException("Finding users by search query error", e);
-        } finally {
-            close(statement);
-            close(connection);
         }
     }
 
     @Override
     public Optional<User> findByEmail(String email) throws DaoException {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = ConnectionPool.getInstance().getConnection();
-            statement = connection.prepareStatement(FIND_USER_BY_EMAIL);
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_USER_BY_EMAIL)) {
             statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
             Optional<User> userOptional = Optional.empty();
@@ -194,40 +147,25 @@ public class UserDaoImpl implements UserDao {
             return userOptional;
         } catch (SQLException | ConnectionDatabaseException e) {
             throw new DaoException("Finding user by email error", e);
-        } finally {
-            close(statement);
-            close(connection);
         }
     }
 
     @Override
     public boolean changePassword(String email, String password) throws DaoException {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        boolean result;
-        try {
-            connection = ConnectionPool.getInstance().getConnection();
-            statement = connection.prepareStatement(CHANGE_PASSWORD);
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(CHANGE_PASSWORD)) {
             statement.setString(1, password);
             statement.setString(2, email);
-            result = statement.executeUpdate() > 0;
+            return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionDatabaseException e) {
             throw new DaoException("Changing password error", e);
-        } finally {
-            close(statement);
-            close(connection);
         }
-        return result;
     }
 
     @Override
     public boolean add(User user, String encryptedPassword) throws DaoException {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        boolean result;
-        try {
-            connection = ConnectionPool.getInstance().getConnection();
-            statement = connection.prepareStatement(ADD_USER);
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(ADD_USER)) {
             statement.setString(1, user.getEmail());
             statement.setString(2, encryptedPassword);
             statement.setString(3, user.getName());
@@ -235,14 +173,10 @@ public class UserDaoImpl implements UserDao {
             statement.setString(5, user.getPatronymic());
             statement.setString(6, user.getRole().toString());
             statement.setString(7, user.getStatus().toString());
-            result = statement.executeUpdate() > 0 ? true : false;
+            return statement.executeUpdate() > 0;
         } catch (SQLException | ConnectionDatabaseException e) {
             throw new DaoException("Adding user to users table error", e);
-        } finally {
-            close(statement);
-            close(connection);
         }
-        return result;
     }
 
     private User createUserFromResultSet(ResultSet resultSet) throws SQLException {

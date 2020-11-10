@@ -10,7 +10,6 @@ import com.traulko.project.service.UserService;
 import com.traulko.project.util.CustomCipher;
 import com.traulko.project.util.mail.MailSender;
 import com.traulko.project.validator.UserValidator;
-import com.traulko.project.validator.impl.UserValidatorImpl;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -21,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean changePassword(String email, String password, String passwordRepeat) throws ServiceException {
-        UserValidator userValidator = new UserValidatorImpl();
+        UserValidator userValidator = new UserValidator();
         boolean result = false;
         try {
             if (userValidator.isPasswordValid(password) && password.equals(passwordRepeat)) {
@@ -149,9 +148,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isUserExists(String email, String password) throws ServiceException {
-        UserValidator userValidator = new UserValidatorImpl();
         boolean result = false;
-        if (userValidator.isEmailValid(email) && userValidator.isPasswordValid(password)) {
+        if (UserValidator.isEmailValid(email) && UserValidator.isPasswordValid(password)) {
             try {
                 CustomCipher cipher = new CustomCipher();
                 String encryptedPassword = cipher.encrypt(password);
@@ -168,11 +166,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean add(String email, String password, String passwordRepeat,
                        String name, String surname, String patronymic) throws ServiceException {
-        UserValidator userValidator = new UserValidatorImpl();
         boolean result = false;
-        if (userValidator.isEmailValid(email) && userValidator.isPasswordValid(password) &&
-                userValidator.isNameValid(name) && userValidator.isNameValid(surname) &&
-                userValidator.isNameValid(patronymic) && password.equals(passwordRepeat) &&
+        if (UserValidator.isEmailValid(email) && UserValidator.isPasswordValid(password) &&
+                UserValidator.isNameValid(name) && UserValidator.isNameValid(surname) &&
+                UserValidator.isNameValid(patronymic) && password.equals(passwordRepeat) &&
                 isEmailFree(email)) {
             try {
                 String encryptedPassword = CustomCipher.encrypt(password);
@@ -188,7 +185,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private boolean isEmailFree(String email) throws ServiceException {
-        UserValidator userValidator = new UserValidatorImpl();
+        UserValidator userValidator = new UserValidator();
         boolean result = false;
         if (userValidator.isEmailValid(email)) {
             try {

@@ -16,12 +16,14 @@
 <main>
     <div class="container">
         <div class="col-4 mx-auto my-lg-4 p-3 bg-light">
-            <h1 class="display-3">${user.getName()} ${user.getSurname()} ${user.getPatronymic()}</h1>
-            <h3 class="lead">${user.getEmail()}</h3>
-            <button type="submit" class="btn btn-secondary"
-                    name="commandName" value="change_password_command">
-                <fmt:message key="add_product.add_button"/>
-            </button>
+            <form method="post" action="controller" autocomplete="off">
+                <h1 class="display-3">${user.getName()} ${user.getSurname()} ${user.getPatronymic()}</h1>
+                <h3 class="lead">${user.getEmail()}</h3>
+                <button type="submit" class="btn btn-secondary"
+                        name="commandName" value="change_password_page">
+                    <fmt:message key="personal_account.change_password_button"/>
+                </button>
+            </form>
         </div>
     </div>
 </main>

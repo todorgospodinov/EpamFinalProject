@@ -23,20 +23,20 @@
         <div class="col-4 mx-auto my-lg-4 p-3 bg-light">
             <form method="post" action="download" enctype="multipart/form-data" autocomplete="off">
                 <div>
-                    <label><fmt:message key="add_product.product_title"/></label>
-                    <input class="form-control" type="text" name="title"/><br/>
+                    <label for="title"><fmt:message key="add_product.product_title"/></label>
+                    <input id="title" class="form-control" type="text" name="title"/><br/>
                 </div>
                 <div>
-                    <label><fmt:message key="add_product.price"/></label>
-                    <input class="form-control" type="text" name="price"/><br/>
+                    <label for="price"><fmt:message key="add_product.price"/></label>
+                    <input id="price" class="form-control" type="text" name="price"/><br/>
                 </div>
                 <div>
-                    <label><fmt:message key="add_product.description"/></label>
-                    <input class="form-control" type="text" name="description"/><br/>
+                    <label for="description"><fmt:message key="add_product.description"/></label>
+                    <input id="description" class="form-control" type="text" name="description"/><br/>
                 </div>
                 <div>
-                    <label><fmt:message key="add_product.image"/></label>
-                    <input type="file" name="content" accept="image/jpeg" required>
+                    <label for="content"><fmt:message key="add_product.image"/></label>
+                    <input id="content" type="file" name="content" accept="image/jpeg" required>
                 </div>
                 <c:if test="${userDataIncorrect}">
                     <div style="color: red">

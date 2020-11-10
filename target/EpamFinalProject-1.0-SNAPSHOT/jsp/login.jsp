@@ -18,16 +18,21 @@
         <div class="col-4 mx-auto my-lg-4 p-3 bg-light">
             <form method="post" action="controller" autocomplete="off">
                 <div>
-                    <label><fmt:message key="login_page.email"/></label>
-                    <input class="form-control" type="text" name="email"/><br/>
+                    <label for="email"><fmt:message key="login_page.email"/></label>
+                    <input id="email" class="form-control" type="text" name="email"/><br/>
                 </div>
                 <div>
-                    <label><fmt:message key="login_page.password"/></label>
-                    <input class="form-control" type="password" name="password"/><br/>
+                    <label for="password"><fmt:message key="login_page.password"/></label>
+                    <input id="password" class="form-control" type="password" name="password"/><br/>
                 </div>
                 <c:if test="${userDataIncorrect}">
                     <div style="color: red">
                         <p><fmt:message key="login_page.incorrect_data"/></p>
+                    </div>
+                </c:if>
+                <c:if test="${userSuccessChangePassword}">
+                    <div style="color: red">
+                        <p><fmt:message key="login_page.user_success_change_password"/></p>
                     </div>
                 </c:if>
                 <div class="form-row text-center">

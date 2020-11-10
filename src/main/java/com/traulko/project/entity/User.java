@@ -15,6 +15,8 @@ public class User {
     private Role role;
     private Status status;
 
+    public User() {}
+
     public User(Integer userId, String email, String name, String surname, String patronymic, Role role, Status status) {
         this.userId = userId;
         this.email = email;

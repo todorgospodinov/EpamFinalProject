@@ -12,6 +12,8 @@ public class PagePath {
     public static final String ADD_PRODUCT = "/jsp/add_product.jsp";
     public static final String FORGOT_PASSWORD = "/jsp/forgot_password.jsp";
     public static final String CHANGE_PASSWORD = "/jsp/change_password.jsp";
+    public static final String PRODUCT = "/jsp/product.jsp";
+    public static final String BASKET = "/jsp/basket.jsp";
 
 
     private PagePath() {

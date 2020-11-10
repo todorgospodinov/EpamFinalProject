@@ -72,6 +72,34 @@
                 <c:if test="${userEmailIsNotFound}">
                     <h2><fmt:message key="message_page.user_email_is_not_found"/></h2>
                 </c:if>
+
+                <c:if test="${addProductSuccess}">
+                    <h2><fmt:message key="message_page.add_product_success"/></h2>
+                </c:if>
+
+                <c:if test="${addProductError}">
+                    <h2><fmt:message key="message_page.add_product_error"/></h2>
+                </c:if>
+
+                <c:if test="${productFindError}">
+                    <h2><fmt:message key="message_page.product_find_error"/></h2>
+                </c:if>
+
+                <c:if test="${addProductToBasketSuccess}">
+                    <h2><fmt:message key="message_page.add_basket_success"/></h2>
+                </c:if>
+
+                <c:if test="${addProductToBasketError}">
+                    <h2><fmt:message key="message_page.add_basket_error"/></h2>
+                </c:if>
+
+                <c:if test="${removeProductFromBasketSuccess}">
+                    <h2><fmt:message key="message_page.remove_basket_success"/></h2>
+                </c:if>
+
+                <c:if test="${removeProductFromBaksetError}">
+                    <h2><fmt:message key="message_page.remove_basket_error"/></h2>
+                </c:if>
             </div>
         </div>
     </section>

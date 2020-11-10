@@ -17,6 +17,8 @@ public class ColumnName {
     public static final String IMAGE_ID = "image_id";
     public static final String IMAGE_NAME = "image_name";
 
+    public static final String BASKET_ID = "basket_id";
+
     private ColumnName() {
     }
 }

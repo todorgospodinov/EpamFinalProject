@@ -5,17 +5,17 @@ public class RequestParameter {
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
     public static final String ERROR_MESSAGE = "errorMessage";
-    public static final String ERROR_LOGIN_PASSWORD_MESSAGE = "errorLoginPasswordMessage";
     public static final String PATRONYMIC = "patronymic";
     public static final String PASSWORD_REPEAT = "password_repeat";
-    public static final String ERROR_REGISTER_MESSAGE = "errorRegisterMessage";
     public static final String NAME = "name";
     public static final String TITLE = "title";
     public static final String DESCRIPTION = "description";
     public static final String PRICE = "price";
     public static final String SURNAME = "surname";
     public static final String REQUEST_ATTRIBUTE_HANDLER = "requestAttributeHandler";
+    public static final String PREVIOUS_REQUEST_ATTRIBUTE_HANDLER = "previousRequestAttributeHandler";
     public static final String CURRENT_PAGE = "currentPage";
+    public static final String PREVIOUS_PAGE = "previousPage";
     public static final String NEW_LOCALE = "newLocale";
     public static final String CURRENT_LOCALE = "currentLocale";
     public static final String USERS = "users";
@@ -24,6 +24,9 @@ public class RequestParameter {
     public static final String ROLE = "role";
     public static final String ACCESS_CODE = "accessCode";
     public static final String SEARCH_USERS_QUERY = "searchUsersQuery";
+    public static final String PRODUCT_ID = "productId";
+    public static final String PRODUCT = "product";
+    public static final String BASKETS = "baskets";
 
     public static final String PHOTO_NAME = "photoName";
     public static final String INCORRECT_IMAGE_MESSAGE = "incorrectImageMessage";
@@ -44,6 +47,14 @@ public class RequestParameter {
 
     public static final String USER_SUCCESS_CHANGE_PASSWORD_LETTER = "userSuccessChangePasswordLetter";
     public static final String USER_EMAIL_IS_NOT_FOUND = "userEmailIsNotFound";
+
+    public static final String ADD_PRODUCT_SUCCESS = "addProductSuccess";
+    public static final String ADD_PRODUCT_ERROR = "addProductError";
+    public static final String PRODUCT_FIND_ERROR = "productFindError";
+    public static final String ADD_PRODUCT_TO_BASKET_SUCCESS = "addProductToBasketSuccess";
+    public static final String ADD_PRODUCT_TO_BASKET_ERROR = "addProductToBasketError";
+    public static final String REMOVE_PRODUCT_FROM_BASKET_SUCCESS = "removeProductFromBasketSuccess";
+    public static final String REMOVE_PRODUCT_FROM_BASKET_ERROR = "removeProductFromBasketError";
 
 
     private RequestParameter() {

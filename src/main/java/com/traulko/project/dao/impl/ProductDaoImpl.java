@@ -3,7 +3,7 @@ package com.traulko.project.dao.impl;
 import com.traulko.project.dao.ColumnName;
 import com.traulko.project.dao.ProductDao;
 import com.traulko.project.dao.connection.ConnectionPool;
-import com.traulko.project.entity.Image;
+import com.traulko.project.entity.CustomImage;
 import com.traulko.project.entity.Product;
 import com.traulko.project.exception.ConnectionDatabaseException;
 import com.traulko.project.exception.DaoException;
@@ -11,21 +11,22 @@ import com.traulko.project.exception.DaoException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ProductDaoImpl implements ProductDao {
-    private static final String FIND_ALL_PRODUCTS = "SELECT product_id, product_title, product_price," +
+    private static final String FIND_ALL = "SELECT product_id, product_title, product_price," +
             " product_description, image_id, image_name FROM products INNER JOIN images ON" +
             " products.image_id_fk = images.image_id";
     private static final String ADD_PRODUCT = "INSERT INTO products (product_title, product_price, "
             + "product_description, image_id_fk) VALUES (?, ?, ?, ?)";
+    private static final String FIND_BY_ID = "SELECT product_id, product_title, product_price," +
+            " product_description, image_id, image_name FROM products INNER JOIN images ON" +
+            " products.image_id_fk = images.image_id where product_id = ?";
 
     @Override
     public List<Product> findAll() throws DaoException {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = ConnectionPool.getInstance().getConnection();
-            statement = connection.prepareStatement(FIND_ALL_PRODUCTS);
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_ALL)) {
             ResultSet resultSet = statement.executeQuery();
             List<Product> productList = new ArrayList<>();
             while (resultSet.next()) {
@@ -35,9 +36,23 @@ public class ProductDaoImpl implements ProductDao {
             return productList;
         } catch (SQLException | ConnectionDatabaseException e) {
             throw new DaoException("Finding all products error", e);
-        } finally {
-            close(statement);
-            close(connection);
+        }
+    }
+
+    @Override
+    public Optional<Product> findById(int id) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_ID)) {
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            Optional<Product> productOptional = Optional.empty();
+            if (resultSet.next()) {
+                Product product = createProductFromResultSet(resultSet);
+                productOptional = Optional.of(product);
+            }
+            return productOptional;
+        } catch (SQLException | ConnectionDatabaseException e) {
+            throw new DaoException("Finding product by id error", e);
         }
     }
 
@@ -51,7 +66,7 @@ public class ProductDaoImpl implements ProductDao {
             boolean result = statement.executeUpdate() > 0;
             return result;
         } catch (SQLException e) {
-            throw new DaoException("Error while adding tattoo: " + product, e);
+            throw new DaoException("Error while adding product: " + product, e);
         }
     }
 
@@ -62,6 +77,6 @@ public class ProductDaoImpl implements ProductDao {
         String description = resultSet.getString(ColumnName.PRODUCT_DESCRIPTION);
         Integer imageId = Integer.parseInt(resultSet.getString(ColumnName.IMAGE_ID));
         String imageName = resultSet.getString(ColumnName.IMAGE_NAME);
-        return new Product(id, title, price, description, new Image(imageId, imageName));
+        return new Product(id, title, price, description, new CustomImage(imageId, imageName));
     }
 }

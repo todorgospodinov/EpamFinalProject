@@ -26,8 +26,12 @@ public class AddProductCommand implements CustomCommand {
         String description = request.getParameter(RequestParameter.DESCRIPTION);
         String photoName = (String) request.getAttribute(RequestParameter.PHOTO_NAME);
         try {
-            productService.add(title, price, description, photoName);
-            page = PagePath.ADMIN;
+            if (productService.add(title, price, description, photoName)) {
+                request.setAttribute(RequestParameter.ADD_PRODUCT_SUCCESS, true);
+            } else {
+                request.setAttribute(RequestParameter.ADD_PRODUCT_ERROR, true);
+            }
+            page = PagePath.MESSAGE;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while adding product", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);

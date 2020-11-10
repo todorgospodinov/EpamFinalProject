@@ -22,12 +22,12 @@
         <div class="col-4 mx-auto my-lg-4 p-3 bg-light">
             <form method="post" action="controller" autocomplete="off">
                 <div>
-                    <label><fmt:message key="change_password.password"/></label>
-                    <input class="form-control" type="text" name="password"/><br/>
+                    <label for="password"><fmt:message key="change_password.password"/></label>
+                    <input id="password" class="form-control" type="text" name="password"/><br/>
                 </div>
                 <div>
-                    <label><fmt:message key="change_password.password_repeat"/></label>
-                    <input class="form-control" type="text" name="password_repeat"/><br/>
+                    <label for="password_repeat"><fmt:message key="change_password.password_repeat"/></label>
+                    <input id="password_repeat" class="form-control" type="text" name="password_repeat"/><br/>
                 </div>
                 <div class="form-row text-center">
                     <div class="col-12">

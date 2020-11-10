@@ -27,7 +27,7 @@
                     <li class="nav-item">
                         <form method="post" action="controller">
                             <button class="btn btn-secondary nav-link" name="commandName"
-                                    value="main_page"><fmt:message key="header.contacts_button"/></button>
+                                    value="basket_page"><fmt:message key="header.basket_button"/></button>
                         </form>
                     </li>
                     <li class="nav-item">

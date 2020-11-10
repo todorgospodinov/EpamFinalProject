@@ -22,8 +22,8 @@
         <div class="col-4 mx-auto my-lg-4 p-3 bg-light">
             <form method="post" action="controller" autocomplete="off">
                 <div>
-                    <label><fmt:message key="forgot_password.email"/></label>
-                    <input class="form-control" type="text" name="email"/><br/>
+                    <label for="email"><fmt:message key="forgot_password.email"/></label>
+                    <input id="email" class="form-control" type="text" name="email"/><br/>
                 </div>
                 <div class="form-row text-center">
                     <div class="col-12">
