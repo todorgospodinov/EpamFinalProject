@@ -19,6 +19,7 @@ public enum CommandType {
     ADD_PRODUCT_TO_BASKET_COMMAND(new AddProductToBasketCommand()),
     DELETE_PRODUCT_FROM_BASKET_COMMAND(new DeleteProductFromBasketCommand()),
     FILL_UP_BALANCE_COMMAND(new FillUpBalanceCommand()),
+    FIND_PRODUCTS_COMMAND(new FindProductsCommand()),
 
 
     SWITCH_LANGUAGE_COMMAND(new SwitchLanguageCommand()),

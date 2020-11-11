@@ -20,6 +20,18 @@
 <main>
     <div class="container">
         <div class="col-12 mx-auto my-lg-4 p-3 bg-light">
+            <div class="col-6">
+                <form method="post" action="controller">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="searchProductsQuery" placeholder="<fmt:message key="catalog_page.product_search"/>">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" name="commandName"
+                                    value="find_products_command"><fmt:message key="catalog_page.search_button"/>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <div class="row">
                 <c:forEach var="product" items="${products}">
                     <div class="col-sm-4">

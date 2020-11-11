@@ -24,6 +24,7 @@ public class RequestParameter {
     public static final String MONEY_AMOUNT = "moneyAmount";
     public static final String ACCESS_CODE = "accessCode";
     public static final String SEARCH_USERS_QUERY = "searchUsersQuery";
+    public static final String SEARCH_PRODUCTS_QUERY = "searchProductsQuery";
     public static final String PRODUCT_ID = "productId";
     public static final String PRODUCT = "product";
     public static final String BASKETS = "baskets";

@@ -5,6 +5,7 @@ import com.traulko.project.dao.ProductDao;
 import com.traulko.project.dao.impl.ProductDaoImpl;
 import com.traulko.project.entity.CustomImage;
 import com.traulko.project.entity.Product;
+import com.traulko.project.entity.User;
 import com.traulko.project.exception.DaoException;
 import com.traulko.project.exception.ServiceException;
 import com.traulko.project.exception.TransactionException;
@@ -40,6 +41,15 @@ public class ProductServiceImpl implements ProductService {
             return optionalProduct;
         } catch (DaoException e) {
             throw new ServiceException("Error while finding product by id", e);
+        }
+    }
+
+    @Override
+    public List<Product> findBySearchQuery(String searchQuery) throws ServiceException {
+        try {
+            return productDao.findBySearchQuery(searchQuery);
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding products by search query in batabase", e);
         }
     }
 

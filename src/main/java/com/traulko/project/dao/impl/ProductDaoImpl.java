@@ -5,6 +5,7 @@ import com.traulko.project.dao.ProductDao;
 import com.traulko.project.dao.connection.ConnectionPool;
 import com.traulko.project.entity.CustomImage;
 import com.traulko.project.entity.Product;
+import com.traulko.project.entity.User;
 import com.traulko.project.exception.ConnectionDatabaseException;
 import com.traulko.project.exception.DaoException;
 
@@ -22,6 +23,10 @@ public class ProductDaoImpl implements ProductDao {
     private static final String FIND_BY_ID = "SELECT product_id, product_title, product_price," +
             " product_description, image_id, image_name FROM products INNER JOIN images ON" +
             " products.image_id_fk = images.image_id where product_id = ?";
+    private static final String PERCENT = "%";
+    private static final String FIND_PRODUCTS_BY_SEARCH_QUERY = "SELECT product_id, product_title, product_price, " +
+            "product_description, image_id, image_name FROM products INNER JOIN images ON " +
+            "products.image_id_fk = images.image_id where concat(product_title, product_price) like ?";
 
     @Override
     public List<Product> findAll() throws DaoException {
@@ -53,6 +58,23 @@ public class ProductDaoImpl implements ProductDao {
             return productOptional;
         } catch (SQLException | ConnectionDatabaseException e) {
             throw new DaoException("Finding product by id error", e);
+        }
+    }
+
+    @Override
+    public List<Product> findBySearchQuery(String searchQuery) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_PRODUCTS_BY_SEARCH_QUERY)) {
+            statement.setString(1, PERCENT + searchQuery + PERCENT);
+            ResultSet resultSet = statement.executeQuery();
+            List<Product> productList = new ArrayList<>();
+            while (resultSet.next()) {
+                Product product = createProductFromResultSet(resultSet);
+                productList.add(product);
+            }
+            return productList;
+        } catch (SQLException | ConnectionDatabaseException e) {
+            throw new DaoException("Finding products by search query error", e);
         }
     }
 

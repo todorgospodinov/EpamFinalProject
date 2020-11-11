@@ -11,5 +11,7 @@ public interface ProductService {
 
     Optional<Product> findById(String id) throws ServiceException;
 
+    List<Product> findBySearchQuery(String searchQuery) throws ServiceException;
+
     List<Product> findAll() throws ServiceException;
 }

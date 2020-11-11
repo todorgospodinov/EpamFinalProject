@@ -3,6 +3,7 @@ com\traulko\project\controller\command\impl\page\ForgotPasswordPageCommand.class
 com\traulko\project\controller\FileUploadController.class
 com\traulko\project\controller\command\impl\LoginCommand.class
 com\traulko\project\service\impl\BasketServiceImpl.class
+com\traulko\project\controller\command\impl\FindProductsCommand.class
 com\traulko\project\controller\command\type\CommandType.class
 com\traulko\project\entity\User.class
 com\traulko\project\controller\command\CustomCommand.class

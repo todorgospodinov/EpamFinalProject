@@ -38,6 +38,7 @@ C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\dao\imp
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\exception\SendMailException.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\entity\Product.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\AccountAccessCommand.java
+C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\FindProductsCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\dao\connection\ConnectionPool.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\CustomCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\FillUpBalanceCommand.java

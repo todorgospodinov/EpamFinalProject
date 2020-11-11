@@ -12,5 +12,7 @@ public interface ProductDao {
 
     Optional<Product> findById(int id) throws DaoException;
 
+    List<Product> findBySearchQuery(String searchQuery) throws DaoException;
+
     boolean add(Product product, Connection connection) throws DaoException;
 }
