@@ -105,6 +105,18 @@
                     <h2><fmt:message key="message_page.fill_up_success"/></h2>
                 </c:if>
 
+                <c:if test="${orderCreateSuccessMessage}">
+                    <h2><fmt:message key="message_page.order_create_success"/></h2>
+                </c:if>
+
+                <c:if test="${orderCreateErrorMessage}">
+                    <h2><fmt:message key="message_page.order_create_error"/></h2>
+                </c:if>
+
+                <c:if test="${accessErrorMessage}">
+                    <h2><fmt:message key="message_page.access_error"/></h2>
+                </c:if>
+
             </div>
         </div>
     </section>

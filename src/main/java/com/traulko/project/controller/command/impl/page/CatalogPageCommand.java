@@ -27,6 +27,7 @@ public class CatalogPageCommand implements CustomCommand {
             page = PagePath.CATALOG;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while finding all products", e);
+            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR;
         }
         return page;

@@ -4,6 +4,34 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <servlet>
+        <servlet-name>controller</servlet-name>
+        <servlet-class>com.traulko.project.controller.MainController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>controller</servlet-name>
+        <url-pattern>/controller</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>JspPagePathFilter</filter-name>
+        <filter-class>com.traulko.project.controller.filter.JspPagePathFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>JspPagePathFilter</filter-name>
+        <url-pattern>/jsp/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>RoleFilter</filter-name>
+        <filter-class>com.traulko.project.controller.filter.RoleFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>RoleFilter</filter-name>
+        <url-pattern>/controller</url-pattern>
+    </filter-mapping>
+
     <context-param>
         <param-name>load.location</param-name>
         <param-value>D:/project/</param-value>

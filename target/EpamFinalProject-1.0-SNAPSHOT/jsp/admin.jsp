@@ -24,9 +24,10 @@
         <div class="col-12 mx-auto my-lg-4 p-3 bg-light">
             <div class="col-6">
                 <form method="post" action="controller">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="searchUsersQuery" placeholder="<fmt:message key="admin_page.user_search"/>">
-                        <div class="input-group-append">
+                    <input type="text" class="form-control" name="searchUsersQuery"
+                           placeholder="<fmt:message key="admin_page.user_search"/>">
+                    <div class="form-row text-center">
+                        <div class="col-12">
                             <button class="btn btn-secondary" name="commandName"
                                     value="find_users_command"><fmt:message key="admin_page.search"/>
                             </button>

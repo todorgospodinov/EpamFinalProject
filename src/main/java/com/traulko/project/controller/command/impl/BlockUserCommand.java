@@ -29,6 +29,7 @@ public class BlockUserCommand implements CustomCommand {
             page = PagePath.MESSAGE;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while block user", e);
+            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR;
         }
         return page;

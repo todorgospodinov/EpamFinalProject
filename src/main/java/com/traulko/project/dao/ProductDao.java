@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface ProductDao {
     List<Product> findAll() throws DaoException;
 
-    Optional<Product> findById(int id) throws DaoException;
+    Optional<Product> findById(Integer id) throws DaoException;
 
     List<Product> findBySearchQuery(String searchQuery) throws DaoException;
 

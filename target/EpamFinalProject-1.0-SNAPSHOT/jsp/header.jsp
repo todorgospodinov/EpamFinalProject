@@ -18,63 +18,68 @@
         <div class="container">
             <div class="navbar-header">
                 <form method="post" action="controller">
-                    <button class="btn btn-secondary nav-link" name="commandName"
-                            value="main_page"><fmt:message key="header.catalog_button"/></button>
+                    <button class="btn btn-secondary nav-link button-margin" name="commandName"
+                            value="main_page"><fmt:message key="header.main_button"/></button>
                 </form>
             </div>
             <div>
                 <ul class="nav">
                     <li class="nav-item">
                         <form method="post" action="controller">
-                            <button class="btn btn-secondary nav-link" name="commandName"
-                                    value="basket_page"><fmt:message key="header.basket_button"/></button>
+                            <button class="btn btn-secondary nav-link button-margin" name="commandName"
+                                    value="catalog_page"><fmt:message key="header.catalog_button"/></button>
                         </form>
                     </li>
-                    <li class="nav-item">
-                        <form method="post" action="controller">
-                            <button class="btn btn-secondary nav-link" name="commandName"
-                                    value="catalog_page"><fmt:message key="header.catalog_button"/> </button>
-                        </form>
-                    </li>
-                    <c:if test="${sessionScope.user != null}">
+                    <c:if test="${user.role.toString().equals(\"USER\")}">
                         <li class="nav-item">
                             <form method="post" action="controller">
-                                <button class="btn btn-secondary nav-link" name="commandName"
-                                        value="personal_account_page"><fmt:message key="header.personal_account_button"/></button>
+                                <button class="btn btn-secondary nav-link button-margin" name="commandName"
+                                        value="basket_page"><fmt:message key="header.basket_button"/></button>
                             </form>
                         </li>
                         <li class="nav-item">
                             <form method="post" action="controller">
-                                <button class="btn btn-secondary nav-link" name="commandName"
-                                        value="logout_command"><fmt:message key="header.logout_button"/> </button>
-                            </form>
-                        </li>
-                        <li class="nav-item">
-                            <form method="post" action="controller">
-                                <button class="btn btn-secondary nav-link" name="commandName"
-                                        value="fill_up_balance_page">${user.getBalance()} <fmt:message key="header.currency"/></button>
+                                <button class="btn btn-secondary nav-link button-margin" name="commandName"
+                                        value="fill_up_balance_page">${user.getBalance()} <fmt:message
+                                        key="header.currency"/></button>
                             </form>
                         </li>
                     </c:if>
-                    <c:if test="${sessionScope.user == null }">
+                    <c:if test="${user != null}">
                         <li class="nav-item">
                             <form method="post" action="controller">
-                                <button class="btn btn-secondary nav-link" name="commandName"
-                                        value="login_page"><fmt:message key="header.login_button"/> </button>
+                                <button class="btn btn-secondary nav-link button-margin" name="commandName"
+                                        value="personal_account_page"><fmt:message
+                                        key="header.personal_account_button"/></button>
                             </form>
                         </li>
                         <li class="nav-item">
                             <form method="post" action="controller">
-                                <button class="btn btn-secondary nav-link" name="commandName"
-                                        value="registration_page"><fmt:message key="header.registration_button"/></button>
+                                <button class="btn btn-secondary nav-link button-margin" name="commandName"
+                                        value="logout_command"><fmt:message key="header.logout_button"/></button>
                             </form>
                         </li>
                     </c:if>
-                    <c:if test ="${sessionScope.user.role.toString().equals(\"ADMIN\")}">
+                    <c:if test="${user == null }">
                         <li class="nav-item">
                             <form method="post" action="controller">
-                                <button class="btn btn-secondary nav-link" name="commandName"
-                                        value="admin_page"><fmt:message key="header.admin_button"/> </button>
+                                <button class="btn btn-secondary nav-link button-margin" name="commandName"
+                                        value="login_page"><fmt:message key="header.login_button"/></button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form method="post" action="controller">
+                                <button class="btn btn-secondary nav-link button-margin" name="commandName"
+                                        value="registration_page"><fmt:message
+                                        key="header.registration_button"/></button>
+                            </form>
+                        </li>
+                    </c:if>
+                    <c:if test="${user.role.toString().equals(\"ADMIN\")}">
+                        <li class="nav-item">
+                            <form method="post" action="controller">
+                                <button class="btn btn-secondary nav-link button-margin" name="commandName"
+                                        value="admin_page"><fmt:message key="header.admin_button"/></button>
                             </form>
                         </li>
                     </c:if>
@@ -82,14 +87,16 @@
                         <form action="controller" method="post">
                             <input type="hidden" name="commandName" value="switch_language_command"/>
                             <input type="hidden" name="newLocale" value="en"/>
-                            <button class="btn btn-secondary nav-link"><fmt:message key="local.en"/></button>
+                            <button class="btn btn-secondary nav-link button-margin"><fmt:message
+                                    key="local.en"/></button>
                         </form>
                     </li>
                     <li class="nav-item">
                         <form action="controller" method="post">
                             <input type="hidden" name="commandName" value="switch_language_command"/>
                             <input type="hidden" name="newLocale" value="ru"/>
-                            <button class="btn btn-secondary nav-link"><fmt:message key="local.ru"/></button>
+                            <button class="btn btn-secondary nav-link button-margin"><fmt:message
+                                    key="local.ru"/></button>
                         </form>
                     </li>
                 </ul>

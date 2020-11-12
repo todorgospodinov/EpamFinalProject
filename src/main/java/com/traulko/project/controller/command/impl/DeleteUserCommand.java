@@ -29,6 +29,7 @@ public class DeleteUserCommand implements CustomCommand {
             page = PagePath.MESSAGE;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while deleting users", e);
+            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR;
         }
         return page;

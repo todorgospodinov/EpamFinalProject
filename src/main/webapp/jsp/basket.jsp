@@ -22,39 +22,38 @@
         <div class="col-12 mx-auto my-lg-4 p-3 bg-light">
             <div class="row">
                 <c:if test="${baskets.size() == 0}">
-                    <p>Empty basket</p>
+                    <p>Empty</p>
                 </c:if>
                 <c:if test="${baskets.size() != 0}">
-                    <c:forEach var="basket" items="${baskets}">
+                    <c:forEach var="userBasketProduct" items="${baskets}">
                         <div class="col-sm-4">
-                            <div class="card text-white bg-secondary">
+                            <div class="card text-white bg-secondary card-margin-bottom">
                                 <div>
                                     <img style="object-fit: cover; height: 200px" class="card-img-top"
-                                         src="image/${basket.getProduct().getImage().getName()}.jpg"
+                                         src="image/${userBasketProduct.getProduct().getImage().getName()}.jpg"
                                          alt="Card image cap">
                                 </div>
-                                <div class="card-body">
-                                    <h5 style="text-align: center"
-                                        class="card-title">${basket.getProduct().getTitle()}</h5>
-                                    <div class="form-row text-center">
-                                        <div class="col-12">
-                                            <form method="post" action="controller">
-                                                <input type="hidden" name="commandName" value="product_page">
-                                                <button class="btn btn-light nav-link" name="productId"
-                                                        value="${basket.getProduct().getProductId()}"><fmt:message
-                                                        key="basket_page.product_page_button"/>
-                                                </button>
-                                            </form>
-                                            <form method="post" action="controller">
-                                                <input type="hidden" name="commandName"
-                                                       value="delete_product_from_basket_command">
-                                                <button class="btn btn-danger nav-link" name="productId"
-                                                        value="${basket.getProduct().getProductId()}"><fmt:message
-                                                        key="basket_page.remove_product_button"/>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
+                                <div class="card-body text-center shadow">
+                                    <h5 class="card-title">${userBasketProduct.getProduct().getTitle()}</h5>
+                                    <form method="post" action="controller">
+                                        <input type="hidden" name="commandName" value="product_page">
+                                        <button class="btn btn-light btn-block nav-link" name="productId"
+                                                value="${userBasketProduct.getProduct().getProductId()}"><fmt:message
+                                                key="basket_page.product_page_button"/>
+                                        </button>
+                                    </form>
+                                    <form method="post" action="controller">
+                                        <input type="hidden" name="commandName"
+                                               value="delete_product_from_basket_command">
+                                        <button class="btn btn-block btn-danger nav-link" name="productId"
+                                                value="${userBasketProduct.getProduct().getProductId()}">
+                                            <fmt:message
+                                                    key="basket_page.remove_product_button"/>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="card-footer text-muted">
+                                    2 days ago
                                 </div>
                             </div>
                         </div>
@@ -63,6 +62,15 @@
                 <c:if test="${totalPrice != 0}">
                     <p><fmt:message key="basket_page.total_price"/> ${totalPrice}</p>
                 </c:if>
+                <form method="post" action="controller">
+                    <input type="hidden" name="commandName"
+                           value="create_order_command">
+                    <button class="btn btn-secondary" name="products"
+                            value="${baskets}">
+                        <fmt:message
+                                key="basket_page.remove_product_button"/>
+                    </button>
+                </form>
             </div>
         </div>
     </div>

@@ -20,6 +20,13 @@ public class ColumnName {
 
     public static final String BASKET_ID = "basket_id";
 
+    public static final String ORDER_ID = "order_id";
+    public static final String ORDER_CREATION_DATE = "order_creation_date";
+    public static final String ORDER_CLOSING_DATE = "order_closing_date";
+    public static final String ORDER_STATUS = "order_status";
+
+    public static final String ORDER_ITEM_ID = "order_item_id";
+
     private ColumnName() {
     }
 }

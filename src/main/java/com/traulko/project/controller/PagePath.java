@@ -15,6 +15,9 @@ public class PagePath {
     public static final String PRODUCT = "/jsp/product.jsp";
     public static final String BASKET = "/jsp/basket.jsp";
     public static final String FILL_UP_BALANCE = "/jsp/fill_up_balance.jsp";
+    public static final String ORDER = "/jsp/order.jsp";
+    public static final String INDEX = "/index.jsp";
+    public static final String ERROR_404 = "/jsp/error.jsp"; // TODO: 12.11.2020
 
 
     private PagePath() {

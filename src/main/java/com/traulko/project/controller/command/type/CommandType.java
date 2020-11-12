@@ -20,9 +20,13 @@ public enum CommandType {
     DELETE_PRODUCT_FROM_BASKET_COMMAND(new DeleteProductFromBasketCommand()),
     FILL_UP_BALANCE_COMMAND(new FillUpBalanceCommand()),
     FIND_PRODUCTS_COMMAND(new FindProductsCommand()),
+    CREATE_ORDER_COMMAND(new CreateOrderCommand()),
 
 
     SWITCH_LANGUAGE_COMMAND(new SwitchLanguageCommand()),
+
+
+    EMPTY_COMMAND(new EmptyCommand()),
 
 
     MAIN_PAGE(new MainPageCommand()),
@@ -36,6 +40,7 @@ public enum CommandType {
     CHANGE_PASSWORD_PAGE(new ChangePasswordPageCommand()),
     BASKET_PAGE(new BasketPageCommand()),
     FILL_UP_BALANCE_PAGE(new FillUpBalancePageCommand()),
+    ORDER_PAGE(new OrderPageCommand()),
     ADD_PRODUCT_PAGE(new AddProductPageCommand());
 
     private final CustomCommand command;

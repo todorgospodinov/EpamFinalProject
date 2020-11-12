@@ -26,6 +26,18 @@
                 <h1 style="text-align: center" class="display-3">${product.getTitle()}</h1>
                 <h3 style="text-align: center" class="lead">${product.getPrice()}</h3>
                 <h3 style="text-align: center" class="lead">${product.getDescription()}</h3>
+                <c:if test="${user.role.toString().equals(\"USER\")}">
+                    <div class="form-row text-center">
+                        <div class="col-12">
+                            <input type="hidden" name="commandName"
+                                   value="add_product_to_basket_command">
+                            <button class="btn btn-light nav-link btn-block" name="productId"
+                                    value="${product.getProductId()}"><fmt:message
+                                    key="catalog_page.add_product_to_basket"/>
+                            </button>
+                        </div>
+                    </div>
+                </c:if>
             </form>
         </div>
     </div>

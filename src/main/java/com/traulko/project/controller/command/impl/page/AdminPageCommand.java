@@ -27,6 +27,7 @@ public class AdminPageCommand implements CustomCommand {
             page = PagePath.ADMIN;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while finding all users", e);
+            request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
             page = PagePath.ERROR;
         }
         return page;

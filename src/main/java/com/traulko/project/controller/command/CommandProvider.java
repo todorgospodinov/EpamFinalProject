@@ -5,25 +5,26 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Optional;
+
 public class CommandProvider {
-    private static final Logger LOGGER = LogManager.getLogger();
-    private static final CustomCommand MAIN_PAGE_COMMAND = CommandType.MAIN_PAGE.getCommand();
+    private static final Logger LOGGER = LogManager.getLogger(CommandProvider.class);
 
     private CommandProvider() {
     }
 
-    public static CustomCommand defineCommand(String commandName) {
-        CustomCommand currentCommand;
+    public static Optional <CustomCommand> defineCommand(String commandName) {
+        Optional<CustomCommand> currentCommand;
         if (commandName != null && !commandName.isBlank()) {
             try {
                 CommandType currentType = CommandType.valueOf(commandName.toUpperCase());
-                currentCommand = currentType.getCommand();
+                currentCommand = Optional.of(currentType.getCommand());
             } catch (IllegalArgumentException e) {
                 LOGGER.log(Level.ERROR, "Incorrect command type", commandName, e);
-                currentCommand = MAIN_PAGE_COMMAND;
+                currentCommand = Optional.empty();
             }
         } else {
-            currentCommand = MAIN_PAGE_COMMAND;
+            currentCommand = Optional.empty();
         }
         return currentCommand;
     }

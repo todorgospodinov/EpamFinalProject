@@ -28,6 +28,10 @@ public class RequestParameter {
     public static final String PRODUCT_ID = "productId";
     public static final String PRODUCT = "product";
     public static final String BASKETS = "baskets";
+    public static final String ORDERS = "orders";
+    public static final String ORDER_ID = "orderId";
+    public static final String ORDER = "order";
+    public static final String ORDER_ITEMS = "orderItems";
 
     public static final String PHOTO_NAME = "photoName";
     public static final String INCORRECT_IMAGE_MESSAGE = "incorrectImageMessage";
@@ -59,6 +63,11 @@ public class RequestParameter {
 
     public static final String FILL_UP_BALANCE_SUCCESS = "fillUpBalanceSuccess";
     public static final String INCORRECT_MONEY_AMOUNT = "incorrectMoneyAmount";
+
+    public static final String ORDER_CREATE_SUCCESS_MESSAGE = "orderCreateSuccessMessage";
+    public static final String ORDER_CREATE_ERROR_MESSAGE = "orderCreateErrorMessage";
+
+    public static final String ACCESS_ERROR_MESSAGE = "accessErrorMessage";
 
 
     private RequestParameter() {

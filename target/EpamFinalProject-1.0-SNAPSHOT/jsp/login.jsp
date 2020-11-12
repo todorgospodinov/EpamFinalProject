@@ -35,22 +35,15 @@
                         <p><fmt:message key="login_page.user_success_change_password"/></p>
                     </div>
                 </c:if>
-                <div class="form-row text-center">
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-secondary"
-                                name="commandName" value="login_command">
-                            <fmt:message key="login_page.login_button"/>
-                        </button>
-                    </div>
-                </div>
-                <div class="form-row text-center">
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-secondary"
-                                name="commandName" value="forgot_password_page">
-                            <fmt:message key="login_page.forgot_password_button"/>
-                        </button>
-                    </div>
-                </div>
+                <button type="submit" class="btn btn-secondary btn-block"
+                        name="commandName" value="login_command">
+                    <fmt:message key="login_page.login_button"/>
+                </button>
+
+                <button type="submit" class="btn btn-secondary btn-block"
+                        name="commandName" value="forgot_password_page">
+                    <fmt:message key="login_page.forgot_password_button"/>
+                </button>
             </form>
         </div>
     </div>
