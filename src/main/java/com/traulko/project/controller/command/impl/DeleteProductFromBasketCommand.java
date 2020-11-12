@@ -5,7 +5,7 @@ import com.traulko.project.controller.RequestParameter;
 import com.traulko.project.controller.command.CustomCommand;
 import com.traulko.project.entity.User;
 import com.traulko.project.exception.ServiceException;
-import com.traulko.project.service.BasketService;
+import com.traulko.project.service.UserBasketProductService;
 import com.traulko.project.service.impl.UserBasketProductServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -16,13 +16,13 @@ import javax.servlet.http.HttpSession;
 
 public class DeleteProductFromBasketCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final BasketService basketService = new UserBasketProductServiceImpl();
+    private static final UserBasketProductService basketService = new UserBasketProductServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) {
         String page;
         HttpSession session = request.getSession();
-        Integer userId = ((User) session.getAttribute(RequestParameter.USER)).getUserId();
+        String userId = (String) session.getAttribute(RequestParameter.USER_ID);
         String productId = request.getParameter(RequestParameter.PRODUCT_ID);
         try {
             if (basketService.remove(userId, productId)) {

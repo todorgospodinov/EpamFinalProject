@@ -6,7 +6,7 @@ import com.traulko.project.controller.command.CustomCommand;
 import com.traulko.project.entity.UserBasketProduct;
 import com.traulko.project.entity.User;
 import com.traulko.project.exception.ServiceException;
-import com.traulko.project.service.BasketService;
+import com.traulko.project.service.UserBasketProductService;
 import com.traulko.project.service.impl.UserBasketProductServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -18,13 +18,13 @@ import java.util.List;
 
 public class BasketPageCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(BasketPageCommand.class);
-    private static final BasketService basketService = new UserBasketProductServiceImpl();
+    private static final UserBasketProductService basketService = new UserBasketProductServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) {
         String page;
         HttpSession session = request.getSession();
-        Integer userId = ((User) session.getAttribute(RequestParameter.USER)).getUserId();
+        String userId = (String) session.getAttribute(RequestParameter.USER_ID);
         try {
             List<UserBasketProduct> userBasketProductList = basketService.getUserBasketProductsByUserId(userId);
             double totalPrice = basketService.calculateTotalPrice(userBasketProductList);

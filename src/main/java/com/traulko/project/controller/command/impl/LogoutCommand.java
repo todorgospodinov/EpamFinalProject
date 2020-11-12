@@ -14,6 +14,7 @@ public class LogoutCommand implements CustomCommand {
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.removeAttribute(RequestParameter.USER);
+            session.removeAttribute(RequestParameter.USER_ID);
             session.setAttribute(RequestParameter.ROLE, User.Role.GUEST.toString());
         }
         return PagePath.LOGIN;

@@ -9,6 +9,7 @@ com\traulko\project\exception\ConnectionDatabaseException.class
 com\traulko\project\tag\UserListCustomTag.class
 com\traulko\project\controller\command\impl\page\ProductPageCommand.class
 com\traulko\project\util\mail\MailSender.class
+com\traulko\project\validator\UserBasketProductValidator.class
 com\traulko\project\util\mail\SessionFactory$1.class
 com\traulko\project\controller\command\impl\page\AdminPageCommand.class
 com\traulko\project\validator\UserValidator.class
@@ -18,7 +19,6 @@ com\traulko\project\controller\command\impl\SwitchLanguageCommand.class
 com\traulko\project\controller\command\impl\AddProductCommand.class
 com\traulko\project\dao\CustomTransaction.class
 com\traulko\project\entity\User$Status.class
-com\traulko\project\service\BasketService.class
 com\traulko\project\controller\PagePath.class
 com\traulko\project\controller\command\impl\page\PersonalAccountPageCommand.class
 com\traulko\project\util\mail\SessionFactory.class
@@ -58,8 +58,10 @@ com\traulko\project\exception\SendMailException.class
 com\traulko\project\service\impl\OrderItemServiceImpl.class
 com\traulko\project\dao\impl\UserDaoImpl.class
 com\traulko\project\controller\command\impl\page\BasketPageCommand.class
+com\traulko\project\validator\OrderItemValidator.class
 com\traulko\project\dao\connection\ProxyConnection.class
 com\traulko\project\controller\command\impl\page\AddProductPageCommand.class
+com\traulko\project\validator\OrderValidator.class
 com\traulko\project\controller\RequestAttributeHandler.class
 com\traulko\project\entity\CustomOrder$Status.class
 com\traulko\project\controller\command\impl\FindUsersCommand.class
@@ -85,11 +87,11 @@ com\traulko\project\dao\connection\ConnectionPool.class
 com\traulko\project\controller\command\CommandProvider.class
 com\traulko\project\service\impl\ProductServiceImpl.class
 com\traulko\project\service\OrderItemService.class
+com\traulko\project\service\UserBasketProductService.class
 com\traulko\project\controller\command\impl\ForgotPasswordCommand.class
 com\traulko\project\dao\impl\ImageDaoImpl.class
 com\traulko\project\controller\command\impl\EmptyCommand.class
 com\traulko\project\dao\ProductDao.class
 com\traulko\project\dao\ImageDao.class
 com\traulko\project\entity\User$Role.class
-com\traulko\project\validator\ProjectValidator.class
 com\traulko\project\entity\CustomOrder.class

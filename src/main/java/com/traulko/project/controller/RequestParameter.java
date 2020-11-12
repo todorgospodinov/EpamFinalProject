@@ -18,6 +18,7 @@ public class RequestParameter {
     public static final String NEW_LOCALE = "newLocale";
     public static final String CURRENT_LOCALE = "currentLocale";
     public static final String USERS = "users";
+    public static final String USER_ID = "userId";
     public static final String PRODUCTS = "products";
     public static final String USER = "user";
     public static final String ROLE = "role";

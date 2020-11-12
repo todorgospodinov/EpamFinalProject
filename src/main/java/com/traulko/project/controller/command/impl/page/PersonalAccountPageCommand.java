@@ -24,7 +24,7 @@ public class PersonalAccountPageCommand implements CustomCommand {
     public String execute(HttpServletRequest request) {
         String page;
         HttpSession session = request.getSession();
-        Integer userId = ((User) session.getAttribute(RequestParameter.USER)).getUserId();
+        String userId = (String) session.getAttribute(RequestParameter.USER_ID);
         try {
             List<CustomOrder> orderList = orderService.findOrdersByUserId(userId);
             request.setAttribute(RequestParameter.ORDERS, orderList);

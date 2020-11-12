@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface UserService {
     boolean isUserExists(String email, String password) throws ServiceException;
 
-    boolean fillUpBalance(User user, String moneyAmount) throws ServiceException;
+    boolean fillUpBalance(String userId, String moneyAmount) throws ServiceException;
 
     void sendLetter(User user, String url) throws ServiceException;
 
@@ -20,6 +20,8 @@ public interface UserService {
     List<User> findBySearchQuery(String searchQuery) throws ServiceException;
 
     boolean changePassword(String email, String password, String passwordRepeat) throws ServiceException;
+
+    Optional<User> findById(String id) throws ServiceException;
 
     Optional<User> findUserByEmail(String email) throws ServiceException;
 

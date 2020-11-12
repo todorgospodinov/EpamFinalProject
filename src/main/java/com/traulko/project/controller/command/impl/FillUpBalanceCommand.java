@@ -22,10 +22,10 @@ public class FillUpBalanceCommand implements CustomCommand {
     public String execute(HttpServletRequest request) {
         String page;
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute(RequestParameter.USER);
+        String userId = (String) session.getAttribute(RequestParameter.USER_ID);
         String moneyAmount = request.getParameter(RequestParameter.MONEY_AMOUNT);
         try {
-            if (userService.fillUpBalance(user, moneyAmount)) {
+            if (userService.fillUpBalance(userId, moneyAmount)) {
                 request.setAttribute(RequestParameter.FILL_UP_BALANCE_SUCCESS, true);
                 page = PagePath.MESSAGE;
             } else {

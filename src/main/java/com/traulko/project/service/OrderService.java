@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OrderService {
-    boolean add(Integer userId, List<UserBasketProduct> userBasketProductList) throws ServiceException;
 
-    List<CustomOrder> findOrdersByUserId(Integer id) throws ServiceException;
+    boolean add(String userId, List<UserBasketProduct> userBasketProductList) throws ServiceException;
+
+    List<CustomOrder> findOrdersByUserId(String id) throws ServiceException;
 
     Optional<CustomOrder> findById(String id) throws ServiceException;
 }

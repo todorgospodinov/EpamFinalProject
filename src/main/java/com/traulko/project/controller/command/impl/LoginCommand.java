@@ -30,6 +30,7 @@ public class LoginCommand implements CustomCommand {
                 switch (user.getStatus()) {
                     case ENABLE -> {
                         request.getSession().setAttribute(RequestParameter.USER, user);
+                        request.getSession().setAttribute(RequestParameter.USER_ID, user.getUserId().toString());
                         request.getSession().setAttribute(RequestParameter.ROLE, user.getRole().toString());
                         page = PagePath.MAIN;
                     }

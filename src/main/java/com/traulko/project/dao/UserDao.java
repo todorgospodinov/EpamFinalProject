@@ -9,6 +9,9 @@ import java.util.Optional;
 public interface UserDao {
     Optional<User> findByEmailAndPassword(String login, String password) throws DaoException;
     Optional<User> findByEmail(String login) throws DaoException;
+
+    Optional<User> findById(Integer id) throws DaoException;
+
     boolean update(User user) throws DaoException;
     boolean remove(String email) throws DaoException;
     boolean block(String email) throws DaoException;

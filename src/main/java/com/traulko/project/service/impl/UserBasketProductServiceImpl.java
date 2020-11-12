@@ -7,24 +7,27 @@ import com.traulko.project.entity.Product;
 import com.traulko.project.entity.User;
 import com.traulko.project.exception.DaoException;
 import com.traulko.project.exception.ServiceException;
-import com.traulko.project.service.BasketService;
-import com.traulko.project.validator.ProjectValidator;
+import com.traulko.project.service.UserBasketProductService;
+import com.traulko.project.validator.UserBasketProductValidator;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class UserBasketProductServiceImpl implements BasketService {
+public class UserBasketProductServiceImpl implements UserBasketProductService {
     private UserBasketProductDao userBasketProductDao = new UserBasketProductDaoImpl();
 
     @Override
-    public boolean add(Integer userId, String productId) throws ServiceException {
+    public boolean add(String userId, String productId) throws ServiceException {
         boolean result = false;
         try {
-            if (ProjectValidator.isCorrectIntValue(productId)) {
-                Integer productIdValue = Integer.parseInt(productId);
+            if (UserBasketProductValidator.isIdValid(productId) &&
+                    UserBasketProductValidator.isIdValid(productId)) {
+                Integer productIdParsed = Integer.parseInt(productId);
+                Integer userIdParsed = Integer.parseInt(userId);
                 User user = new User();
-                user.setUserId(userId);
+                user.setUserId(userIdParsed);
                 Product product = new Product();
-                product.setProductId(productIdValue);
+                product.setProductId(productIdParsed);
                 UserBasketProduct userBasketProduct = new UserBasketProduct();
                 userBasketProduct.setUser(user);
                 userBasketProduct.setProduct(product);
@@ -46,15 +49,17 @@ public class UserBasketProductServiceImpl implements BasketService {
     }
 
     @Override
-    public boolean remove(Integer userId, String productId) throws ServiceException {
+    public boolean remove(String userId, String productId) throws ServiceException {
         boolean result = false;
         try {
-            if (ProjectValidator.isCorrectIntValue(productId)) {
+            if (UserBasketProductValidator.isIdValid(userId) &&
+                    UserBasketProductValidator.isIdValid(productId)) {
                 Integer productIdValue = Integer.parseInt(productId);
+                Integer userIdParsed = Integer.parseInt(userId);
                 Product product = new Product();
                 product.setProductId(productIdValue);
                 User user = new User();
-                user.setUserId(userId);
+                user.setUserId(userIdParsed);
                 UserBasketProduct userBasketProduct = new UserBasketProduct();
                 userBasketProduct.setUser(user);
                 userBasketProduct.setProduct(product);
@@ -67,11 +72,16 @@ public class UserBasketProductServiceImpl implements BasketService {
     }
 
     @Override
-    public List<UserBasketProduct> getUserBasketProductsByUserId(Integer id) throws ServiceException {
+    public List<UserBasketProduct> getUserBasketProductsByUserId(String id) throws ServiceException {
+        List<UserBasketProduct> userBasketProductList = new ArrayList<>();
         try {
-            return userBasketProductDao.getBasketProductsByUserId(id);
+            if (UserBasketProductValidator.isIdValid(id)) {
+                int userId = Integer.parseInt(id);
+                userBasketProductList = userBasketProductDao.getBasketProductsByUserId(userId);
+            }
         } catch (DaoException e) {
             throw new ServiceException("Error while finding baskets", e);
         }
+        return userBasketProductList;
     }
 }

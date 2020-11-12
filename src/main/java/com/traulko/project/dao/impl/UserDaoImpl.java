@@ -3,6 +3,7 @@ package com.traulko.project.dao.impl;
 import com.traulko.project.dao.connection.ConnectionPool;
 import com.traulko.project.dao.ColumnName;
 import com.traulko.project.dao.UserDao;
+import com.traulko.project.entity.Product;
 import com.traulko.project.entity.User;
 import com.traulko.project.exception.ConnectionDatabaseException;
 import com.traulko.project.exception.DaoException;
@@ -32,6 +33,8 @@ public class UserDaoImpl implements UserDao {
     private static final String BLOCK_USER = "UPDATE users SET user_status = \"BLOCKED\" where user_email = ?";
     private static final String UNBLOCK_USER = "UPDATE users SET user_status = \"ENABLE\" where user_email = ?";
     private static final String CHANGE_PASSWORD = "UPDATE users SET user_password = ? where user_email = ?";
+    private static final String FIND_BY_ID = "SELECT user_id, user_email, user_name, user_surname, user_patronymic," +
+            " user_role, user_status, user_balance FROM users where user_id = ?";
     private static final String PERCENT = "%";
 
     public Optional<User> findByEmailAndPassword(String email, String password) throws DaoException {
@@ -48,6 +51,23 @@ public class UserDaoImpl implements UserDao {
             return userOptional;
         } catch (SQLException | ConnectionDatabaseException e) {
             throw new DaoException("Finding user by email and password error", e);
+        }
+    }
+
+    @Override
+    public Optional<User> findById(Integer id) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_ID)) {
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            Optional<User> userOptional = Optional.empty();
+            if (resultSet.next()) {
+                User user = createUserFromResultSet(resultSet);
+                userOptional = Optional.of(user);
+            }
+            return userOptional;
+        } catch (SQLException | ConnectionDatabaseException e) {
+            throw new DaoException("Finding user by id error", e);
         }
     }
 

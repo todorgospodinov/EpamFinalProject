@@ -35,10 +35,11 @@
                                 </div>
                                 <div class="card-body text-center shadow">
                                     <h5 class="card-title">${userBasketProduct.getProduct().getTitle()}</h5>
+                                    <h3 style="text-align: center" class="lead">${product.getPrice()}</h3>
                                     <form method="post" action="controller">
                                         <input type="hidden" name="commandName" value="product_page">
                                         <button class="btn btn-light btn-block nav-link" name="productId"
-                                                value="${userBasketProduct.getProduct().getProductId()}"><fmt:message
+                                                value="${userBasketProduct.getProduct().getProductId().toString()}"><fmt:message
                                                 key="basket_page.product_page_button"/>
                                         </button>
                                     </form>
@@ -52,26 +53,18 @@
                                         </button>
                                     </form>
                                 </div>
-                                <div class="card-footer text-muted">
-                                    2 days ago
-                                </div>
                             </div>
                         </div>
                     </c:forEach>
                 </c:if>
-                <c:if test="${totalPrice != 0}">
-                    <p><fmt:message key="basket_page.total_price"/> ${totalPrice}</p>
-                </c:if>
-                <form method="post" action="controller">
-                    <input type="hidden" name="commandName"
-                           value="create_order_command">
-                    <button class="btn btn-secondary" name="products"
-                            value="${baskets}">
-                        <fmt:message
-                                key="basket_page.remove_product_button"/>
-                    </button>
-                </form>
             </div>
+            <c:if test="${totalPrice != 0}">
+                <p><fmt:message key="basket_page.total_price"/> ${totalPrice}</p>
+            </c:if>
+            <form method="post" action="controller">
+                <button class="btn btn-secondary" name="commandName"
+                        value="create_order_command"><fmt:message key="basket_page.checkout"/></button>
+            </form>
         </div>
     </div>
 </main>
