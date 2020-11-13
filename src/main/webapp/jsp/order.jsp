@@ -51,6 +51,24 @@
                     </div>
                 </c:forEach>
             </div>
+            <c:if test="${user.role.toString().equals(\"ADMIN\")}">
+                <c:if test="${order.getStatus().toString().equals(\"UNDER_CONSIDERATION\")}">
+                    <form method="post" action="controller">
+                        <input type="hidden" name="commandName" value="produce_order_command">
+                        <button class="btn btn-success nav-link btn-block" name="orderId"
+                                value="${order.getOrderId()}"><fmt:message
+                                key="order_page.produce_button"/>
+                        </button>
+                    </form>
+                    <form method="post" action="controller">
+                        <input type="hidden" name="commandName" value="reject_order_command">
+                        <button class="btn btn-danger nav-link btn-block" name="orderId"
+                                value="${order.getOrderId()}"><fmt:message
+                                key="order_page.reject_button"/>
+                        </button>
+                    </form>
+                </c:if>
+            </c:if>
         </div>
     </div>
 </main>

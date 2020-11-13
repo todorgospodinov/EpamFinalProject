@@ -21,6 +21,8 @@ public enum CommandType {
     FILL_UP_BALANCE_COMMAND(new FillUpBalanceCommand()),
     FIND_PRODUCTS_COMMAND(new FindProductsCommand()),
     CREATE_ORDER_COMMAND(new CreateOrderCommand()),
+    PRODUCE_ORDER_COMMAND(new ProduceOrderCommand()),
+    REJECT_ORDER_COMMAND(new RejectOrderCommand()),
 
 
     SWITCH_LANGUAGE_COMMAND(new SwitchLanguageCommand()),
@@ -30,6 +32,8 @@ public enum CommandType {
 
 
     MAIN_PAGE(new MainPageCommand()),
+    ADMIN_USERS_PAGE(new AdminUsersPageCommand()),
+    ADMIN_ORDERS_PAGE(new AdminOrdersPageCommand()),
     PRODUCT_PAGE(new ProductPageCommand()),
     LOGIN_PAGE(new LoginPageCommand()),
     PERSONAL_ACCOUNT_PAGE(new PersonalAccountPageCommand()),

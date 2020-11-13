@@ -18,12 +18,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserBasketProductDaoImpl implements UserBasketProductDao {
+    private static final UserBasketProductDaoImpl INSTANCE = new UserBasketProductDaoImpl();
     private static final String ADD_PRODUCT_TO_BASKET = "INSERT INTO basket (user_id_fk, product_id_fk) " +
             "VALUES (?, ?)";
     private static final String FIND_BY_USER_ID = "SELECT basket_id, user_id, product_id, product_title, product_price," +
             "product_description, image_id, image_name FROM basket INNER JOIN products ON product_id_fk = product_id " +
             "INNER JOIN images ON image_id = image_id_fk INNER JOIN users ON user_id_fk = user_id where user_id = ?";
     private static final String REMOVE_PRODUCT_FROM_BASKET = "DELETE FROM basket where user_id_fk = ? AND product_id_fk = ? LIMIT 1";
+
+    private UserBasketProductDaoImpl() {
+    }
+
+    public static UserBasketProductDaoImpl getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public boolean add(UserBasketProduct userBasketProduct) throws DaoException {

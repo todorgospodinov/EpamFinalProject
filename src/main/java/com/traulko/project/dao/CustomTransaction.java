@@ -17,13 +17,21 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CustomTransaction {
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final CustomTransaction INSTANCE = new CustomTransaction();
+    private static final Logger LOGGER = LogManager.getLogger(CustomTransaction.class);
+
+    private CustomTransaction() {
+    }
+
+    public static CustomTransaction getInstance() {
+        return INSTANCE;
+    }
 
     public boolean addOrderAndOrderItem(CustomOrder order, List<UserBasketProduct> userBasketProductList) throws TransactionException {
         Connection connection = null;
-        UserBasketProductDao userBasketProductDao = new UserBasketProductDaoImpl();
-        OrderDao orderDao = new OrderDaoImpl();
-        OrderItemDao orderItemDao = new OrderItemDaoImpl();
+        UserBasketProductDao userBasketProductDao = UserBasketProductDaoImpl.getInstance();
+        OrderDao orderDao = OrderDaoImpl.getInstance();
+        OrderItemDao orderItemDao = OrderItemDaoImpl.getInstance();
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
@@ -48,8 +56,8 @@ public class CustomTransaction {
 
     public boolean addProductAndImage(Product product) throws TransactionException {
         Connection connection = null;
-        ImageDao imageDao = new ImageDaoImpl();
-        ProductDao productDao = new ProductDaoImpl();
+        ImageDao imageDao = ImageDaoImpl.getInstance();
+        ProductDao productDao = ProductDaoImpl.getInstance();
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);

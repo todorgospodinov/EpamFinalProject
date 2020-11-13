@@ -67,6 +67,10 @@ public class RequestParameter {
 
     public static final String ORDER_CREATE_SUCCESS_MESSAGE = "orderCreateSuccessMessage";
     public static final String ORDER_CREATE_ERROR_MESSAGE = "orderCreateErrorMessage";
+    public static final String ORDER_PRODUCE_SUCCESS_MESSAGE = "orderProduceSuccessMessage";
+    public static final String ORDER_PRODUCE_ERROR_MESSAGE = "orderProduceErrorMessage";
+    public static final String ORDER_REJECT_SUCCESS_MESSAGE = "orderRejectSuccessMessage";
+    public static final String ORDER_REJECT_ERROR_MESSAGE = "orderRejectErrorMessage";
 
     public static final String ACCESS_ERROR_MESSAGE = "accessErrorMessage";
 

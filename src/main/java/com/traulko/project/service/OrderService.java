@@ -13,5 +13,11 @@ public interface OrderService {
 
     List<CustomOrder> findOrdersByUserId(String id) throws ServiceException;
 
+    List<CustomOrder> findAll() throws ServiceException;
+
+    boolean produce(String orderId) throws ServiceException;
+
+    boolean reject(String orderId) throws ServiceException;
+
     Optional<CustomOrder> findById(String id) throws ServiceException;
 }

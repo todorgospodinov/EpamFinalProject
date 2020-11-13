@@ -18,6 +18,7 @@ com\traulko\project\dao\UserDao.class
 com\traulko\project\controller\command\impl\SwitchLanguageCommand.class
 com\traulko\project\controller\command\impl\AddProductCommand.class
 com\traulko\project\dao\CustomTransaction.class
+com\traulko\project\controller\command\impl\RejectOrderCommand.class
 com\traulko\project\entity\User$Status.class
 com\traulko\project\controller\PagePath.class
 com\traulko\project\controller\command\impl\page\PersonalAccountPageCommand.class
@@ -27,6 +28,7 @@ com\traulko\project\controller\filter\JspPagePathFilter.class
 com\traulko\project\exception\ServiceException.class
 com\traulko\project\exception\DaoException.class
 com\traulko\project\controller\command\impl\page\CatalogPageCommand.class
+com\traulko\project\controller\command\impl\page\AdminOrdersPageCommand.class
 com\traulko\project\exception\TransactionException.class
 com\traulko\project\dao\UserBasketProductDao.class
 com\traulko\project\service\ProductService.class
@@ -59,6 +61,7 @@ com\traulko\project\service\impl\OrderItemServiceImpl.class
 com\traulko\project\dao\impl\UserDaoImpl.class
 com\traulko\project\controller\command\impl\page\BasketPageCommand.class
 com\traulko\project\validator\OrderItemValidator.class
+com\traulko\project\controller\command\impl\ProduceOrderCommand.class
 com\traulko\project\dao\connection\ProxyConnection.class
 com\traulko\project\controller\command\impl\page\AddProductPageCommand.class
 com\traulko\project\validator\OrderValidator.class
@@ -84,6 +87,7 @@ com\traulko\project\dao\impl\OrderDaoImpl.class
 com\traulko\project\controller\command\impl\FillUpBalanceCommand.class
 com\traulko\project\dao\impl\UserBasketProductDaoImpl.class
 com\traulko\project\dao\connection\ConnectionPool.class
+com\traulko\project\controller\command\impl\page\AdminUsersPageCommand.class
 com\traulko\project\controller\command\CommandProvider.class
 com\traulko\project\service\impl\ProductServiceImpl.class
 com\traulko\project\service\OrderItemService.class

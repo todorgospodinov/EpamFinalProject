@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderItemServiceImpl implements OrderItemService {
-    private OrderItemDao orderItemDao = new OrderItemDaoImpl();
+    private final OrderItemDao orderItemDao = OrderItemDaoImpl.getInstance();
 
     @Override
     public List<OrderItem> findOrderItemsByOrderId(String id) throws ServiceException {

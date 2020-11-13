@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
-    private UserDao userDao = new UserDaoImpl();
+    private final UserDao userDao = UserDaoImpl.getInstance();
 
     @Override
     public boolean changePassword(String email, String password, String passwordRepeat) throws ServiceException {

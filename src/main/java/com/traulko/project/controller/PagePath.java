@@ -17,6 +17,8 @@ public class PagePath {
     public static final String FILL_UP_BALANCE = "/jsp/fill_up_balance.jsp";
     public static final String ORDER = "/jsp/order.jsp";
     public static final String INDEX = "/index.jsp";
+    public static final String ADMIN_ORDERS_PAGE = "/jsp/admin_orders.jsp";
+    public static final String ADMIN_USERS_PAGE = "/jsp/admin_users.jsp";
     public static final String ERROR_404 = "/jsp/error.jsp"; // TODO: 12.11.2020
 
 

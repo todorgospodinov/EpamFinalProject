@@ -10,17 +10,32 @@ import com.traulko.project.exception.ConnectionDatabaseException;
 import com.traulko.project.exception.DaoException;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class OrderDaoImpl implements OrderDao {
+    private static final OrderDaoImpl INSTANCE = new OrderDaoImpl();
     private static final String ADD_ORDER = "INSERT INTO orders (order_creation_date, order_closing_date," +
             "order_status, user_id_fk) VALUES (?, ?, ?, ?)";
     private static final String FIND_BY_USER_ID = "SELECT order_id, order_creation_date, order_closing_date," +
             "order_status, user_id FROM orders INNER JOIN users ON user_id = user_id_fk where user_id = ?";
     private static final String FIND_BY_ID = "SELECT order_id, order_creation_date, order_closing_date," +
             "order_status, user_id FROM orders INNER JOIN users ON user_id = user_id_fk where order_id = ?";
+    private static final String FIND_ALL = "SELECT order_id, order_creation_date, order_closing_date," +
+            "order_status, user_id FROM orders INNER JOIN users ON user_id = user_id_fk";
+    private static final String PRODUCE_ORDER = "UPDATE orders SET order_status = \"PRODUCED\", " +
+            "order_closing_date = ? where order_id = ?";
+    private static final String REJECT_ORDER = "UPDATE orders SET order_status = \"DENIED\", " +
+            "order_closing_date = ? where order_id = ?";
+
+    private OrderDaoImpl() {
+    }
+
+    public static OrderDaoImpl getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public boolean add(CustomOrder order, Connection connection) throws DaoException {
@@ -43,7 +58,33 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public List<CustomOrder> getOrdersByUserId(Integer id) throws DaoException {
+    public boolean produce(Integer orderId, LocalDate date) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(PRODUCE_ORDER)) {
+            Date closingDate = Date.valueOf(date);
+            statement.setLong(1, closingDate.getTime());
+            statement.setInt(2, orderId);
+            return statement.executeUpdate() > 0;
+        } catch (SQLException | ConnectionDatabaseException e) {
+            throw new DaoException("Produce order error", e);
+        }
+    }
+
+    @Override
+    public boolean reject(Integer orderId, LocalDate date) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(REJECT_ORDER)) {
+            Date closingDate = Date.valueOf(date);
+            statement.setLong(1, closingDate.getTime());
+            statement.setInt(2, orderId);
+            return statement.executeUpdate() > 0;
+        } catch (SQLException | ConnectionDatabaseException e) {
+            throw new DaoException("Reject order error", e);
+        }
+    }
+
+    @Override
+    public List<CustomOrder> findOrdersByUserId(Integer id) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_USER_ID)) {
             statement.setInt(1, id);
@@ -55,7 +96,23 @@ public class OrderDaoImpl implements OrderDao {
             }
             return orderList;
         } catch (SQLException | ConnectionDatabaseException e) {
-            throw new DaoException("Error while finding baskets", e);
+            throw new DaoException("Error while finding orders", e);
+        }
+    }
+
+    @Override
+    public List<CustomOrder> findAll() throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_ALL)) {
+            ResultSet resultSet = statement.executeQuery();
+            List<CustomOrder> orderList = new ArrayList<>();
+            while (resultSet.next()) {
+                CustomOrder order = createOrderFromResultSet(resultSet);
+                orderList.add(order);
+            }
+            return orderList;
+        } catch (SQLException | ConnectionDatabaseException e) {
+            throw new DaoException("Error while finding all orders", e);
         }
     }
 

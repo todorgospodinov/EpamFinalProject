@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class ProductServiceImpl implements ProductService {
-    private ProductDao productDao = new ProductDaoImpl();
-    private CustomTransaction customTransaction = new CustomTransaction();
+    private final ProductDao productDao = ProductDaoImpl.getInstance();
+    private final CustomTransaction customTransaction = CustomTransaction.getInstance();
 
     @Override
     public boolean add(String productTitle, String price, String description, String imageName) throws ServiceException {

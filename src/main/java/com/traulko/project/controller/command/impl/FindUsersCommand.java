@@ -24,7 +24,7 @@ public class FindUsersCommand implements CustomCommand {
         try {
             List<User> userList = userService.findBySearchQuery(searchQuery);
             request.setAttribute(RequestParameter.USERS, userList);
-            page = PagePath.ADMIN;
+            page = PagePath.ADMIN_USERS_PAGE;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while finding users", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);

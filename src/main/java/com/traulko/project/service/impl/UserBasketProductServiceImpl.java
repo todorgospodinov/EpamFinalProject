@@ -2,9 +2,9 @@ package com.traulko.project.service.impl;
 
 import com.traulko.project.dao.UserBasketProductDao;
 import com.traulko.project.dao.impl.UserBasketProductDaoImpl;
-import com.traulko.project.entity.UserBasketProduct;
 import com.traulko.project.entity.Product;
 import com.traulko.project.entity.User;
+import com.traulko.project.entity.UserBasketProduct;
 import com.traulko.project.exception.DaoException;
 import com.traulko.project.exception.ServiceException;
 import com.traulko.project.service.UserBasketProductService;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserBasketProductServiceImpl implements UserBasketProductService {
-    private UserBasketProductDao userBasketProductDao = new UserBasketProductDaoImpl();
+    private final UserBasketProductDao userBasketProductDao = UserBasketProductDaoImpl.getInstance();
 
     @Override
     public boolean add(String userId, String productId) throws ServiceException {

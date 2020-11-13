@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class OrderServiceImpl implements OrderService {
-    private OrderDao orderDao = new OrderDaoImpl();
-    private CustomTransaction customTransaction = new CustomTransaction();
+    private final OrderDao orderDao = OrderDaoImpl.getInstance();
+    private final CustomTransaction customTransaction = CustomTransaction.getInstance();
 
     @Override
     public boolean add(String userId, List<UserBasketProduct> userBasketProductList) throws ServiceException {
@@ -49,12 +49,51 @@ public class OrderServiceImpl implements OrderService {
         try {
             if (OrderValidator.isIdValid(id)) {
                 int userId = Integer.parseInt(id);
-                orderList = orderDao.getOrdersByUserId(userId);
+                orderList = orderDao.findOrdersByUserId(userId);
             }
         } catch (DaoException e) {
             throw new ServiceException("Error while finding orders by user id", e);
         }
         return orderList;
+    }
+
+    @Override
+    public List<CustomOrder> findAll() throws ServiceException {
+        try {
+            return orderDao.findAll();
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding all orders", e);
+        }
+    }
+
+    @Override
+    public boolean produce(String orderId) throws ServiceException {
+        boolean isProduced = false;
+        try {
+            if (OrderValidator.isIdValid(orderId)) {
+                LocalDate date = LocalDate.now();
+                int orderIdParsed = Integer.parseInt(orderId);
+                isProduced = orderDao.produce(orderIdParsed, date);
+            }
+        } catch (DaoException e) {
+            throw new ServiceException("Error while order produce", e);
+        }
+        return isProduced;
+    }
+
+    @Override
+    public boolean reject(String orderId) throws ServiceException {
+        boolean isRejected = false;
+        try {
+            if (OrderValidator.isIdValid(orderId)) {
+                LocalDate date = LocalDate.now();
+                int orderIdParsed = Integer.parseInt(orderId);
+                isRejected = orderDao.reject(orderIdParsed, date);
+            }
+        } catch (DaoException e) {
+            throw new ServiceException("Error while order reject", e);
+        }
+        return isRejected;
     }
 
     @Override

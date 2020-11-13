@@ -52,6 +52,10 @@ public enum RoleAccess {
             CommandType.CHANGE_PASSWORD_PAGE,
             CommandType.MAIN_PAGE,
             CommandType.ORDER_PAGE,
+            CommandType.ADMIN_ORDERS_PAGE,
+            CommandType.PRODUCE_ORDER_COMMAND,
+            CommandType.REJECT_ORDER_COMMAND,
+            CommandType.ADMIN_USERS_PAGE,
             CommandType.PERSONAL_ACCOUNT_PAGE,
             CommandType.PRODUCT_PAGE));
 

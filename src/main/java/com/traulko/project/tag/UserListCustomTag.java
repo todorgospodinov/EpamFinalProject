@@ -19,10 +19,10 @@ import java.util.ResourceBundle;
 
 public class UserListCustomTag extends TagSupport {
     private static final String LOCAL = "property/local";
-    private static final String SHOW_HISTORY = "admin_page.show_history";
-    private static final String BLOCK = "admin_page.block";
-    private static final String UNBLOCK = "admin_page.unblock";
-    private static final String DELETE = "admin_page.delete";
+    private static final String SHOW_HISTORY = "admin_users_page.show_history";
+    private static final String BLOCK = "admin_users_page.block";
+    private static final String UNBLOCK = "admin_users_page.unblock";
+    private static final String DELETE = "admin_users_page.delete";
     private static final String DELETE_COMMAND = "delete_user_command";
     private static final String BLOCK_COMMAND = "block_user_command";
     private static final String UNBLOCK_COMMAND = "unblock_user_command";
@@ -31,11 +31,9 @@ public class UserListCustomTag extends TagSupport {
     @Override
     public int doStartTag() throws JspException {
         HttpSession httpSession = pageContext.getSession();
-        String s = (String) httpSession.getAttribute(RequestParameter.CURRENT_LOCALE);
         Locale locale = new Locale((String) httpSession.getAttribute(RequestParameter.CURRENT_LOCALE));
         ResourceBundle bundle = ResourceBundle.getBundle(LOCAL, locale);
         ServletRequest servletRequest = pageContext.getRequest();
-        User currentUser = (User) httpSession.getAttribute(RequestParameter.USER);
         List<User> userList = (List<User>) servletRequest.getAttribute(RequestParameter.USERS);
         int index = 0;
         while (index < userList.size()) {

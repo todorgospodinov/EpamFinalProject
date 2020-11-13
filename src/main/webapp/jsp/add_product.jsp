@@ -24,15 +24,29 @@
             <form method="post" action="download" enctype="multipart/form-data" autocomplete="off">
                 <div>
                     <label for="title"><fmt:message key="add_product.product_title"/></label>
-                    <input id="title" class="form-control" type="text" name="title"/><br/>
+                    <input id="title" class="form-control" required type="text" name="title"
+                           maxlength="25" , minlength="2"
+                           oninvalid="this.setCustomValidity('<fmt:message key="add_product.title_validator"/>')"
+                           onchange="this.setCustomValidity('')"
+                           pattern="^[^<>]{2,25}$"
+                           title='<fmt:message key="add_product.title_validator"/>'><br/>
                 </div>
                 <div>
                     <label for="price"><fmt:message key="add_product.price"/></label>
-                    <input id="price" class="form-control" type="text" name="price"/><br/>
+                    <input id="price" class="form-control" type="text" name="price"
+                           maxlength="7"
+                           oninvalid="this.setCustomValidity('<fmt:message key="add_product.price_validator"/>')"
+                           onchange="this.setCustomValidity('')"
+                           pattern="^[1-9]\d{0,4}(\.\d{0,2})?$"
+                           title='<fmt:message key="add_product.price_validator"/>'><br/>
                 </div>
                 <div>
                     <label for="description"><fmt:message key="add_product.description"/></label>
-                    <input id="description" class="form-control" type="text" name="description"/><br/>
+                    <input id="description" class="form-control" type="text" name="description" maxlength="1000"
+                           oninvalid="this.setCustomValidity('<fmt:message key="add_product.description_validator"/>')"
+                           onchange="this.setCustomValidity('')"
+                           pattern="^[^<>]{1,1000}$"
+                           title='<fmt:message key="add_product.description_validator"/>'><br/>
                 </div>
                 <div>
                     <label for="content"><fmt:message key="add_product.image"/></label>

@@ -6,6 +6,7 @@ C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\excepti
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\validator\UserBasketProductValidator.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\AddProductCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\dao\OrderDao.java
+C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\RejectOrderCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\dao\ColumnName.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\entity\UserBasketProduct.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\util\mail\SessionFactory.java
@@ -34,12 +35,14 @@ C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\control
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\dao\impl\ProductDaoImpl.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\dao\UserBasketProductDao.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\ChangePasswordCommand.java
+C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\page\AdminUsersPageCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\FileDownloadController.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\MainController.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\dao\impl\OrderDaoImpl.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\BlockUserCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\RoleAccess.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\service\impl\OrderItemServiceImpl.java
+C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\page\AdminOrdersPageCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\exception\ConnectionDatabaseException.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\tag\UserListCustomTag.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\dao\impl\ImageDaoImpl.java
@@ -63,6 +66,7 @@ C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\control
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\exception\DaoException.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\page\OrderPageCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\dao\connection\DatabaseConfig.java
+C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\ProduceOrderCommand.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\validator\OrderValidator.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\util\mail\MailSender.java
 C:\Users\Ян\Desktop\EpamFinalProject\src\main\java\com\traulko\project\controller\command\impl\UnblockUserCommand.java

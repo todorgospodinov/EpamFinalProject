@@ -23,7 +23,11 @@
             <form method="post" action="controller" autocomplete="off">
                 <div>
                     <label for="email"><fmt:message key="forgot_password.email"/></label>
-                    <input id="email" class="form-control" type="text" name="email"/><br/>
+                    <input id="email" class="form-control" type="text" name="email"
+                           oninvalid="this.setCustomValidity('<fmt:message key="forgot_password.email_validator"/>')"
+                           onchange="this.setCustomValidity('')"
+                           pattern="^[A-Za-z0-9+_.-]+@[A-Za-z0-9]+\.[A-Za-z0-9]+$"
+                           title='<fmt:message key="forgot_password.email_validator"/>'><br/>
                 </div>
                 <div class="form-row text-center">
                     <div class="col-12">

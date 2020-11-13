@@ -7,7 +7,15 @@ import com.traulko.project.exception.DaoException;
 import java.sql.*;
 
 public class ImageDaoImpl implements ImageDao {
+    private static final ImageDaoImpl INSTANCE = new ImageDaoImpl();
     private static final String ADD_IMAGE = "INSERT INTO images (image_name) VALUES (?)";
+
+    private ImageDaoImpl() {
+    }
+
+    public static ImageDaoImpl getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public boolean add(CustomImage image, Connection connection) throws DaoException {

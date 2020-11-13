@@ -1,19 +1,22 @@
 package com.traulko.project.dao.impl;
 
-import com.traulko.project.dao.connection.ConnectionPool;
 import com.traulko.project.dao.ColumnName;
 import com.traulko.project.dao.UserDao;
-import com.traulko.project.entity.Product;
+import com.traulko.project.dao.connection.ConnectionPool;
 import com.traulko.project.entity.User;
 import com.traulko.project.exception.ConnectionDatabaseException;
 import com.traulko.project.exception.DaoException;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
+    private static final UserDaoImpl INSTANCE = new UserDaoImpl();
     private static final String FIND_USER_BY_EMAIL_AND_PASSWORD = "SELECT user_id, user_email, " +
             "user_name, user_surname, user_patronymic, user_role, user_status, user_balance FROM users" +
             " WHERE user_email = ? AND user_password = ?";
@@ -25,7 +28,7 @@ public class UserDaoImpl implements UserDao {
     private static final String UPDATE_USER = "UPDATE users set user_email = ?, user_name = ?, user_surname = ?," +
             " user_patronymic = ?, user_role = ?, user_status = ?, user_balance = ? where user_id = ?";
     private static final String FIND_ALL_USERS = "SELECT user_id, user_email, user_name, user_surname, user_patronymic," +
-            " user_role, user_status, user_balance FROM users";
+            " user_role, user_status, user_balance FROM users where user_role != \"ADMIN\"";
     private static final String FIND_USERS_BY_SEARCH_QUERY = "SELECT user_id, user_email, user_name, user_surname, " +
             "user_patronymic, user_role, user_status, user_balance FROM users where concat(user_id, user_email, user_name, user_surname," +
             " user_patronymic, user_role, user_status, user_balance) like ?";
@@ -36,6 +39,13 @@ public class UserDaoImpl implements UserDao {
     private static final String FIND_BY_ID = "SELECT user_id, user_email, user_name, user_surname, user_patronymic," +
             " user_role, user_status, user_balance FROM users where user_id = ?";
     private static final String PERCENT = "%";
+
+    private UserDaoImpl() {
+    }
+
+    public static UserDaoImpl getInstance() {
+        return INSTANCE;
+    }
 
     public Optional<User> findByEmailAndPassword(String email, String password) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();

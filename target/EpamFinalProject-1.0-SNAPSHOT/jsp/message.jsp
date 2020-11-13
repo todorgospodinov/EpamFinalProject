@@ -117,6 +117,22 @@
                     <h2><fmt:message key="message_page.access_error"/></h2>
                 </c:if>
 
+                <c:if test="${orderProduceSuccessMessage}">
+                    <h2><fmt:message key="message_page.order_produce_success"/></h2>
+                </c:if>
+
+                <c:if test="${orderProduceErrorMessage}">
+                    <h2><fmt:message key="message_page.order_produce_error"/></h2>
+                </c:if>
+
+                <c:if test="${orderRejectSuccessMessage}">
+                    <h2><fmt:message key="message_page.order_reject_success"/></h2>
+                </c:if>
+
+                <c:if test="${orderRejectErrorMessage}">
+                    <h2><fmt:message key="message_page.order_reject_error"/></h2>
+                </c:if>
+
             </div>
         </div>
     </section>

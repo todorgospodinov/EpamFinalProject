@@ -19,11 +19,20 @@
             <form method="post" action="controller" autocomplete="off">
                 <div>
                     <label for="email"><fmt:message key="login_page.email"/></label>
-                    <input id="email" class="form-control" type="text" name="email"/><br/>
+                    <input id="email" class="form-control" required type="text" name="email"
+                           oninvalid="this.setCustomValidity('<fmt:message key="login_page.email_validator"/>')"
+                           onchange="this.setCustomValidity('')"
+                           pattern="^[A-Za-z0-9+_.-]+@[A-Za-z0-9]+\.[A-Za-z0-9]+$"
+                           title='<fmt:message key="login_page.email_validator"/>'><br/>
                 </div>
                 <div>
                     <label for="password"><fmt:message key="login_page.password"/></label>
-                    <input id="password" class="form-control" type="password" name="password"/><br/>
+                    <input id="password" class="form-control" required type="password" name="password"
+                           maxlength="16" minlength="6"
+                           oninvalid="this.setCustomValidity('<fmt:message key="login_page.password_validator"/>')"
+                           onchange="this.setCustomValidity('')"
+                           pattern="^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,16}$"
+                           title='<fmt:message key="login_page.password_validator"/>'><br/>
                 </div>
                 <c:if test="${userDataIncorrect}">
                     <div style="color: red">

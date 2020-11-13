@@ -8,30 +8,19 @@ import org.apache.logging.log4j.Logger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayDeque;
-import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
 public class ConnectionPool {
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
-    private static final int POOL_SIZE = 32;
-    private static ConnectionPool instance;
-    private static volatile boolean instanceIsCreated;
+    private static final int POOL_SIZE = 8;
+    private static ConnectionPool connectionPool = new ConnectionPool();
 
     private BlockingQueue<ProxyConnection> freeConnections;
-    private Queue<ProxyConnection> proxyConnections;
+    private BlockingQueue<ProxyConnection> proxyConnections;
 
     public static ConnectionPool getInstance() {
-        if (!instanceIsCreated) {
-            synchronized (ConnectionPool.class) {
-                if (!instanceIsCreated) {
-                    instance = new ConnectionPool();
-                    instanceIsCreated = true;
-                }
-            }
-        }
-        return instance;
+        return connectionPool;
     }
 
     private ConnectionPool() {
@@ -39,8 +28,7 @@ public class ConnectionPool {
             DatabaseConfig databaseConfig = new DatabaseConfig();
             Class.forName(databaseConfig.getDriverName());
             freeConnections = new LinkedBlockingDeque<>(POOL_SIZE);
-            proxyConnections = new ArrayDeque<>(POOL_SIZE);
-
+            proxyConnections = new LinkedBlockingDeque<>(POOL_SIZE);
             for (int i = 0; i < POOL_SIZE; i++) {
                 freeConnections.offer(new ProxyConnection(DriverManager
                         .getConnection(databaseConfig.getUrl(), databaseConfig.getUsername(),
@@ -49,18 +37,18 @@ public class ConnectionPool {
             LOGGER.log(Level.INFO, "Connection pool has been filled");
         } catch (ClassNotFoundException | SQLException e) {
             LOGGER.log(Level.FATAL, "Error during connection pool creating");
-            System.out.println("Error while connection pool creating " + e);
+            System.out.println("Error while connecting to database " + e);
         }
     }
 
     public Connection getConnection() throws ConnectionDatabaseException {
-        ProxyConnection connection = null;
+        ProxyConnection connection;
         try {
             connection = freeConnections.take();
             proxyConnections.offer(connection);
             LOGGER.log(Level.DEBUG, "Connection has been given");
         } catch (InterruptedException e) {
-            LOGGER.log(Level.ERROR, e);
+            LOGGER.log(Level.ERROR, "Pool can't provide connection", e);
             throw new ConnectionDatabaseException(e);
         }
         return connection;
@@ -68,8 +56,9 @@ public class ConnectionPool {
 
     public void releaseConnection(Connection connection) {
         if (connection.getClass() == ProxyConnection.class) {
-            proxyConnections.remove(connection);
-            freeConnections.offer((ProxyConnection) connection);
+            if(proxyConnections.remove(connection)) {
+                freeConnections.offer((ProxyConnection) connection);
+            }
             LOGGER.log(Level.DEBUG, "Connection has been released");
         } else {
             LOGGER.log(Level.WARN, "Invalid connection to release");

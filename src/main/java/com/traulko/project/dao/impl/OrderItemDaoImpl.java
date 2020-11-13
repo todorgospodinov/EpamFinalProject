@@ -12,12 +12,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderItemDaoImpl implements OrderItemDao {
+    private static final OrderItemDaoImpl INSTANCE = new OrderItemDaoImpl();
     private static final String ADD_ORDER_ITEM = "INSERT INTO order_item (product_id_fk, order_id_fk)" +
             " VALUES (?, ?)";
     private static final String FIND_BY_ORDER_ID = "SELECT order_item_id, product_id, product_title," +
             "product_price, product_description, image_id, image_name, order_id from order_item INNER JOIN products " +
             "ON product_id_fk = product_id INNER JOIN images ON image_id_fk = image_id INNER JOIN orders ON " +
             "order_id_fk = order_id where order_id = ?";
+
+    private OrderItemDaoImpl() {
+    }
+
+    public static OrderItemDaoImpl getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public boolean add(CustomOrder order, Product product, Connection connection) throws DaoException {

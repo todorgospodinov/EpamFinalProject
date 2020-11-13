@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class ProductDaoImpl implements ProductDao {
+    private static final ProductDaoImpl INSTANCE = new ProductDaoImpl();
     private static final String FIND_ALL = "SELECT product_id, product_title, product_price," +
             " product_description, image_id, image_name FROM products INNER JOIN images ON" +
             " products.image_id_fk = images.image_id";
@@ -27,6 +28,13 @@ public class ProductDaoImpl implements ProductDao {
     private static final String FIND_PRODUCTS_BY_SEARCH_QUERY = "SELECT product_id, product_title, product_price, " +
             "product_description, image_id, image_name FROM products INNER JOIN images ON " +
             "products.image_id_fk = images.image_id where concat(product_title, product_price) like ?";
+
+    private ProductDaoImpl() {
+    }
+
+    public static ProductDaoImpl getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public List<Product> findAll() throws DaoException {
