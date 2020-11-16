@@ -4,9 +4,11 @@ public class User {
     public enum Role {
         ADMIN, USER, GUEST;
     }
+
     public enum Status {
         ENABLE, BLOCKED, NOT_CONFIRMED;
     }
+
     private Integer userId;
     private String name;
     private String surname;
@@ -16,7 +18,8 @@ public class User {
     private Status status;
     private double balance;
 
-    public User() {}
+    public User() {
+    }
 
     public User(Integer userId, String email, String name, String surname, String patronymic, Role role,
                 Status status, double balance) {

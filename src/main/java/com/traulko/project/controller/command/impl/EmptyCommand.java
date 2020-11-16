@@ -8,6 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 public class EmptyCommand implements CustomCommand {
     @Override
     public String execute(HttpServletRequest request) {
-        return PagePath.ERROR_404; // TODO: 12.11.2020  
+        return PagePath.ERROR_404;
     }
 }

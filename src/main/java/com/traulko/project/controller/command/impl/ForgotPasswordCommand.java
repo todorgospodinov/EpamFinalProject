@@ -12,7 +12,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 public class ForgotPasswordCommand implements CustomCommand {
@@ -36,7 +35,7 @@ public class ForgotPasswordCommand implements CustomCommand {
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error forgot password", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
-            page = PagePath.ERROR;
+            page = PagePath.ERROR_500;
         }
         return page;
     }

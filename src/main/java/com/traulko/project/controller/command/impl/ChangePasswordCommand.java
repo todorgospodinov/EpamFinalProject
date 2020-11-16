@@ -42,7 +42,7 @@ public class ChangePasswordCommand implements CustomCommand {
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while changing password", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
-            page = PagePath.ERROR;
+            page = PagePath.ERROR_500;
         }
         return page;
     }

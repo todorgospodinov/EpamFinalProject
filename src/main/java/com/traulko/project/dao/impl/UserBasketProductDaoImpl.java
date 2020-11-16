@@ -1,12 +1,12 @@
 package com.traulko.project.dao.impl;
 
-import com.traulko.project.dao.UserBasketProductDao;
 import com.traulko.project.dao.ColumnName;
+import com.traulko.project.dao.UserBasketProductDao;
 import com.traulko.project.dao.connection.ConnectionPool;
-import com.traulko.project.entity.UserBasketProduct;
 import com.traulko.project.entity.CustomImage;
 import com.traulko.project.entity.Product;
 import com.traulko.project.entity.User;
+import com.traulko.project.entity.UserBasketProduct;
 import com.traulko.project.exception.ConnectionDatabaseException;
 import com.traulko.project.exception.DaoException;
 

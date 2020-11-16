@@ -11,6 +11,7 @@ import com.traulko.project.exception.ServiceException;
 import com.traulko.project.exception.TransactionException;
 import com.traulko.project.service.OrderService;
 import com.traulko.project.validator.OrderValidator;
+import com.traulko.project.validator.UserValidator;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class OrderServiceImpl implements OrderService {
     public boolean add(String userId, List<UserBasketProduct> userBasketProductList) throws ServiceException {
         boolean result = false;
         try {
-            if (OrderValidator.isIdValid(userId) && userBasketProductList != null) {
+            if (UserValidator.isIdValid(userId) && userBasketProductList != null) {
                 int userIdParsed = Integer.parseInt(userId);
                 CustomOrder order = new CustomOrder();
                 LocalDate date = LocalDate.now();
@@ -35,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
                 User user = new User();
                 user.setUserId(userIdParsed);
                 order.setUser(user);
-                result = customTransaction.addOrderAndOrderItem(order, userBasketProductList);
+                result = customTransaction.addOrderAndOrderItems(order, userBasketProductList);
             }
         } catch (TransactionException e) {
             throw new ServiceException("Error while adding order", e);
@@ -44,10 +45,24 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public boolean remove(String orderId) throws ServiceException {
+        boolean result = false;
+        try {
+            if (OrderValidator.isIdValid(orderId)) {
+                int orderIdParsed = Integer.parseInt(orderId);
+                result = customTransaction.removeOrderAndOrderItems(orderIdParsed);
+            }
+        } catch (TransactionException e) {
+            throw new ServiceException("Error while removing order", e);
+        }
+        return result;
+    }
+
+    @Override
     public List<CustomOrder> findOrdersByUserId(String id) throws ServiceException {
         List<CustomOrder> orderList = new ArrayList<>();
         try {
-            if (OrderValidator.isIdValid(id)) {
+            if (UserValidator.isIdValid(id)) {
                 int userId = Integer.parseInt(id);
                 orderList = orderDao.findOrdersByUserId(userId);
             }
@@ -55,6 +70,15 @@ public class OrderServiceImpl implements OrderService {
             throw new ServiceException("Error while finding orders by user id", e);
         }
         return orderList;
+    }
+
+    @Override
+    public List<CustomOrder> findBySearchQuery(String searchQuery) throws ServiceException {
+        try {
+            return orderDao.findBySearchQuery(searchQuery);
+        } catch (DaoException e) {
+            throw new ServiceException("Error while finding orders by search query", e);
+        }
     }
 
     @Override

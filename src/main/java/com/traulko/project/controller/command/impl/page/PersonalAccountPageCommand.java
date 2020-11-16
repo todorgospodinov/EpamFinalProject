@@ -4,7 +4,6 @@ import com.traulko.project.controller.PagePath;
 import com.traulko.project.controller.RequestParameter;
 import com.traulko.project.controller.command.CustomCommand;
 import com.traulko.project.entity.CustomOrder;
-import com.traulko.project.entity.User;
 import com.traulko.project.exception.ServiceException;
 import com.traulko.project.service.OrderService;
 import com.traulko.project.service.impl.OrderServiceImpl;
@@ -32,7 +31,7 @@ public class PersonalAccountPageCommand implements CustomCommand {
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while finding orders", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
-            page = PagePath.ERROR;
+            page = PagePath.ERROR_500;
         }
         return page;
     }

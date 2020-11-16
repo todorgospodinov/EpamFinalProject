@@ -14,5 +14,9 @@ public interface ProductDao {
 
     List<Product> findBySearchQuery(String searchQuery) throws DaoException;
 
+    boolean update(Product product, Connection connection) throws DaoException;
+
+    boolean update(Product product) throws DaoException;
+
     boolean add(Product product, Connection connection) throws DaoException;
 }

@@ -45,13 +45,13 @@ public class LoginCommand implements CustomCommand {
                     default -> page = PagePath.MAIN;
                 }
             } else {
-                request.setAttribute(RequestParameter.USER_DATA_INCORRECT, true);
+                request.setAttribute(RequestParameter.REGISTRATION_PARAMETERS, true);
                 page = PagePath.LOGIN;
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while login user", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
-            page = PagePath.ERROR;
+            page = PagePath.ERROR_500;
         }
         return page;
     }

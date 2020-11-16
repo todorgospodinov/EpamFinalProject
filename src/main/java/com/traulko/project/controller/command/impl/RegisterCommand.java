@@ -12,6 +12,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(RegisterCommand.class);
@@ -26,20 +28,27 @@ public class RegisterCommand implements CustomCommand {
         String name = request.getParameter(RequestParameter.NAME);
         String surname = request.getParameter(RequestParameter.SURNAME);
         String patronymic = request.getParameter(RequestParameter.PATRONYMIC);
+        Map<String, String> registrationParameters = new HashMap<>();
+        registrationParameters.put(RequestParameter.EMAIL, email);
+        registrationParameters.put(RequestParameter.NAME, name);
+        registrationParameters.put(RequestParameter.SURNAME, surname);
+        registrationParameters.put(RequestParameter.PATRONYMIC, patronymic);
+        registrationParameters.put(RequestParameter.PASSWORD, password);
+        registrationParameters.put(RequestParameter.PASSWORD_REPEAT, passwordRepeat);
         try {
-            if (userService.add(email, password, passwordRepeat, name, surname, patronymic)) {
+            if (userService.add(registrationParameters)) {
                 User user = userService.findUserByEmail(email).get();
                 userService.sendLetter(user, request.getRequestURL().toString());
                 request.setAttribute(RequestParameter.USER_CONFIRM_REGISTRATION_LETTER, true);
                 page = PagePath.MESSAGE;
             } else {
-                request.setAttribute(RequestParameter.USER_DATA_INCORRECT, true);
+                request.setAttribute(RequestParameter.REGISTRATION_PARAMETERS, registrationParameters);
                 page = PagePath.REGISTRATION;
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while register user", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
-            page = PagePath.ERROR;
+            page = PagePath.ERROR_500;
         }
         return page;
     }

@@ -37,7 +37,6 @@ public class ConnectionPool {
             LOGGER.log(Level.INFO, "Connection pool has been filled");
         } catch (ClassNotFoundException | SQLException e) {
             LOGGER.log(Level.FATAL, "Error during connection pool creating");
-            System.out.println("Error while connecting to database " + e);
         }
     }
 
@@ -56,7 +55,7 @@ public class ConnectionPool {
 
     public void releaseConnection(Connection connection) {
         if (connection.getClass() == ProxyConnection.class) {
-            if(proxyConnections.remove(connection)) {
+            if (proxyConnections.remove(connection)) {
                 freeConnections.offer((ProxyConnection) connection);
             }
             LOGGER.log(Level.DEBUG, "Connection has been released");

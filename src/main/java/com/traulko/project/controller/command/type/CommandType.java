@@ -23,13 +23,13 @@ public enum CommandType {
     CREATE_ORDER_COMMAND(new CreateOrderCommand()),
     PRODUCE_ORDER_COMMAND(new ProduceOrderCommand()),
     REJECT_ORDER_COMMAND(new RejectOrderCommand()),
-
+    EDIT_PRODUCT_COMMAND(new EditProductCommand()),
+    UNDO_ORDER_COMMAND(new UndoOrderCommand()),
+    FIND_ORDERS_COMMAND(new FindOrdersCommand()),
 
     SWITCH_LANGUAGE_COMMAND(new SwitchLanguageCommand()),
 
-
     EMPTY_COMMAND(new EmptyCommand()),
-
 
     MAIN_PAGE(new MainPageCommand()),
     ADMIN_USERS_PAGE(new AdminUsersPageCommand()),
@@ -45,7 +45,9 @@ public enum CommandType {
     BASKET_PAGE(new BasketPageCommand()),
     FILL_UP_BALANCE_PAGE(new FillUpBalancePageCommand()),
     ORDER_PAGE(new OrderPageCommand()),
-    ADD_PRODUCT_PAGE(new AddProductPageCommand());
+    PRODUCT_ACTIONS_PAGE(new ProductActionsPageCommand()),
+    ORDER_HISTORY_PAGE(new OrderHistoryPageCommand()),
+    ADD_PRODUCT_PAGE(new ProductActionsPageCommand());
 
     private final CustomCommand command;
 

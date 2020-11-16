@@ -1,6 +1,5 @@
 package com.traulko.project.controller;
 
-
 import com.traulko.project.util.FileLoader;
 
 import javax.servlet.RequestDispatcher;
@@ -11,16 +10,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 
-@WebServlet(urlPatterns = "/download/*")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024,
         maxFileSize = 1024 * 1024 * 5,
         maxRequestSize = 1024 * 1024 * 5 * 5)
-public class FileDownloadController extends HttpServlet {
+@WebServlet(urlPatterns = "/image/*")
+public class ImageServlet extends HttpServlet {
+    private static final String CONTENT_TYPE = "Content-Type";
+    private static final String CONTENT_LENGTH = "Content-Length";
     private static final String DIRECTORY = "load.location";
     private static final FileLoader fileLoader = new FileLoader();
     private static final String CONTROLLER_PATH = "/controller";
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String filename = request.getPathInfo().substring(1);
+        String directory = getServletContext().getInitParameter(DIRECTORY);
+        Path path = Paths.get(directory, filename);
+        response.setHeader(CONTENT_TYPE, getServletContext().getMimeType(filename));
+        response.setHeader(CONTENT_LENGTH, String.valueOf(Files.size(path)));
+        Files.copy(path, response.getOutputStream());
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -36,9 +50,5 @@ public class FileDownloadController extends HttpServlet {
         }
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request, response);
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
     }
 }

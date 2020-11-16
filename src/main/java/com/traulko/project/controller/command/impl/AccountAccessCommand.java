@@ -18,6 +18,7 @@ import java.util.Optional;
 public class AccountAccessCommand implements CustomCommand {
     private static final UserService userService = new UserServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();
+
     @Override
     public String execute(HttpServletRequest request) {
         String page;
@@ -42,7 +43,7 @@ public class AccountAccessCommand implements CustomCommand {
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while activating account", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
-            page = PagePath.ERROR;
+            page = PagePath.ERROR_500;
         }
         return page;
     }

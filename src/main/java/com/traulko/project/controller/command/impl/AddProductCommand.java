@@ -5,9 +5,7 @@ import com.traulko.project.controller.RequestParameter;
 import com.traulko.project.controller.command.CustomCommand;
 import com.traulko.project.exception.ServiceException;
 import com.traulko.project.service.ProductService;
-import com.traulko.project.service.UserService;
 import com.traulko.project.service.impl.ProductServiceImpl;
-import com.traulko.project.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,7 +33,7 @@ public class AddProductCommand implements CustomCommand {
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while adding product", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
-            page = PagePath.ERROR;
+            page = PagePath.ERROR_500;
         }
         return page;
     }

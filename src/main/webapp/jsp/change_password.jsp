@@ -23,7 +23,8 @@
             <form method="post" action="controller" autocomplete="off">
                 <div>
                     <label for="password"><fmt:message key="change_password.password"/></label>
-                    <input id="password" class="form-control" type="text" name="password" maxlength="16" minlength="6"
+                    <input id="password" class="form-control" required type="text" name="password" maxlength="16"
+                           minlength="6"
                            oninvalid="this.setCustomValidity('<fmt:message key="change_password.password_validator"/>')"
                            onchange="this.setCustomValidity('')"
                            pattern="^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,16}$"
@@ -31,7 +32,8 @@
                 </div>
                 <div>
                     <label for="password_repeat"><fmt:message key="change_password.password_repeat"/></label>
-                    <input id="password_repeat" class="form-control" type="text" name="password_repeat" maxlength="16"
+                    <input id="password_repeat" class="form-control" required type="text" name="password_repeat"
+                           maxlength="16"
                            minlength="6"
                            oninvalid="this.setCustomValidity('<fmt:message key="change_password.password_validator"/>')"
                            onchange="this.setCustomValidity('')"

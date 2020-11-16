@@ -22,7 +22,7 @@
         <div class="col-12 mx-auto my-lg-4 p-3 bg-light">
             <div class="row">
                 <c:if test="${baskets.size() == 0}">
-                    <p>Empty</p>
+                    <h3 style="text-align: center"><fmt:message key="basket_page.empty"/></h3>
                 </c:if>
                 <c:if test="${baskets.size() != 0}">
                     <c:forEach var="userBasketProduct" items="${baskets}">
@@ -39,8 +39,9 @@
                                     <form method="post" action="controller">
                                         <input type="hidden" name="commandName" value="product_page">
                                         <button class="btn btn-light btn-block nav-link" name="productId"
-                                                value="${userBasketProduct.getProduct().getProductId().toString()}"><fmt:message
-                                                key="basket_page.product_page_button"/>
+                                                value="${userBasketProduct.getProduct().getProductId().toString()}">
+                                            <fmt:message
+                                                    key="basket_page.product_page_button"/>
                                         </button>
                                     </form>
                                     <form method="post" action="controller">
@@ -58,13 +59,25 @@
                     </c:forEach>
                 </c:if>
             </div>
-            <c:if test="${totalPrice != 0}">
-                <p><fmt:message key="basket_page.total_price"/> ${totalPrice}</p>
+            <c:if test="${baskets.size() != 0}">
+                <h4><fmt:message key="basket_page.total_price"/> ${totalPrice}</h4>
+                <h4><fmt:message key="basket_page.balance"/> ${balance} <fmt:message
+                        key="basket_page.currency"/></h4>
+                <form method="post" action="controller">
+                    <button class="btn btn-secondary nav-link" name="commandName"
+                            value="fill_up_balance_page"><fmt:message
+                            key="basket_page.fill_up_balance"/></button>
+                </form>
+                <c:if test="${totalPrice <= balance}">
+                    <form method="post" action="controller">
+                        <button class="btn btn-secondary" name="commandName"
+                                value="create_order_command"><fmt:message key="basket_page.checkout"/></button>
+                    </form>
+                </c:if>
+                <c:if test="${totalPrice > balance}">
+                    <h4><fmt:message key="basket_page.low_balance"/></h4>
+                </c:if>
             </c:if>
-            <form method="post" action="controller">
-                <button class="btn btn-secondary" name="commandName"
-                        value="create_order_command"><fmt:message key="basket_page.checkout"/></button>
-            </form>
         </div>
     </div>
 </main>

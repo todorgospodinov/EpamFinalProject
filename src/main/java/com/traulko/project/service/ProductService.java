@@ -4,10 +4,13 @@ import com.traulko.project.entity.Product;
 import com.traulko.project.exception.ServiceException;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface ProductService {
     boolean add(String productTitle, String price, String description, String imageName) throws ServiceException;
+
+    boolean update(String id, String productTitle, String price, String description) throws ServiceException;
 
     Optional<Product> findById(String id) throws ServiceException;
 

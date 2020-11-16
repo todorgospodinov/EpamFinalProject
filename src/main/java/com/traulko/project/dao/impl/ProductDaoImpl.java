@@ -28,6 +28,8 @@ public class ProductDaoImpl implements ProductDao {
     private static final String FIND_PRODUCTS_BY_SEARCH_QUERY = "SELECT product_id, product_title, product_price, " +
             "product_description, image_id, image_name FROM products INNER JOIN images ON " +
             "products.image_id_fk = images.image_id where concat(product_title, product_price) like ?";
+    private static final String UPDATE_PRODUCT = "UPDATE products set product_title = ?, product_price = ?," +
+            "product_description = ?, image_id_fk = ? where product_id = ?";
 
     private ProductDaoImpl() {
     }
@@ -83,6 +85,37 @@ public class ProductDaoImpl implements ProductDao {
             return productList;
         } catch (SQLException | ConnectionDatabaseException e) {
             throw new DaoException("Finding products by search query error", e);
+        }
+    }
+
+    @Override
+    public boolean update(Product product, Connection connection) throws DaoException {
+        try (PreparedStatement statement = connection.prepareStatement(UPDATE_PRODUCT)) {
+            statement.setString(1, product.getTitle());
+            statement.setDouble(2, product.getPrice());
+            statement.setString(3, product.getDescription());
+            statement.setInt(4, product.getImage().getImageId());
+            statement.setInt(5, product.getProductId());
+            boolean result = statement.executeUpdate() > 0;
+            return result;
+        } catch (SQLException e) {
+            throw new DaoException("Error while updating product: " + product, e);
+        }
+    }
+
+    @Override
+    public boolean update(Product product) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_PRODUCT)) {
+            statement.setString(1, product.getTitle());
+            statement.setDouble(2, product.getPrice());
+            statement.setString(3, product.getDescription());
+            statement.setInt(4, product.getImage().getImageId());
+            statement.setInt(5, product.getProductId());
+            boolean result = statement.executeUpdate() > 0;
+            return result;
+        } catch (SQLException | ConnectionDatabaseException e) {
+            throw new DaoException("Error while updating product: " + product, e);
         }
     }
 

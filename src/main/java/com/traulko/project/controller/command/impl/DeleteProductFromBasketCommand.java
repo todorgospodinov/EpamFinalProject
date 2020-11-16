@@ -3,7 +3,6 @@ package com.traulko.project.controller.command.impl;
 import com.traulko.project.controller.PagePath;
 import com.traulko.project.controller.RequestParameter;
 import com.traulko.project.controller.command.CustomCommand;
-import com.traulko.project.entity.User;
 import com.traulko.project.exception.ServiceException;
 import com.traulko.project.service.UserBasketProductService;
 import com.traulko.project.service.impl.UserBasketProductServiceImpl;
@@ -34,7 +33,7 @@ public class DeleteProductFromBasketCommand implements CustomCommand {
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while removing product", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
-            page = PagePath.ERROR;
+            page = PagePath.ERROR_500;
         }
         return page;
     }

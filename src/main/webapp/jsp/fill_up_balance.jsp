@@ -19,7 +19,7 @@
             <form method="post" action="controller" autocomplete="off">
                 <div>
                     <label for="amount"><fmt:message key="fill_up_balance.amount"/></label>
-                    <input id="amount" class="form-control" type="text" name="moneyAmount" maxlength="7"
+                    <input id="amount" class="form-control" required type="text" name="moneyAmount" maxlength="7"
                            oninvalid="this.setCustomValidity('<fmt:message key="fill_up_balance.price_validator"/>')"
                            onchange="this.setCustomValidity('')"
                            pattern="^[1-9]\d{0,4}(\.\d{0,2})?$"

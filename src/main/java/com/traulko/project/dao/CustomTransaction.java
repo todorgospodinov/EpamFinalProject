@@ -2,9 +2,9 @@ package com.traulko.project.dao;
 
 import com.traulko.project.dao.connection.ConnectionPool;
 import com.traulko.project.dao.impl.*;
-import com.traulko.project.entity.UserBasketProduct;
 import com.traulko.project.entity.CustomOrder;
 import com.traulko.project.entity.Product;
+import com.traulko.project.entity.UserBasketProduct;
 import com.traulko.project.exception.ConnectionDatabaseException;
 import com.traulko.project.exception.DaoException;
 import com.traulko.project.exception.TransactionException;
@@ -27,7 +27,7 @@ public class CustomTransaction {
         return INSTANCE;
     }
 
-    public boolean addOrderAndOrderItem(CustomOrder order, List<UserBasketProduct> userBasketProductList) throws TransactionException {
+    public boolean addOrderAndOrderItems(CustomOrder order, List<UserBasketProduct> userBasketProductList) throws TransactionException {
         Connection connection = null;
         UserBasketProductDao userBasketProductDao = UserBasketProductDaoImpl.getInstance();
         OrderDao orderDao = OrderDaoImpl.getInstance();
@@ -49,6 +49,29 @@ public class CustomTransaction {
         } catch (ConnectionDatabaseException | SQLException | DaoException e) {
             rollback(connection);
             throw new TransactionException("Error while adding order and orderItem " + order, e);
+        } finally {
+            close(connection);
+        }
+    }
+
+    public boolean removeOrderAndOrderItems(Integer orderId) throws TransactionException {
+        Connection connection = null;
+        OrderDao orderDao = OrderDaoImpl.getInstance();
+        OrderItemDao orderItemDao = OrderItemDaoImpl.getInstance();
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            connection.setAutoCommit(false);
+            boolean result = orderItemDao.removeAll(orderId, connection);
+            if (result) {
+                if (!orderDao.remove(orderId, connection)) {
+                    result = false;
+                }
+            }
+            connection.commit();
+            return result;
+        } catch (ConnectionDatabaseException | SQLException | DaoException e) {
+            rollback(connection);
+            throw new TransactionException("Error while adding order and orderItem with order id" + orderId, e);
         } finally {
             close(connection);
         }

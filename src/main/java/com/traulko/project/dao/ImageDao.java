@@ -6,5 +6,5 @@ import com.traulko.project.exception.DaoException;
 import java.sql.Connection;
 
 public interface ImageDao {
-    boolean add(CustomImage image, Connection connection) throws DaoException, DaoException;
+    boolean add(CustomImage image, Connection connection) throws DaoException;
 }

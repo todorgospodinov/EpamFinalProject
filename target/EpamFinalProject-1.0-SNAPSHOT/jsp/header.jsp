@@ -37,13 +37,6 @@
                                         value="basket_page"><fmt:message key="header.basket_button"/></button>
                             </form>
                         </li>
-                        <li class="nav-item">
-                            <form method="post" action="controller">
-                                <button class="btn btn-secondary nav-link button-margin" name="commandName"
-                                        value="fill_up_balance_page">${user.getBalance()} <fmt:message
-                                        key="header.currency"/></button>
-                            </form>
-                        </li>
                     </c:if>
                     <c:if test="${user != null}">
                         <li class="nav-item">

@@ -7,7 +7,8 @@ public class Product {
     private String description;
     private CustomImage image;
 
-    public Product() {}
+    public Product() {
+    }
 
     public Product(Integer productId, String title, double price, String description, CustomImage image) {
         this.productId = productId;

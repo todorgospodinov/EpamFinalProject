@@ -1,6 +1,5 @@
 package com.traulko.project.util;
 
-import com.traulko.project.controller.FileDownloadController;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +12,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class FileLoader {
-    private static final Logger LOGGER = LogManager.getLogger(FileDownloadController.class);
+    private static final Logger LOGGER = LogManager.getLogger(FileLoader.class);
     private static final String FILE_EXTENSION = ".jpg";
 
     public Optional<String> load(Collection<Part> parts, String directory) {

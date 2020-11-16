@@ -133,6 +133,25 @@
                     <h2><fmt:message key="message_page.order_reject_error"/></h2>
                 </c:if>
 
+                <c:if test="${orderUndoSuccessMessage}">
+                    <h2><fmt:message key="message_page.order_undo_success"/></h2>
+                </c:if>
+
+                <c:if test="${orderUndoErrorMessage}">
+                    <h2><fmt:message key="message_page.order_undo_error"/></h2>
+                </c:if>
+
+                <c:if test="${updateProductSuccess}">
+                    <h2><fmt:message key="message_page.update_product_success"/></h2>
+                </c:if>
+
+                <c:if test="${updateProductError}">
+                    <h2><fmt:message key="message_page.update_product_error"/></h2>
+                </c:if>
+
+                <c:if test="${balanceLoadingError}">
+                    <h2><fmt:message key="message_page.balance_loading_error"/></h2>
+                </c:if>
             </div>
         </div>
     </section>

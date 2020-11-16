@@ -17,6 +17,19 @@
     <div class="container">
         <div class="col-12 mx-auto my-lg-4 p-3 bg-light">
             <c:if test="${orders.size() != 0}">
+                <div class="col-6">
+                    <form method="post" action="controller">
+                        <input type="text" class="form-control" name="searchOrdersQuery"
+                               placeholder="<fmt:message key="admin_orders_page.order_search"/>">
+                        <div class="form-row text-center">
+                            <div class="col-12">
+                                <button class="btn btn-secondary button-margin" name="commandName"
+                                        value="find_orders_command"><fmt:message key="admin_orders_page.search"/>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <h1><fmt:message key="admin_orders_page.orders"/></h1>
                 <table class="table">
                     <thead class="thead-light">
@@ -48,7 +61,7 @@
                 </table>
             </c:if>
             <c:if test="${orders.size() == 0}">
-                <h2>EMPTY</h2>
+                <h3><fmt:message key="admin_orders_page.search_no_result"/></h3>
             </c:if>
         </div>
     </div>

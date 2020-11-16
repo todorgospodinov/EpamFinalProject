@@ -1,19 +1,20 @@
 package com.traulko.project.entity;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class CustomOrder {
     public enum Status {
         UNDER_CONSIDERATION, DENIED, PRODUCED;
     }
+
     private Integer orderId;
     private LocalDate creationDate;
     private LocalDate closingDate;
     private Status status;
     private User user;
 
-    public CustomOrder() {}
+    public CustomOrder() {
+    }
 
     public CustomOrder(Integer orderId, LocalDate creationDate, LocalDate closingDate,
                        Status status, User user) {

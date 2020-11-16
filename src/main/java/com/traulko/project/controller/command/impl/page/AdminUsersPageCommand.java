@@ -17,6 +17,7 @@ import java.util.List;
 public class AdminUsersPageCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(AdminUsersPageCommand.class);
     private static final UserService userService = new UserServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) {
         String page;
@@ -27,7 +28,7 @@ public class AdminUsersPageCommand implements CustomCommand {
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Error while finding all users", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
-            page = PagePath.ERROR;
+            page = PagePath.ERROR_500;
         }
         return page;
     }

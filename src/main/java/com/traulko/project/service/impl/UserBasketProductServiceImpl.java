@@ -9,6 +9,7 @@ import com.traulko.project.exception.DaoException;
 import com.traulko.project.exception.ServiceException;
 import com.traulko.project.service.UserBasketProductService;
 import com.traulko.project.validator.UserBasketProductValidator;
+import com.traulko.project.validator.UserValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class UserBasketProductServiceImpl implements UserBasketProductService {
     public boolean add(String userId, String productId) throws ServiceException {
         boolean result = false;
         try {
-            if (UserBasketProductValidator.isIdValid(productId) &&
+            if (UserValidator.isIdValid(userId) &&
                     UserBasketProductValidator.isIdValid(productId)) {
                 Integer productIdParsed = Integer.parseInt(productId);
                 Integer userIdParsed = Integer.parseInt(userId);
@@ -45,14 +46,15 @@ public class UserBasketProductServiceImpl implements UserBasketProductService {
         for (UserBasketProduct userBasketProduct : userBasketProductList) {
             totalPrice += userBasketProduct.getProduct().getPrice();
         }
-        return totalPrice;
+        double scale = Math.pow(10, 2);
+        return Math.ceil(totalPrice * scale) / scale;
     }
 
     @Override
     public boolean remove(String userId, String productId) throws ServiceException {
         boolean result = false;
         try {
-            if (UserBasketProductValidator.isIdValid(userId) &&
+            if (UserValidator.isIdValid(userId) &&
                     UserBasketProductValidator.isIdValid(productId)) {
                 Integer productIdValue = Integer.parseInt(productId);
                 Integer userIdParsed = Integer.parseInt(userId);

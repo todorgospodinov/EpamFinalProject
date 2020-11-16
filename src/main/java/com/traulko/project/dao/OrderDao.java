@@ -11,6 +11,10 @@ import java.util.Optional;
 public interface OrderDao {
     boolean add(CustomOrder order, Connection connection) throws DaoException;
 
+    boolean remove(Integer orderId, Connection connection) throws DaoException;
+
+    List<CustomOrder> findBySearchQuery(String searchQuery) throws DaoException;
+
     boolean produce(Integer orderId, LocalDate date) throws DaoException;
 
     boolean reject(Integer orderId, LocalDate date) throws DaoException;

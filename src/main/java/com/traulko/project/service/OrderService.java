@@ -11,7 +11,11 @@ public interface OrderService {
 
     boolean add(String userId, List<UserBasketProduct> userBasketProductList) throws ServiceException;
 
+    boolean remove(String orderId) throws ServiceException;
+
     List<CustomOrder> findOrdersByUserId(String id) throws ServiceException;
+
+    List<CustomOrder> findBySearchQuery(String searchQuery) throws ServiceException;
 
     List<CustomOrder> findAll() throws ServiceException;
 

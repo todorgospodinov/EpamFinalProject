@@ -1,5 +1,6 @@
 package com.traulko.project.service.impl;
 
+import com.traulko.project.controller.RequestParameter;
 import com.traulko.project.dao.UserDao;
 import com.traulko.project.dao.impl.UserDaoImpl;
 import com.traulko.project.entity.User;
@@ -12,10 +13,13 @@ import com.traulko.project.util.mail.MailSender;
 import com.traulko.project.validator.UserValidator;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
+    private static final String EMPTY_VALUE = "";
     private final UserDao userDao = UserDaoImpl.getInstance();
 
     @Override
@@ -206,26 +210,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean add(String email, String password, String passwordRepeat,
-                       String name, String surname, String patronymic) throws ServiceException {
+    public boolean add(Map<String, String> parameters) throws ServiceException {
         boolean result = false;
-        if (UserValidator.isEmailValid(email) && UserValidator.isPasswordValid(password) &&
-                UserValidator.isNameValid(name) && UserValidator.isNameValid(surname) &&
-                UserValidator.isNameValid(patronymic) && password.equals(passwordRepeat) &&
-                isEmailFree(email)) {
-            try {
-                String encryptedPassword = CustomCipher.encrypt(password);
-                User user = new User();
-                user.setEmail(email);
-                user.setName(name);
-                user.setSurname(surname);
-                user.setPatronymic(patronymic);
-                user.setStatus(User.Status.NOT_CONFIRMED);
-                user.setRole(User.Role.USER);
-                user.setBalance(0);
-                result = userDao.add(user, encryptedPassword);
-            } catch (DaoException | NoSuchAlgorithmException e) {
-                throw new ServiceException("Error while adding user", e);
+        String email = parameters.get(RequestParameter.EMAIL);
+        String password = parameters.get(RequestParameter.PASSWORD);
+        String name = parameters.get(RequestParameter.NAME);
+        String surname = parameters.get(RequestParameter.SURNAME);
+        String patronymic = parameters.get(RequestParameter.PATRONYMIC);
+        if (UserValidator.isRegistrationParametersCorrect(parameters)) {
+            if (isEmailFree(email)) {
+                try {
+                    String encryptedPassword = CustomCipher.encrypt(password);
+                    User user = new User();
+                    user.setEmail(email);
+                    user.setName(name);
+                    user.setSurname(surname);
+                    user.setPatronymic(patronymic);
+                    user.setStatus(User.Status.NOT_CONFIRMED);
+                    user.setRole(User.Role.USER);
+                    user.setBalance(0);
+                    result = userDao.add(user, encryptedPassword);
+                } catch (DaoException | NoSuchAlgorithmException e) {
+                    throw new ServiceException("Error while adding user", e);
+                }
+            } else {
+                parameters.put(RequestParameter.EMAIL, EMPTY_VALUE);
             }
         }
         return result;
@@ -236,7 +245,7 @@ public class UserServiceImpl implements UserService {
         try {
             if (UserValidator.isEmailValid(email)) {
                 Optional<User> optionalUser = userDao.findByEmail(email);
-                result = optionalUser.isPresent();
+                result = optionalUser.isEmpty();
             }
         } catch (DaoException e) {
             throw new ServiceException("Error while checking free email for presence in database", e);

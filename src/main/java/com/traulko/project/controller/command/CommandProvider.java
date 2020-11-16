@@ -13,7 +13,7 @@ public class CommandProvider {
     private CommandProvider() {
     }
 
-    public static Optional <CustomCommand> defineCommand(String commandName) {
+    public static Optional<CustomCommand> defineCommand(String commandName) {
         Optional<CustomCommand> currentCommand;
         if (commandName != null && !commandName.isBlank()) {
             try {

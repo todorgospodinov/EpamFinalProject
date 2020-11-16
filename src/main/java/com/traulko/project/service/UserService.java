@@ -4,6 +4,7 @@ import com.traulko.project.entity.User;
 import com.traulko.project.exception.ServiceException;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface UserService {
@@ -33,6 +34,5 @@ public interface UserService {
 
     boolean unblock(String email) throws ServiceException;
 
-    boolean add(String email, String password, String passwordRepeat,
-                String name, String surname, String patronymic) throws ServiceException;
+    boolean add(Map<String, String> parameters) throws ServiceException;
 }

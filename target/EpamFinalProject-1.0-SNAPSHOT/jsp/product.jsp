@@ -29,14 +29,26 @@
                 <c:if test="${user.getRole().toString().equals(\"USER\")}">
                     <div class="form-row text-center">
                         <div class="col-12">
-                            <input type="hidden" name="commandName"
-                                   value="add_product_to_basket_command">
-                            <button class="btn btn-secondary nav-link btn-block" name="productId"
-                                    value="${product.getProductId()}"><fmt:message
-                                    key="catalog_page.add_product_to_basket"/>
-                            </button>
+                            <form method="post" action="controller" autocomplete="off">
+                                <input type="hidden" name="commandName"
+                                       value="add_product_to_basket_command">
+                                <button class="btn btn-secondary nav-link btn-block" name="productId"
+                                        value="${product.getProductId()}"><fmt:message
+                                        key="product_page.add_product_to_basket"/>
+                                </button>
+                            </form>
                         </div>
                     </div>
+                </c:if>
+                <c:if test="${user.getRole().toString().equals(\"ADMIN\")}">
+                    <form method="post" action="controller" autocomplete="off">
+                        <input type="hidden" name="commandName"
+                               value="product_actions_page">
+                        <button class="btn btn-secondary nav-link btn-block" name="productId"
+                                value="${product.getProductId()}"><fmt:message
+                                key="product_page.edit_product"/>
+                        </button>
+                    </form>
                 </c:if>
             </form>
         </div>

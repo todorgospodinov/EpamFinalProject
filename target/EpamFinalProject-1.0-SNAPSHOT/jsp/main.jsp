@@ -15,10 +15,10 @@
     <jsp:include page="header.jsp"/>
 </header>
 <main>
-        <div class="container">
-            <h1 class="display-3">Welcome to my website</h1>
-            <p class="lead">Website is under construction</p>
-        </div>
+    <div class="container">
+        <h1 class="display-3">Welcome to my website</h1>
+        <p class="lead">Website is under construction</p>
+    </div>
 </main>
 <footer>
     <jsp:include page="footer.jsp"/>

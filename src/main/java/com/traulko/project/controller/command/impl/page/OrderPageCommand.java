@@ -15,7 +15,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,14 +33,12 @@ public class OrderPageCommand implements CustomCommand {
                 List<OrderItem> orderItemList = orderItemService.findOrderItemsByOrderId(orderId);
                 request.setAttribute(RequestParameter.ORDER_ITEMS, orderItemList);
                 request.setAttribute(RequestParameter.ORDER, orderOptional.get());
-                // TODO: 12.11.2020
             }
             page = PagePath.ORDER;
-            //page = PagePath.PERSONAL_ACCOUNT;
         } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, "Error while finding users", e);
+            LOGGER.log(Level.ERROR, "Error while finding order", e);
             request.setAttribute(RequestParameter.ERROR_MESSAGE, e);
-            page = PagePath.ERROR;
+            page = PagePath.ERROR_500;
         }
         return page;
     }

@@ -12,6 +12,7 @@ import com.traulko.project.service.ProductService;
 import com.traulko.project.validator.ProductValidator;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class ProductServiceImpl implements ProductService {
@@ -35,6 +36,28 @@ public class ProductServiceImpl implements ProductService {
             }
         } catch (TransactionException e) {
             throw new ServiceException("Error while adding product", e);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean update(String id, String productTitle, String price, String description) throws ServiceException {
+        boolean result = false;
+        try {
+            if (ProductValidator.isIdValid(id) && ProductValidator.isTitleValid(productTitle) && ProductValidator.isPriceValid(price) &&
+                    ProductValidator.isDescriptionValid(description)) {
+                int productIdParsed = Integer.parseInt(id);
+                Optional<Product> optionalProduct = productDao.findById(productIdParsed);
+                if (optionalProduct.isPresent()) {
+                    Product product = optionalProduct.get();
+                    product.setTitle(productTitle);
+                    product.setDescription(description);
+                    product.setPrice(Double.parseDouble(price));
+                    result = productDao.update(product);
+                }
+            }
+        } catch (DaoException e) {
+            throw new ServiceException("Error while updating product", e);
         }
         return result;
     }

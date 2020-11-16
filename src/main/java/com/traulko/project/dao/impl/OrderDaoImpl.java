@@ -25,10 +25,14 @@ public class OrderDaoImpl implements OrderDao {
             "order_status, user_id FROM orders INNER JOIN users ON user_id = user_id_fk where order_id = ?";
     private static final String FIND_ALL = "SELECT order_id, order_creation_date, order_closing_date," +
             "order_status, user_id FROM orders INNER JOIN users ON user_id = user_id_fk";
+    private static final String FIND_PRODUCTS_BY_SEARCH_QUERY = "SELECT order_id, order_creation_date, order_closing_date," +
+            "order_status, user_id FROM orders INNER JOIN users ON user_id = user_id_fk where concat(order_id, order_creation_date, order_closing_date, order_status, user_id) like ?";
     private static final String PRODUCE_ORDER = "UPDATE orders SET order_status = \"PRODUCED\", " +
             "order_closing_date = ? where order_id = ?";
     private static final String REJECT_ORDER = "UPDATE orders SET order_status = \"DENIED\", " +
             "order_closing_date = ? where order_id = ?";
+    private static final String REMOVE_ORDER = "DELETE FROM orders where order_id = ?";
+    private static final String PERCENT = "%";
 
     private OrderDaoImpl() {
     }
@@ -54,6 +58,34 @@ public class OrderDaoImpl implements OrderDao {
             return result;
         } catch (SQLException e) {
             throw new DaoException("Error while adding order", e);
+        }
+    }
+
+    @Override
+    public boolean remove(Integer orderId, Connection connection) throws DaoException {
+        try (PreparedStatement statement = connection.prepareStatement(REMOVE_ORDER)) {
+            statement.setInt(1, orderId);
+            boolean result = statement.executeUpdate() > 0;
+            return result;
+        } catch (SQLException e) {
+            throw new DaoException("Error while removing order with order id: " + orderId, e);
+        }
+    }
+
+    @Override
+    public List<CustomOrder> findBySearchQuery(String searchQuery) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_PRODUCTS_BY_SEARCH_QUERY)) {
+            statement.setString(1, PERCENT + searchQuery + PERCENT);
+            ResultSet resultSet = statement.executeQuery();
+            List<CustomOrder> orderList = new ArrayList<>();
+            while (resultSet.next()) {
+                CustomOrder order = createOrderFromResultSet(resultSet);
+                orderList.add(order);
+            }
+            return orderList;
+        } catch (SQLException | ConnectionDatabaseException e) {
+            throw new DaoException("Finding orders by search query error", e);
         }
     }
 

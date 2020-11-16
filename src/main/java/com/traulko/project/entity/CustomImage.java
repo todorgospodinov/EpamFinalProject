@@ -4,7 +4,8 @@ public class CustomImage {
     private Integer imageId;
     private String name;
 
-    public CustomImage () {}
+    public CustomImage() {
+    }
 
     public CustomImage(Integer imageId, String name) {
         this.imageId = imageId;

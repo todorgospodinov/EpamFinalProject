@@ -2,8 +2,8 @@ package com.traulko.project.validator;
 
 public class ProductValidator {
     private static final String ID_REGEX = "^[1-9]\\d{0,9}$";
-    private static final String TITLE_REGEX = "^[^<>]{2,25}$";
-    private static final String DESCRIPTION_REGEX = "^[^<>]{1,1000}$";
+    private static final String TITLE_REGEX = "^\\p{L}[^<>]{2,25}$";
+    private static final String DESCRIPTION_REGEX = "^\\p{L}[^<>]{1,1000}$";
     private static final String PRICE_REGEX = "^[1-9]\\d{0,4}(\\.\\d{0,2})?$";
 
     public static boolean isIdValid(String id) {

@@ -5,7 +5,8 @@ public class UserBasketProduct {
     private User user;
     private Product product;
 
-    public UserBasketProduct() {}
+    public UserBasketProduct() {
+    }
 
     public UserBasketProduct(Integer basketId, User user, Product product) {
         this.basketId = basketId;

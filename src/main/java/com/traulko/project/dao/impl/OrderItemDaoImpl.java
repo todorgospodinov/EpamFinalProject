@@ -15,6 +15,10 @@ public class OrderItemDaoImpl implements OrderItemDao {
     private static final OrderItemDaoImpl INSTANCE = new OrderItemDaoImpl();
     private static final String ADD_ORDER_ITEM = "INSERT INTO order_item (product_id_fk, order_id_fk)" +
             " VALUES (?, ?)";
+    private static final String REMOVE_ORDER_ITEM = "DELETE FROM order_item where product_id_fk = ?" +
+            ", order_id_fk = ?";
+    private static final String REMOVE_ALL_ORDER_ITEMS = "DELETE FROM order_item where " +
+            "order_id_fk = ?";
     private static final String FIND_BY_ORDER_ID = "SELECT order_item_id, product_id, product_title," +
             "product_price, product_description, image_id, image_name, order_id from order_item INNER JOIN products " +
             "ON product_id_fk = product_id INNER JOIN images ON image_id_fk = image_id INNER JOIN orders ON " +
@@ -36,6 +40,29 @@ public class OrderItemDaoImpl implements OrderItemDao {
             return result;
         } catch (SQLException e) {
             throw new DaoException("Error while adding orderItem: " + product, e);
+        }
+    }
+
+    @Override
+    public boolean remove(CustomOrder order, Product product, Connection connection) throws DaoException {
+        try (PreparedStatement statement = connection.prepareStatement(REMOVE_ORDER_ITEM)) {
+            statement.setInt(1, product.getProductId());
+            statement.setInt(2, order.getOrderId());
+            boolean result = statement.executeUpdate() > 0;
+            return result;
+        } catch (SQLException e) {
+            throw new DaoException("Error while removing orderItem: " + product, e);
+        }
+    }
+
+    @Override
+    public boolean removeAll(Integer orderId, Connection connection) throws DaoException {
+        try (PreparedStatement statement = connection.prepareStatement(REMOVE_ALL_ORDER_ITEMS)) {
+            statement.setInt(1, orderId);
+            boolean result = statement.executeUpdate() > 0;
+            return result;
+        } catch (SQLException e) {
+            throw new DaoException("Error while removing orderItems with order id: " + orderId, e);
         }
     }
 

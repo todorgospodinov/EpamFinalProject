@@ -1,15 +1,44 @@
 package com.traulko.project.validator;
 
+import com.traulko.project.controller.RequestParameter;
+
+import java.util.Map;
+
 public class UserValidator {
     private static final String ID_REGEX = "^[1-9]\\d{0,9}$";
     private static final String PASSWORD_REGEX = "^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,16}$";
-    //Password must contain at least one letter, at least one number, and be longer
-    //than six characters and less than sixteen.
     private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9]+\\.[A-Za-z0-9]+$";
     private static final String NAME_REGEX = "^\\p{L}{2,25}$";
     private static final String PRICE_REGEX = "^[1-9]\\d{0,4}(\\.\\d{0,2})?$";
+    private static final String EMPTY_VALUE = "";
 
-    // TODO: 12.11.2020
+    public static boolean isRegistrationParametersCorrect(Map<String, String> parameters) {
+        boolean isCorrect = true;
+        if (!isEmailValid(parameters.get(RequestParameter.EMAIL))) {
+            isCorrect = false;
+            parameters.put(RequestParameter.EMAIL, EMPTY_VALUE);
+        }
+        if (!isNameValid(parameters.get(RequestParameter.NAME))) {
+            isCorrect = false;
+            parameters.put(RequestParameter.NAME, EMPTY_VALUE);
+        }
+        if (!isNameValid(parameters.get(RequestParameter.SURNAME))) {
+            isCorrect = false;
+            parameters.put(RequestParameter.SURNAME, EMPTY_VALUE);
+        }
+        if (!isNameValid(parameters.get(RequestParameter.PATRONYMIC))) {
+            isCorrect = false;
+            parameters.put(RequestParameter.PATRONYMIC, EMPTY_VALUE);
+        }
+        if (!isPasswordValid(parameters.get(RequestParameter.PASSWORD)) ||
+                !(parameters.get(RequestParameter.PASSWORD)
+                        .equals(parameters.get(RequestParameter.PASSWORD_REPEAT)))) {
+            isCorrect = false;
+            parameters.put(RequestParameter.PASSWORD, EMPTY_VALUE);
+            parameters.put(RequestParameter.PASSWORD_REPEAT, EMPTY_VALUE);
+        }
+        return isCorrect;
+    }
 
     public static boolean isIdValid(String id) {
         return isStringCorrect(id, ID_REGEX);

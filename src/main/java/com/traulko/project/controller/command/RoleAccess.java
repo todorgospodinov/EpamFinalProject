@@ -34,11 +34,14 @@ public enum RoleAccess {
             CommandType.MAIN_PAGE,
             CommandType.ORDER_PAGE,
             CommandType.PERSONAL_ACCOUNT_PAGE,
+            CommandType.UNDO_ORDER_COMMAND,
+            CommandType.ORDER_HISTORY_PAGE,
             CommandType.PRODUCT_PAGE)),
 
     ADMIN(EnumSet.of(CommandType.ACCOUNT_ACCESS_COMMAND,
             CommandType.ADD_PRODUCT_COMMAND,
             CommandType.BLOCK_USER_COMMAND,
+            CommandType.FIND_ORDERS_COMMAND,
             CommandType.CHANGE_PASSWORD_COMMAND,
             CommandType.DELETE_USER_COMMAND,
             CommandType.FIND_PRODUCTS_COMMAND,
@@ -46,6 +49,8 @@ public enum RoleAccess {
             CommandType.SWITCH_LANGUAGE_COMMAND,
             CommandType.UNBLOCK_USER_COMMAND,
             CommandType.LOGOUT_COMMAND,
+            CommandType.EDIT_PRODUCT_COMMAND,
+            CommandType.PRODUCT_ACTIONS_PAGE,
             CommandType.ADD_PRODUCT_PAGE,
             CommandType.ADMIN_PAGE,
             CommandType.CATALOG_PAGE,
@@ -57,6 +62,7 @@ public enum RoleAccess {
             CommandType.REJECT_ORDER_COMMAND,
             CommandType.ADMIN_USERS_PAGE,
             CommandType.PERSONAL_ACCOUNT_PAGE,
+            CommandType.ORDER_HISTORY_PAGE,
             CommandType.PRODUCT_PAGE));
 
     private Set<CommandType> accessCommands;
