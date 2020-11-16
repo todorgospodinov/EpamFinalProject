@@ -49,5 +49,5 @@ The administrator fills the site with goods, changes their description if necess
         10. Reject/produce orders
         11. Logout
     
-###**Objects:** **product**, **order**, **basket**.
+### **Objects:** **product**, **order**, **basket**.
 The *product* has parameters such as name, description, price. Archiving is under development. The shopping *basket* is a repository of goods that the user is going to purchase in the future. If there is the required amount of money, the user can send all the goods contained in the *basket* to the administrator in the form of an *order* for consideration. The *order* can be either approved, then the money will be debited from the buyer's account, or canceled.
