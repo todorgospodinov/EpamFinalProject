@@ -23,7 +23,7 @@ public class ForgotPasswordCommand implements CustomCommand {
         String page;
         String email = request.getParameter(RequestParameter.EMAIL);
         try {
-            Optional<User> optionalUser = userService.findUserByEmail(email);
+            Optional<User> optionalUser = userService.findByEmail(email);
             if (optionalUser.isPresent()) {
                 User user = optionalUser.get();
                 userService.sendLetter(user, request.getRequestURL().toString());

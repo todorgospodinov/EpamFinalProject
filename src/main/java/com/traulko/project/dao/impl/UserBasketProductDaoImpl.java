@@ -60,7 +60,7 @@ public class UserBasketProductDaoImpl implements UserBasketProductDao {
     }
 
     @Override
-    public List<UserBasketProduct> getBasketProductsByUserId(Integer id) throws DaoException {
+    public List<UserBasketProduct> findBasketProductsByUserId(Integer id) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_USER_ID)) {
             statement.setInt(1, id);

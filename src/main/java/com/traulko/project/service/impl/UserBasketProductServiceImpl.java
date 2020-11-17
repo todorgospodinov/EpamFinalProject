@@ -79,7 +79,7 @@ public class UserBasketProductServiceImpl implements UserBasketProductService {
         try {
             if (UserBasketProductValidator.isIdValid(id)) {
                 int userId = Integer.parseInt(id);
-                userBasketProductList = userBasketProductDao.getBasketProductsByUserId(userId);
+                userBasketProductList = userBasketProductDao.findBasketProductsByUserId(userId);
             }
         } catch (DaoException e) {
             throw new ServiceException("Error while finding baskets", e);

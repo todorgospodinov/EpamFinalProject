@@ -25,7 +25,7 @@ public class LoginCommand implements CustomCommand {
         String password = request.getParameter(RequestParameter.PASSWORD);
         try {
             if (userService.isUserExists(email, password)) {
-                Optional<User> optionalUser = userService.findUserByEmail(email);
+                Optional<User> optionalUser = userService.findByEmail(email);
                 User user = optionalUser.get();
                 switch (user.getStatus()) {
                     case ENABLE -> {

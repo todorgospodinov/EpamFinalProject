@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUserByEmail(String email) throws ServiceException {
+    public Optional<User> findByEmail(String email) throws ServiceException {
         Optional<User> optionalUser;
         try {
             optionalUser = userDao.findByEmail(email);
@@ -65,7 +65,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findUserByAccessCode(String code, List<User> userList) throws ServiceException {
-        // TODO: 12.11.2020
         Optional<User> optionalUser = Optional.empty();
         CustomCipher cipher = new CustomCipher();
         try {

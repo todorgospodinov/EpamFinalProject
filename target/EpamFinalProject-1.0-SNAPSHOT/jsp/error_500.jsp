@@ -26,8 +26,6 @@
                 <br/>
                 <h5><fmt:message key="error_500_page.code"/> ${pageContext.errorData.statusCode}</h5>
                 <br/>
-                <h5><fmt:message key="error_500_page.error"/> ${pageContext.exception}</h5>
-                <br/>
                 <h5><fmt:message key="error_500_page.error"/> ${errorMessage}</h5>
                 <br/>
             </div>

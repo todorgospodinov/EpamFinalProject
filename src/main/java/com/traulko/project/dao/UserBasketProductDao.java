@@ -10,5 +10,5 @@ public interface UserBasketProductDao {
 
     boolean remove(UserBasketProduct userBasketProduct) throws DaoException;
 
-    List<UserBasketProduct> getBasketProductsByUserId(Integer id) throws DaoException;
+    List<UserBasketProduct> findBasketProductsByUserId(Integer id) throws DaoException;
 }

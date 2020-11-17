@@ -37,7 +37,7 @@ public class RegisterCommand implements CustomCommand {
         registrationParameters.put(RequestParameter.PASSWORD_REPEAT, passwordRepeat);
         try {
             if (userService.add(registrationParameters)) {
-                User user = userService.findUserByEmail(email).get();
+                User user = userService.findByEmail(email).get();
                 userService.sendLetter(user, request.getRequestURL().toString());
                 request.setAttribute(RequestParameter.USER_CONFIRM_REGISTRATION_LETTER, true);
                 page = PagePath.MESSAGE;
