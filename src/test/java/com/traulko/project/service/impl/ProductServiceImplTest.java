@@ -47,7 +47,7 @@ public class ProductServiceImplTest {
     public void addPositiveTest() {
         try {
             when(transaction.addProductAndImage(any(Product.class))).thenReturn(true);
-            boolean actual = productService.add("title", "1.1", "description", "imageName");
+            boolean actual = productService.addProduct("title", "1.1", "description", "imageName");
             assertTrue(actual);
         } catch (TransactionException | ServiceException e) {
             fail("Incorrect data", e);
@@ -58,7 +58,7 @@ public class ProductServiceImplTest {
     public void addNegativeTest() {
         try {
             when(transaction.addProductAndImage(any(Product.class))).thenReturn(true);
-            boolean actual = productService.add(" ", null, null, "imageName");
+            boolean actual = productService.addProduct(" ", null, null, "imageName");
             assertFalse(actual);
         } catch (TransactionException | ServiceException e) {
             fail("Incorrect data", e);
@@ -70,7 +70,7 @@ public class ProductServiceImplTest {
         try {
             when(productDao.findById(any(Integer.class))).thenReturn(Optional.of(new Product()));
             when(productDao.update(any(Product.class))).thenReturn(true);
-            boolean actual = productService.update("1", "title", "1.1", "description");
+            boolean actual = productService.updateProduct("1", "title", "1.1", "description");
             assertTrue(actual);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -82,7 +82,7 @@ public class ProductServiceImplTest {
         try {
             when(productDao.findById(any(Integer.class))).thenReturn(Optional.of(new Product()));
             when(productDao.update(any(Product.class))).thenReturn(true);
-            boolean actual = productService.update(" ", null, null, "description");
+            boolean actual = productService.updateProduct(" ", null, null, "description");
             assertFalse(actual);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -118,7 +118,7 @@ public class ProductServiceImplTest {
         try {
             when(productDao.findById(any(Integer.class))).thenReturn(Optional.of(new Product()));
             Product expected = new Product();
-            Optional<Product> actual = productService.findById("1");
+            Optional<Product> actual = productService.findProductById("1");
             assertEquals(actual.get(), expected);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -130,7 +130,7 @@ public class ProductServiceImplTest {
         try {
             Optional<Product> expected = Optional.of(new Product());
             when(productDao.findById(any(Integer.class))).thenReturn(Optional.of(new Product()));
-            Optional<Product> actual = productService.findById(" ");
+            Optional<Product> actual = productService.findProductById(" ");
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -142,7 +142,7 @@ public class ProductServiceImplTest {
         try {
             List<Product> expected = new ArrayList<>();
             when(productDao.findAll()).thenReturn(new ArrayList<>());
-            List<Product> actual = productService.findAll();
+            List<Product> actual = productService.findAllProducts();
             assertEquals(actual, expected);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -154,7 +154,7 @@ public class ProductServiceImplTest {
         try {
             List<Product> expected = null;
             when(productDao.findAll()).thenReturn(new ArrayList<>());
-            List<Product> actual = productService.findAll();
+            List<Product> actual = productService.findAllProducts();
             assertNotEquals(actual, expected);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);

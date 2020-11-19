@@ -5,6 +5,12 @@ import com.traulko.project.controller.command.CustomCommand;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The {@code ForgotPasswordPageCommand} class represents browse forgot password page command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class ForgotPasswordPageCommand implements CustomCommand {
     @Override
     public String execute(HttpServletRequest request) {

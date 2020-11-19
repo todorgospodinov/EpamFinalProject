@@ -18,6 +18,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The {@code OrderPageCommand} class represents browse order page command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class OrderPageCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(OrderPageCommand.class);
     private static final OrderService orderService = new OrderServiceImpl();
@@ -28,7 +34,7 @@ public class OrderPageCommand implements CustomCommand {
         String page;
         String orderId = request.getParameter(RequestParameter.ORDER_ID);
         try {
-            Optional<CustomOrder> orderOptional = orderService.findById(orderId);
+            Optional<CustomOrder> orderOptional = orderService.findOrderById(orderId);
             if (orderOptional.isPresent()) {
                 List<OrderItem> orderItemList = orderItemService.findOrderItemsByOrderId(orderId);
                 request.setAttribute(RequestParameter.ORDER_ITEMS, orderItemList);

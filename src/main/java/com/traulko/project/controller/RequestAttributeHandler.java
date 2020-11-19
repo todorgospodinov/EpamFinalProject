@@ -6,6 +6,12 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The {@code RequestAttributeHandler} class represents request attribute handler.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class RequestAttributeHandler {
     private Map<String, Object> attributes = new HashMap<>();
 

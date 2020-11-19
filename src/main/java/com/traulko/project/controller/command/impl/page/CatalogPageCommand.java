@@ -14,6 +14,12 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * The {@code CatalogPageCommand} class represents browse catalog page command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class CatalogPageCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(CatalogPageCommand.class);
     private static final ProductService productService = new ProductServiceImpl();
@@ -22,7 +28,7 @@ public class CatalogPageCommand implements CustomCommand {
     public String execute(HttpServletRequest request) {
         String page;
         try {
-            List<Product> productList = productService.findAll();
+            List<Product> productList = productService.findAllProducts();
             request.setAttribute(RequestParameter.PRODUCTS, productList);
             page = PagePath.CATALOG;
         } catch (ServiceException e) {

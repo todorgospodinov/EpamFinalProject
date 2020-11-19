@@ -15,6 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * The {@code PersonalAccountPageCommand} class represents browse personal account page command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class PersonalAccountPageCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(PersonalAccountPageCommand.class);
     private static final OrderService orderService = new OrderServiceImpl();

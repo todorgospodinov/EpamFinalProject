@@ -15,6 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The {@code OrderDaoImpl} class represents order dao implementation.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class OrderDaoImpl implements OrderDao {
     private static final OrderDaoImpl INSTANCE = new OrderDaoImpl();
     private static final String ADD_ORDER = "INSERT INTO orders (order_creation_date, order_closing_date," +
@@ -37,6 +43,11 @@ public class OrderDaoImpl implements OrderDao {
     private OrderDaoImpl() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static OrderDaoImpl getInstance() {
         return INSTANCE;
     }
@@ -116,10 +127,10 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public List<CustomOrder> findOrdersByUserId(Integer id) throws DaoException {
+    public List<CustomOrder> findOrdersByUserId(Integer userId) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_USER_ID)) {
-            statement.setInt(1, id);
+            statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
             List<CustomOrder> orderList = new ArrayList<>();
             while (resultSet.next()) {

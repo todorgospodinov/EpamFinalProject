@@ -5,6 +5,12 @@ import com.traulko.project.controller.command.CustomCommand;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The {@code EmptyCommand} class represents empty command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class EmptyCommand implements CustomCommand {
     @Override
     public String execute(HttpServletRequest request) {

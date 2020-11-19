@@ -1,5 +1,11 @@
 package com.traulko.project.controller;
 
+/**
+ * The {@code PagePath} class represents page path.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class PagePath {
     public static final String ADMIN = "/jsp/admin.jsp";
     public static final String MAIN = "/jsp/main.jsp";

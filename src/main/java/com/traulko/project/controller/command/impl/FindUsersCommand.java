@@ -15,6 +15,12 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * The {@code FindUsersCommand} class represents find users command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class FindUsersCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(FindUsersCommand.class);
     private static final UserService userService = new UserServiceImpl();
@@ -25,7 +31,7 @@ public class FindUsersCommand implements CustomCommand {
         String searchQuery = request.getParameter(RequestParameter.SEARCH_USERS_QUERY);
         try {
             String searchQuerySecured = XssSecurity.secure(searchQuery);
-            List<User> userList = userService.findBySearchQuery(searchQuerySecured);
+            List<User> userList = userService.findUsersBySearchQuery(searchQuerySecured);
             request.setAttribute(RequestParameter.USERS, userList);
             page = PagePath.ADMIN_USERS_PAGE;
         } catch (ServiceException e) {

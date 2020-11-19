@@ -14,6 +14,12 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * The {@code ProductPageCommand} class represents browse product page command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class ProductPageCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(ProductPageCommand.class);
     private static final ProductService productService = new ProductServiceImpl();
@@ -23,7 +29,7 @@ public class ProductPageCommand implements CustomCommand {
         String id = request.getParameter(RequestParameter.PRODUCT_ID);
         String page;
         try {
-            Optional<Product> optionalProduct = productService.findById(id);
+            Optional<Product> optionalProduct = productService.findProductById(id);
             if (optionalProduct.isPresent()) {
                 request.setAttribute(RequestParameter.PRODUCT, optionalProduct.get());
                 page = PagePath.PRODUCT;

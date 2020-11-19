@@ -14,6 +14,12 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * The {@code LoginCommand} class represents login command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class LoginCommand implements CustomCommand {
     private static final UserService userService = new UserServiceImpl();
 
@@ -25,7 +31,7 @@ public class LoginCommand implements CustomCommand {
         String password = request.getParameter(RequestParameter.PASSWORD);
         try {
             if (userService.isUserExists(email, password)) {
-                Optional<User> optionalUser = userService.findByEmail(email);
+                Optional<User> optionalUser = userService.findUserByEmail(email);
                 User user = optionalUser.get();
                 switch (user.getStatus()) {
                     case ENABLE -> {

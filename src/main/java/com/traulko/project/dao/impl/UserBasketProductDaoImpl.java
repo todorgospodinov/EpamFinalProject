@@ -17,6 +17,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The {@code UserBasketProductDaoImpl} class represents user basket product dao implementation.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class UserBasketProductDaoImpl implements UserBasketProductDao {
     private static final UserBasketProductDaoImpl INSTANCE = new UserBasketProductDaoImpl();
     private static final String ADD_PRODUCT_TO_BASKET = "INSERT INTO basket (user_id_fk, product_id_fk) " +
@@ -29,6 +35,11 @@ public class UserBasketProductDaoImpl implements UserBasketProductDao {
     private UserBasketProductDaoImpl() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static UserBasketProductDaoImpl getInstance() {
         return INSTANCE;
     }
@@ -60,10 +71,10 @@ public class UserBasketProductDaoImpl implements UserBasketProductDao {
     }
 
     @Override
-    public List<UserBasketProduct> findBasketProductsByUserId(Integer id) throws DaoException {
+    public List<UserBasketProduct> findBasketProductsByUserId(Integer userId) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_USER_ID)) {
-            statement.setInt(1, id);
+            statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
             List<UserBasketProduct> userBasketProductList = new ArrayList<>();
             while (resultSet.next()) {

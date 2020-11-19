@@ -12,6 +12,12 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The {@code DeleteUserCommand} class represents delete user command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class DeleteUserCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(DeleteUserCommand.class);
     private static final UserService userService = new UserServiceImpl();
@@ -21,7 +27,7 @@ public class DeleteUserCommand implements CustomCommand {
         String page;
         String email = request.getParameter(RequestParameter.EMAIL);
         try {
-            if (userService.remove(email)) {
+            if (userService.removeUser(email)) {
                 request.setAttribute(RequestParameter.USER_DELETE_SUCCESS_MESSAGE, true);
             } else {
                 request.setAttribute(RequestParameter.USER_DELETE_ERROR_MESSAGE, true);

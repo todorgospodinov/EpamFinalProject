@@ -12,6 +12,12 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The {@code ProduceOrderCommand} class represents produce order command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class ProduceOrderCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(ProduceOrderCommand.class);
     private static final OrderService orderService = new OrderServiceImpl();
@@ -21,7 +27,7 @@ public class ProduceOrderCommand implements CustomCommand {
         String page;
         String orderId = request.getParameter(RequestParameter.ORDER_ID);
         try {
-            if (orderService.produce(orderId)) {
+            if (orderService.produceOrder(orderId)) {
                 request.setAttribute(RequestParameter.ORDER_PRODUCE_SUCCESS_MESSAGE, true);
             } else {
                 request.setAttribute(RequestParameter.ORDER_PRODUCE_ERROR_MESSAGE, true);

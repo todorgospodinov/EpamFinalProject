@@ -12,6 +12,12 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The {@code BlockUserCommand} class represents block user command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class BlockUserCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(BlockUserCommand.class);
     private static final UserService userService = new UserServiceImpl();
@@ -21,7 +27,7 @@ public class BlockUserCommand implements CustomCommand {
         String page;
         String email = request.getParameter(RequestParameter.EMAIL);
         try {
-            if (userService.block(email)) {
+            if (userService.blockUser(email)) {
                 request.setAttribute(RequestParameter.USER_BLOCK_SUCCESS_MESSAGE, true);
             } else {
                 request.setAttribute(RequestParameter.USER_BLOCK_ERROR_MESSAGE, true);

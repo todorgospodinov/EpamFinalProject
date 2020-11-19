@@ -14,6 +14,12 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * The {@code AdminUsersPageCommand} class represents browse admin users page command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class AdminUsersPageCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(AdminUsersPageCommand.class);
     private static final UserService userService = new UserServiceImpl();
@@ -22,7 +28,7 @@ public class AdminUsersPageCommand implements CustomCommand {
     public String execute(HttpServletRequest request) {
         String page;
         try {
-            List<User> userList = userService.findAll();
+            List<User> userList = userService.findAllUsers();
             request.setAttribute(RequestParameter.USERS, userList);
             page = PagePath.ADMIN_USERS_PAGE;
         } catch (ServiceException e) {

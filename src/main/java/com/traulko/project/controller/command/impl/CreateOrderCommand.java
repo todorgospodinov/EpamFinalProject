@@ -17,6 +17,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * The {@code CreateOrderCommand} class represents create order command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class CreateOrderCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(CreateOrderCommand.class);
     private static final OrderService orderService = new OrderServiceImpl();
@@ -28,8 +34,8 @@ public class CreateOrderCommand implements CustomCommand {
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute(RequestParameter.USER_ID);
         try {
-            List<UserBasketProduct> userBasketProductList = basketService.getUserBasketProductsByUserId(userId);
-            if (orderService.add(userId, userBasketProductList)) {
+            List<UserBasketProduct> userBasketProductList = basketService.findUserBasketProductsByUserId(userId);
+            if (orderService.addOrder(userId, userBasketProductList)) {
                 request.setAttribute(RequestParameter.ORDER_CREATE_SUCCESS_MESSAGE, true);
             } else {
                 request.setAttribute(RequestParameter.ORDER_CREATE_ERROR_MESSAGE, true);

@@ -15,6 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The {@code UserDaoImpl} class represents user dao implementation.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class UserDaoImpl implements UserDao {
     private static final UserDaoImpl INSTANCE = new UserDaoImpl();
     private static final String FIND_USER_BY_EMAIL_AND_PASSWORD = "SELECT user_id, user_email, " +
@@ -43,6 +49,11 @@ public class UserDaoImpl implements UserDao {
     private UserDaoImpl() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static UserDaoImpl getInstance() {
         return INSTANCE;
     }
@@ -65,10 +76,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Optional<User> findById(Integer id) throws DaoException {
+    public Optional<User> findById(Integer userId) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_ID)) {
-            statement.setInt(1, id);
+            statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
             Optional<User> userOptional = Optional.empty();
             if (resultSet.next()) {

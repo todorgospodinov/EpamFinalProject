@@ -15,6 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The {@code AccountAccessCommand} class represents account access command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class AccountAccessCommand implements CustomCommand {
     private static final UserService userService = new UserServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger();
@@ -24,7 +30,7 @@ public class AccountAccessCommand implements CustomCommand {
         String page;
         String code = request.getParameter(RequestParameter.ACCESS_CODE);
         try {
-            List<User> userList = userService.findAll();
+            List<User> userList = userService.findAllUsers();
             Optional<User> optionalUser = userService.findUserByAccessCode(code, userList);
             if (optionalUser.isPresent()) {
                 User user = optionalUser.get();

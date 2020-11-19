@@ -16,6 +16,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * The {@code CustomTransaction} class represents custom transaction.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class CustomTransaction {
     private static final CustomTransaction INSTANCE = new CustomTransaction();
     private static final Logger LOGGER = LogManager.getLogger(CustomTransaction.class);
@@ -23,10 +29,23 @@ public class CustomTransaction {
     private CustomTransaction() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static CustomTransaction getInstance() {
         return INSTANCE;
     }
 
+    /**
+     * Add order and order item transaction.
+     *
+     * @param order the order
+     * @param userBasketProductList the user basket product list
+     * @return the boolean
+     * @throws TransactionException the transaction exception
+     */
     public boolean addOrderAndOrderItems(CustomOrder order, List<UserBasketProduct> userBasketProductList) throws TransactionException {
         Connection connection = null;
         UserBasketProductDao userBasketProductDao = UserBasketProductDaoImpl.getInstance();
@@ -54,6 +73,13 @@ public class CustomTransaction {
         }
     }
 
+    /**
+     * Remove order and order items transaction.
+     *
+     * @param orderId the order index
+     * @return the boolean
+     * @throws TransactionException the transaction exception
+     */
     public boolean removeOrderAndOrderItems(Integer orderId) throws TransactionException {
         Connection connection = null;
         OrderDao orderDao = OrderDaoImpl.getInstance();
@@ -77,6 +103,13 @@ public class CustomTransaction {
         }
     }
 
+    /**
+     * Add product and image transaction.
+     *
+     * @param product the product
+     * @return the boolean
+     * @throws TransactionException the transaction exception
+     */
     public boolean addProductAndImage(Product product) throws TransactionException {
         Connection connection = null;
         ImageDao imageDao = ImageDaoImpl.getInstance();

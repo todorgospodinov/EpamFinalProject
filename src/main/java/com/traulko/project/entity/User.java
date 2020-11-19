@@ -1,5 +1,11 @@
 package com.traulko.project.entity;
 
+/**
+ * The {@code User} class represents User entity.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class User {
     public enum Role {
         ADMIN, USER, GUEST;
@@ -18,9 +24,24 @@ public class User {
     private Status status;
     private double balance;
 
+    /**
+     * Instantiates a new User.
+     */
     public User() {
     }
 
+    /**
+     * Instantiates a new CustomImage.
+     *
+     * @param userId the user index
+     * @param name the name
+     * @param balance the balance
+     * @param email the email
+     * @param patronymic the patronymic
+     * @param role the role
+     * @param status the status
+     * @param surname the surname
+     */
     public User(Integer userId, String email, String name, String surname, String patronymic, Role role,
                 Status status, double balance) {
         this.userId = userId;
@@ -33,66 +54,146 @@ public class User {
         this.balance = balance;
     }
 
+    /**
+     * Gets User balance.
+     *
+     * @return the User balance
+     */
     public double getBalance() {
         return balance;
     }
 
+    /**
+     * Sets Product description.
+     *
+     * @param description the Product description
+     */
     public void setBalance(double balance) {
         this.balance = balance;
     }
 
+    /**
+     * Gets User id.
+     *
+     * @return the User id
+     */
     public Integer getUserId() {
         return userId;
     }
 
+    /**
+     * Sets User user index.
+     *
+     * @param userId the User user index
+     */
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
+    /**
+     * Gets User name.
+     *
+     * @return the User name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets User name.
+     *
+     * @param name the User name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets User surname.
+     *
+     * @return the User surname
+     */
     public String getSurname() {
         return surname;
     }
 
+    /**
+     * Sets User surname.
+     *
+     * @param surname the User surname
+     */
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
+    /**
+     * Gets User patronymic.
+     *
+     * @return the User patronymic
+     */
     public String getPatronymic() {
         return patronymic;
     }
 
+    /**
+     * Sets User patronymic.
+     *
+     * @param patronymic the User patronymic
+     */
     public void setPatronymic(String patronymic) {
         this.patronymic = patronymic;
     }
 
+    /**
+     * Gets User email.
+     *
+     * @return the User email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Sets User email.
+     *
+     * @param email the User email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * Gets User role.
+     *
+     * @return the User role
+     */
     public Role getRole() {
         return role;
     }
 
+    /**
+     * Sets User role.
+     *
+     * @param role the User role
+     */
     public void setRole(Role role) {
         this.role = role;
     }
 
+    /**
+     * Gets User status.
+     *
+     * @return the User status
+     */
     public Status getStatus() {
         return status;
     }
 
+    /**
+     * Sets User status.
+     *
+     * @param status the User status
+     */
     public void setStatus(Status status) {
         this.status = status;
     }

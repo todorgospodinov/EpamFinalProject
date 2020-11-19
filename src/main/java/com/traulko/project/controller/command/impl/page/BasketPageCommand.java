@@ -19,6 +19,12 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The {@code BasketPageCommand} class represents browse basket page command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class BasketPageCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(BasketPageCommand.class);
     private static final UserBasketProductService basketService = new UserBasketProductServiceImpl();
@@ -30,11 +36,11 @@ public class BasketPageCommand implements CustomCommand {
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute(RequestParameter.USER_ID);
         try {
-            List<UserBasketProduct> userBasketProductList = basketService.getUserBasketProductsByUserId(userId);
+            List<UserBasketProduct> userBasketProductList = basketService.findUserBasketProductsByUserId(userId);
             double totalPrice = basketService.calculateTotalPrice(userBasketProductList);
             request.setAttribute(RequestParameter.TOTAL_PRICE, totalPrice);
             request.setAttribute(RequestParameter.BASKETS, userBasketProductList);
-            Optional<User> optionalUser = userService.findById(userId);
+            Optional<User> optionalUser = userService.findUserById(userId);
             if (optionalUser.isPresent()) {
                 double userBalance = optionalUser.get().getBalance();
                 request.setAttribute(RequestParameter.BALANCE, userBalance);

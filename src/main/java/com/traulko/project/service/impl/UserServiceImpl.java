@@ -18,6 +18,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * The {@code UserServiceImpl} class represents user service implementation.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class UserServiceImpl implements UserService {
     private static final String EMPTY_VALUE = "";
     private final UserDao userDao = UserDaoImpl.getInstance();
@@ -39,7 +45,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findById(String id) throws ServiceException {
+    public Optional<User> findUserById(String id) throws ServiceException {
         Optional<User> optionalUser = Optional.empty();
         try {
             if (UserValidator.isIdValid(id)) {
@@ -53,7 +59,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findByEmail(String email) throws ServiceException {
+    public Optional<User> findUserByEmail(String email) throws ServiceException {
         Optional<User> optionalUser;
         try {
             optionalUser = userDao.findByEmail(email);
@@ -81,7 +87,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean remove(String email) throws ServiceException {
+    public boolean removeUser(String email) throws ServiceException {
         boolean isRemoved = false;
         try {
             if (UserValidator.isEmailValid(email)) {
@@ -94,7 +100,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean block(String email) throws ServiceException {
+    public boolean blockUser(String email) throws ServiceException {
         boolean isBlocked = false;
         try {
             if (UserValidator.isEmailValid(email)) {
@@ -107,7 +113,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean unblock(String email) throws ServiceException {
+    public boolean unblockUser(String email) throws ServiceException {
         boolean isUnblocked = false;
         try {
             if (UserValidator.isEmailValid(email)) {
@@ -174,7 +180,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll() throws ServiceException {
+    public List<User> findAllUsers() throws ServiceException {
         try {
             return userDao.findAll();
         } catch (DaoException e) {
@@ -183,7 +189,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findBySearchQuery(String searchQuery) throws ServiceException {
+    public List<User> findUsersBySearchQuery(String searchQuery) throws ServiceException {
         try {
             return userDao.findBySearchQuery(searchQuery);
         } catch (DaoException e) {
@@ -209,7 +215,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean add(Map<String, String> parameters) throws ServiceException {
+    public boolean addUser(Map<String, String> parameters) throws ServiceException {
         boolean result = false;
         String email = parameters.get(RequestParameter.EMAIL);
         String password = parameters.get(RequestParameter.PASSWORD);

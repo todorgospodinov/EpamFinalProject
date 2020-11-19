@@ -7,12 +7,24 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
+/**
+ * The {@code CommandProvider} class represents command provider.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class CommandProvider {
     private static final Logger LOGGER = LogManager.getLogger(CommandProvider.class);
 
     private CommandProvider() {
     }
 
+    /**
+     * Define command.
+     *
+     * @param commandName the command name
+     * @return the optional of created command
+     */
     public static Optional<CustomCommand> defineCommand(String commandName) {
         Optional<CustomCommand> currentCommand;
         if (commandName != null && !commandName.isBlank()) {

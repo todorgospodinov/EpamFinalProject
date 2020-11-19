@@ -12,6 +12,12 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The {@code EditProductCommand} class represents edit product command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class EditProductCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final ProductService productService = new ProductServiceImpl();
@@ -24,7 +30,7 @@ public class EditProductCommand implements CustomCommand {
         String price = request.getParameter(RequestParameter.PRICE);
         String description = request.getParameter(RequestParameter.DESCRIPTION);
         try {
-            if (productService.update(id, title, price, description)) {
+            if (productService.updateProduct(id, title, price, description)) {
                 request.setAttribute(RequestParameter.UPDATE_PRODUCT_SUCCESS, true);
             } else {
                 request.setAttribute(RequestParameter.UPDATE_PRODUCT_ERROR, true);

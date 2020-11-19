@@ -8,6 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
+/**
+ * The {@code SwitchLanguageCommand} class represents switch language command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class SwitchLanguageCommand implements CustomCommand {
     @Override
     public String execute(HttpServletRequest request) {

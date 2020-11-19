@@ -20,6 +20,12 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * The {@code RoleFilter} class represents role filter.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 @WebFilter(urlPatterns = {"/*"})
 public class RoleFilter implements Filter {
     private static final Logger LOGGER = LogManager.getLogger();

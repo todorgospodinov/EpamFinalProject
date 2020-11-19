@@ -8,6 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * The {@code JspPagePathFilter} class represents jsp page path filter.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 @WebFilter(urlPatterns = {"/jsp/*"})
 public class JspPagePathFilter implements Filter {
     @Override

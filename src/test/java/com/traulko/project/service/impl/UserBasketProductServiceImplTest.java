@@ -41,7 +41,7 @@ public class UserBasketProductServiceImplTest {
     public void addPositiveTest() {
         try {
             when(userBasketProductDao.add(any(UserBasketProduct.class))).thenReturn(true);
-            boolean actual = userBasketProductService.add("1", "2");
+            boolean actual = userBasketProductService.addUserBasketProduct("1", "2");
             assertTrue(actual);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -52,7 +52,7 @@ public class UserBasketProductServiceImplTest {
     public void addNegativeTest() {
         try {
             when(userBasketProductDao.add(any(UserBasketProduct.class))).thenReturn(true);
-            boolean actual = userBasketProductService.add(" ", null);
+            boolean actual = userBasketProductService.addUserBasketProduct(" ", null);
             assertFalse(actual);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -89,7 +89,7 @@ public class UserBasketProductServiceImplTest {
     public void removePositiveTest() {
         try {
             when(userBasketProductDao.remove(any(UserBasketProduct.class))).thenReturn(true);
-            boolean actual = userBasketProductService.remove("1", "2");
+            boolean actual = userBasketProductService.removeUserBasketProduct("1", "2");
             assertTrue(actual);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -100,7 +100,7 @@ public class UserBasketProductServiceImplTest {
     public void removeNegativeTest() {
         try {
             when(userBasketProductDao.remove(any(UserBasketProduct.class))).thenReturn(true);
-            boolean actual = userBasketProductService.remove(" ", null);
+            boolean actual = userBasketProductService.removeUserBasketProduct(" ", null);
             assertFalse(actual);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -112,7 +112,7 @@ public class UserBasketProductServiceImplTest {
         try {
             when(userBasketProductDao.findBasketProductsByUserId(any(Integer.class)))
                     .thenReturn(new ArrayList<>());
-            List<UserBasketProduct> actual = userBasketProductService.getUserBasketProductsByUserId("1");
+            List<UserBasketProduct> actual = userBasketProductService.findUserBasketProductsByUserId("1");
             List<UserBasketProduct> expected = new ArrayList<>();
             assertEquals(actual, expected);
         } catch (DaoException | ServiceException e) {
@@ -126,7 +126,7 @@ public class UserBasketProductServiceImplTest {
             List<UserBasketProduct> expected = null;
             when(userBasketProductDao.findBasketProductsByUserId(any(Integer.class)))
                     .thenReturn(new ArrayList<>());
-            List<UserBasketProduct> actual = userBasketProductService.getUserBasketProductsByUserId("");
+            List<UserBasketProduct> actual = userBasketProductService.findUserBasketProductsByUserId("");
             assertNotEquals(actual, expected);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);

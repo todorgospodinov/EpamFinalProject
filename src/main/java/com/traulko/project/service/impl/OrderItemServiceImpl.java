@@ -11,6 +11,12 @@ import com.traulko.project.validator.OrderItemValidator;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The {@code OrderItemServiceImpl} class represents order item service implementation.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class OrderItemServiceImpl implements OrderItemService {
     private final OrderItemDao orderItemDao = OrderItemDaoImpl.getInstance();
 

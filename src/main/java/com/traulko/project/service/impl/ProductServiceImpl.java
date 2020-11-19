@@ -15,12 +15,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * The {@code ProductServiceImpl} class represents product service implementation.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class ProductServiceImpl implements ProductService {
     private final ProductDao productDao = ProductDaoImpl.getInstance();
     private final CustomTransaction customTransaction = CustomTransaction.getInstance();
 
     @Override
-    public boolean add(String productTitle, String price, String description, String imageName) throws ServiceException {
+    public boolean addProduct(String productTitle, String price, String description, String imageName) throws ServiceException {
         boolean result = false;
         try {
             if (ProductValidator.isTitleValid(productTitle) && ProductValidator.isPriceValid(price) &&
@@ -41,12 +47,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public boolean update(String id, String productTitle, String price, String description) throws ServiceException {
+    public boolean updateProduct(String productId, String productTitle, String price, String description) throws ServiceException {
         boolean result = false;
         try {
-            if (ProductValidator.isIdValid(id) && ProductValidator.isTitleValid(productTitle) && ProductValidator.isPriceValid(price) &&
+            if (ProductValidator.isIdValid(productId) && ProductValidator.isTitleValid(productTitle) && ProductValidator.isPriceValid(price) &&
                     ProductValidator.isDescriptionValid(description)) {
-                int productIdParsed = Integer.parseInt(id);
+                int productIdParsed = Integer.parseInt(productId);
                 Optional<Product> optionalProduct = productDao.findById(productIdParsed);
                 if (optionalProduct.isPresent()) {
                     Product product = optionalProduct.get();
@@ -63,7 +69,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> findById(String id) throws ServiceException {
+    public Optional<Product> findProductById(String id) throws ServiceException {
         Optional<Product> optionalProduct = Optional.empty();
         try {
             if (ProductValidator.isIdValid(id)) {
@@ -86,7 +92,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findAll() throws ServiceException {
+    public List<Product> findAllProducts() throws ServiceException {
         try {
             return productDao.findAll();
         } catch (DaoException e) {

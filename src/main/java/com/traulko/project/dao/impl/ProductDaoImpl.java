@@ -14,6 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The {@code ProductDaoImpl} class represents product dao implementation.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class ProductDaoImpl implements ProductDao {
     private static final ProductDaoImpl INSTANCE = new ProductDaoImpl();
     private static final String FIND_ALL = "SELECT product_id, product_title, product_price," +
@@ -29,11 +35,16 @@ public class ProductDaoImpl implements ProductDao {
             "product_description, image_id, image_name FROM products INNER JOIN images ON " +
             "products.image_id_fk = images.image_id where concat(product_title, product_price) like ?";
     private static final String UPDATE_PRODUCT = "UPDATE products set product_title = ?, product_price = ?," +
-            "product_description = ?, image_id_fk = ? where product_id = ?";
+            "product_description = ? where product_id = ?";
 
     private ProductDaoImpl() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static ProductDaoImpl getInstance() {
         return INSTANCE;
     }
@@ -55,10 +66,10 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public Optional<Product> findById(Integer id) throws DaoException {
+    public Optional<Product> findById(Integer productId) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_ID)) {
-            statement.setInt(1, id);
+            statement.setInt(1, productId);
             ResultSet resultSet = statement.executeQuery();
             Optional<Product> productOptional = Optional.empty();
             if (resultSet.next()) {
@@ -89,29 +100,13 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public boolean update(Product product, Connection connection) throws DaoException {
-        try (PreparedStatement statement = connection.prepareStatement(UPDATE_PRODUCT)) {
-            statement.setString(1, product.getTitle());
-            statement.setDouble(2, product.getPrice());
-            statement.setString(3, product.getDescription());
-            statement.setInt(4, product.getImage().getImageId());
-            statement.setInt(5, product.getProductId());
-            boolean result = statement.executeUpdate() > 0;
-            return result;
-        } catch (SQLException e) {
-            throw new DaoException("Error while updating product: " + product, e);
-        }
-    }
-
-    @Override
     public boolean update(Product product) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_PRODUCT)) {
             statement.setString(1, product.getTitle());
             statement.setDouble(2, product.getPrice());
             statement.setString(3, product.getDescription());
-            statement.setInt(4, product.getImage().getImageId());
-            statement.setInt(5, product.getProductId());
+            statement.setInt(4, product.getProductId());
             boolean result = statement.executeUpdate() > 0;
             return result;
         } catch (SQLException | ConnectionDatabaseException e) {

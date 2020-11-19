@@ -8,6 +8,12 @@ import com.traulko.project.entity.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * The {@code LogoutCommand} class represents logout command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class LogoutCommand implements CustomCommand {
     @Override
     public String execute(HttpServletRequest request) {

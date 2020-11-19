@@ -13,6 +13,12 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * The {@code FillUpBalanceCommand} class represents fill up balance command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class FillUpBalanceCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(FillUpBalanceCommand.class);
     private static final UserService userService = new UserServiceImpl();

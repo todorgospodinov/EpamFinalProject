@@ -4,6 +4,12 @@ import com.traulko.project.controller.command.CustomCommand;
 import com.traulko.project.controller.command.impl.*;
 import com.traulko.project.controller.command.impl.page.*;
 
+/**
+ * The {@code CommandType} enum represents command type.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public enum CommandType {
     LOGIN_COMMAND(new LoginCommand()),
     REGISTER_COMMAND(new RegisterCommand()),
@@ -55,6 +61,11 @@ public enum CommandType {
         this.command = command;
     }
 
+    /**
+     * Gets command.
+     *
+     * @return the command
+     */
     public CustomCommand getCommand() {
         return command;
     }

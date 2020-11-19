@@ -1,29 +1,72 @@
 package com.traulko.project.entity;
 
+/**
+ * The {@code CustomImage} class represents CustomImage entity.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class CustomImage {
+
+    /**
+     * The value is used for custom image id storage.
+     */
     private Integer imageId;
+
+    /**
+     * The value is used for name storage.
+     */
     private String name;
 
+    /**
+     * Instantiates a new CustomImage.
+     */
     public CustomImage() {
     }
 
+    /**
+     * Instantiates a new CustomImage.
+     *
+     * @param imageId the image index
+     * @param name the name
+     */
     public CustomImage(Integer imageId, String name) {
         this.imageId = imageId;
         this.name = name;
     }
 
+    /**
+     * Gets CustomImage id.
+     *
+     * @return the CustomImage id
+     */
     public Integer getImageId() {
         return imageId;
     }
 
+    /**
+     * Sets CustomImage id.
+     *
+     * @param imageId the CustomImage id
+     */
     public void setImageId(Integer imageId) {
         this.imageId = imageId;
     }
 
+    /**
+     * Gets CustomImage name.
+     *
+     * @return the CustomImage name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets CustomImage name.
+     *
+     * @param name the CustomImage name
+     */
     public void setName(String name) {
         this.name = name;
     }

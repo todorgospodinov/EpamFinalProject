@@ -13,6 +13,12 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * The {@code DeleteProductFromBasketCommand} class represents delete product from basket command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class DeleteProductFromBasketCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final UserBasketProductService basketService = new UserBasketProductServiceImpl();
@@ -24,7 +30,7 @@ public class DeleteProductFromBasketCommand implements CustomCommand {
         String userId = (String) session.getAttribute(RequestParameter.USER_ID);
         String productId = request.getParameter(RequestParameter.PRODUCT_ID);
         try {
-            if (basketService.remove(userId, productId)) {
+            if (basketService.removeUserBasketProduct(userId, productId)) {
                 request.setAttribute(RequestParameter.REMOVE_PRODUCT_FROM_BASKET_SUCCESS, true);
             } else {
                 request.setAttribute(RequestParameter.REMOVE_PRODUCT_FROM_BASKET_ERROR, true);

@@ -15,6 +15,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
+/**
+ * The {@code ImageServlet} class represents image servlet.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024,
         maxFileSize = 1024 * 1024 * 5,
         maxRequestSize = 1024 * 1024 * 5 * 5)

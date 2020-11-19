@@ -5,7 +5,17 @@ import com.traulko.project.controller.command.type.CommandType;
 import java.util.EnumSet;
 import java.util.Set;
 
+/**
+ * The {@code RoleAccess} enum represents role access.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public enum RoleAccess {
+
+    /**
+     * Guest role access.
+     */
     GUEST(EnumSet.of(CommandType.FIND_PRODUCTS_COMMAND,
             CommandType.LOGIN_COMMAND,
             CommandType.REGISTER_COMMAND,
@@ -18,6 +28,9 @@ public enum RoleAccess {
             CommandType.PRODUCT_PAGE,
             CommandType.REGISTRATION_PAGE)),
 
+    /**
+     * User role access.
+     */
     USER(EnumSet.of(CommandType.ACCOUNT_ACCESS_COMMAND,
             CommandType.ADD_PRODUCT_TO_BASKET_COMMAND,
             CommandType.CHANGE_PASSWORD_COMMAND,
@@ -38,6 +51,9 @@ public enum RoleAccess {
             CommandType.ORDER_HISTORY_PAGE,
             CommandType.PRODUCT_PAGE)),
 
+    /**
+     * Admin role access.
+     */
     ADMIN(EnumSet.of(CommandType.ACCOUNT_ACCESS_COMMAND,
             CommandType.ADD_PRODUCT_COMMAND,
             CommandType.BLOCK_USER_COMMAND,
@@ -71,6 +87,11 @@ public enum RoleAccess {
         this.accessCommands = accessCommands;
     }
 
+    /**
+     * Gets access commands.
+     *
+     * @return the commands
+     */
     public Set<CommandType> getAccessCommands() {
         return this.accessCommands;
     }

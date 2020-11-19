@@ -14,6 +14,12 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * The {@code OrderHistoryPageCommand} class represents browse order history page command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class OrderHistoryPageCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(OrderHistoryPageCommand.class);
     private static final OrderService orderService = new OrderServiceImpl();

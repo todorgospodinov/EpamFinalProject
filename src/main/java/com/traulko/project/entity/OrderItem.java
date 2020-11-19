@@ -1,36 +1,79 @@
 package com.traulko.project.entity;
 
+/**
+ * The {@code OrderItem} class represents OrderItem entity.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class OrderItem {
     private Integer orderItemId;
     private Product product;
     private CustomOrder order;
 
+    /**
+     * Instantiates a new CustomImage.
+     *
+     * @param orderItemId the order item index
+     * @param product the product
+     * @param order the order
+     */
     public OrderItem(Integer orderItemId, Product product, CustomOrder order) {
         this.orderItemId = orderItemId;
         this.product = product;
         this.order = order;
     }
 
+    /**
+     * Gets OrderItem id.
+     *
+     * @return the OrderItem id
+     */
     public Integer getOrderItemId() {
         return orderItemId;
     }
 
+    /**
+     * Sets OrderItem id.
+     *
+     * @param orderItemId the OrderItem id
+     */
     public void setOrderItemId(Integer orderItemId) {
         this.orderItemId = orderItemId;
     }
 
+    /**
+     * Gets OrderItem product.
+     *
+     * @return the OrderItem product
+     */
     public Product getProduct() {
         return product;
     }
 
+    /**
+     * Sets OrderItem product.
+     *
+     * @param product the OrderItem product
+     */
     public void setProduct(Product product) {
         this.product = product;
     }
 
+    /**
+     * Gets OrderItem order.
+     *
+     * @return the OrderItem order
+     */
     public CustomOrder getOrder() {
         return order;
     }
 
+    /**
+     * Sets OrderItem order.
+     *
+     * @param order the OrderItem order
+     */
     public void setOrder(CustomOrder order) {
         this.order = order;
     }

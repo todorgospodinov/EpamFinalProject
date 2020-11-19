@@ -15,6 +15,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * The {@code MailSender} class represents mail sender.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class MailSender {
     private static final Logger LOGGER = LogManager.getLogger(MailSender.class);
     private static final String PROPERTY_NAME = "property/mail.properties";
@@ -22,11 +28,18 @@ public class MailSender {
     private static final String MAIL_MESSAGE_LINK = "%s?commandName=account_access_command&accessCode=";
 
     private MimeMessage message;
-    private String sendToEmail;
-    private String mailSubject;
-    private String mailText;
-    private Properties properties;
+    private final String sendToEmail;
+    private final String mailSubject;
+    private final String mailText;
+    private final Properties properties;
 
+    /**
+     * Instantiates a new MailSender.
+     *
+     * @param email the email
+     * @param code the code
+     * @param url the url
+     */
     public MailSender(String email, String url, String code) {
         this.sendToEmail = email;
         this.mailSubject = MAIL_SUBJECT;
@@ -34,6 +47,9 @@ public class MailSender {
         properties = getProperties();
     }
 
+    /**
+     * Send message.
+     */
     public void send() throws SendMailException {
         try {
             initMessage();

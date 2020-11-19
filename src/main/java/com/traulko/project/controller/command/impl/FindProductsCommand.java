@@ -15,6 +15,12 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * The {@code FindProductsCommand} class represents find products command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class FindProductsCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(FindProductsCommand.class);
     private static final ProductService productService = new ProductServiceImpl();

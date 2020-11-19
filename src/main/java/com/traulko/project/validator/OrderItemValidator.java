@@ -1,8 +1,20 @@
 package com.traulko.project.validator;
 
+/**
+ * The {@code OrderItemValidator} class represents order item validator.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class OrderItemValidator {
     private static final String ID_REGEX = "^[1-9]\\d{0,9}$";
 
+    /**
+     * Check id for valid.
+     *
+     * @param id the id
+     * @return the boolean
+     */
     public static boolean isIdValid(String id) {
         return isStringCorrect(id, ID_REGEX);
     }

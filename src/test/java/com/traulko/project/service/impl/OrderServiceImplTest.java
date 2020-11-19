@@ -48,7 +48,7 @@ public class OrderServiceImplTest {
     public void addPositiveTest() {
         try {
             when(transaction.addOrderAndOrderItems(any(CustomOrder.class), any(List.class))).thenReturn(true);
-            boolean actual = orderService.add("1", new ArrayList<>());
+            boolean actual = orderService.addOrder("1", new ArrayList<>());
             assertTrue(actual);
         } catch (TransactionException | ServiceException e) {
             fail("Incorrect data", e);
@@ -59,7 +59,7 @@ public class OrderServiceImplTest {
     public void addNegativeTest() {
         try {
             when(transaction.addOrderAndOrderItems(any(CustomOrder.class), any(List.class))).thenReturn(true);
-            boolean actual = orderService.add(" ", null);
+            boolean actual = orderService.addOrder(" ", null);
             assertFalse(actual);
         } catch (TransactionException | ServiceException e) {
             fail("Incorrect data", e);
@@ -70,7 +70,7 @@ public class OrderServiceImplTest {
     public void removePositiveTest() {
         try {
             when(transaction.removeOrderAndOrderItems(any(Integer.class))).thenReturn(true);
-            boolean actual = orderService.remove("1");
+            boolean actual = orderService.removeOrder("1");
             assertTrue(actual);
         } catch (TransactionException | ServiceException e) {
             fail("Incorrect data", e);
@@ -81,7 +81,7 @@ public class OrderServiceImplTest {
     public void removeNegativeTest() {
         try {
             when(transaction.removeOrderAndOrderItems(any(Integer.class))).thenReturn(true);
-            boolean actual = orderService.remove(" ");
+            boolean actual = orderService.removeOrder(" ");
             assertFalse(actual);
         } catch (TransactionException | ServiceException e) {
             fail("Incorrect data", e);
@@ -115,7 +115,7 @@ public class OrderServiceImplTest {
         try {
             List<CustomOrder> expected = new ArrayList<>();
             when(orderDao.findBySearchQuery(any(String.class))).thenReturn(new ArrayList<>());
-            List<CustomOrder> actual = orderService.findBySearchQuery("1");
+            List<CustomOrder> actual = orderService.findOrdersBySearchQuery("1");
             assertEquals(actual, expected);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -127,7 +127,7 @@ public class OrderServiceImplTest {
         try {
             List<CustomOrder> expected = null;
             when(orderDao.findBySearchQuery(any(String.class))).thenReturn(new ArrayList<>());
-            List<CustomOrder> actual = orderService.findBySearchQuery("1");
+            List<CustomOrder> actual = orderService.findOrdersBySearchQuery("1");
             assertNotEquals(actual, expected);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -139,7 +139,7 @@ public class OrderServiceImplTest {
         try {
             List<CustomOrder> expected = new ArrayList<>();
             when(orderDao.findAll()).thenReturn(new ArrayList<>());
-            List<CustomOrder> actual = orderService.findAll();
+            List<CustomOrder> actual = orderService.findAllOrders();
             assertEquals(actual, expected);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -151,7 +151,7 @@ public class OrderServiceImplTest {
         try {
             List<CustomOrder> expected = null;
             when(orderDao.findAll()).thenReturn(new ArrayList<>());
-            List<CustomOrder> actual = orderService.findAll();
+            List<CustomOrder> actual = orderService.findAllOrders();
             assertNotEquals(actual, expected);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -162,7 +162,7 @@ public class OrderServiceImplTest {
     public void producePositiveTest() {
         try {
             when(orderDao.produce(any(Integer.class), any(LocalDate.class))).thenReturn(true);
-            boolean actual = orderService.produce("1");
+            boolean actual = orderService.produceOrder("1");
             assertTrue(actual);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -173,7 +173,7 @@ public class OrderServiceImplTest {
     public void produceNegativeTest() {
         try {
             when(orderDao.produce(any(Integer.class), any(LocalDate.class))).thenReturn(true);
-            boolean actual = orderService.produce(" ");
+            boolean actual = orderService.produceOrder(" ");
             assertFalse(actual);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -184,7 +184,7 @@ public class OrderServiceImplTest {
     public void rejectPositiveTest() {
         try {
             when(orderDao.reject(any(Integer.class), any(LocalDate.class))).thenReturn(true);
-            boolean actual = orderService.reject("1");
+            boolean actual = orderService.rejectOrder("1");
             assertTrue(actual);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -195,7 +195,7 @@ public class OrderServiceImplTest {
     public void rejectNegativeTest() {
         try {
             when(orderDao.reject(any(Integer.class), any(LocalDate.class))).thenReturn(true);
-            boolean actual = orderService.reject(" ");
+            boolean actual = orderService.rejectOrder(" ");
             assertFalse(actual);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -207,7 +207,7 @@ public class OrderServiceImplTest {
         try {
             when(orderDao.findById(any(Integer.class))).thenReturn(Optional.of(new CustomOrder()));
             CustomOrder expected = new CustomOrder();
-            Optional<CustomOrder> actual = orderService.findById("1");
+            Optional<CustomOrder> actual = orderService.findOrderById("1");
             assertEquals(actual.get(), expected);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -219,7 +219,7 @@ public class OrderServiceImplTest {
         try {
             Optional<CustomOrder> expected = Optional.of(new CustomOrder());
             when(orderDao.findById(any(Integer.class))).thenReturn(Optional.of(new CustomOrder()));
-            Optional<CustomOrder> actual = orderService.findById(" ");
+            Optional<CustomOrder> actual = orderService.findOrderById(" ");
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);

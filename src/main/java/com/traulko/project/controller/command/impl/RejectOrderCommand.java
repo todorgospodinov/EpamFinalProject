@@ -12,6 +12,12 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The {@code RejectOrderCommand} class represents reject order command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class RejectOrderCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(RejectOrderCommand.class);
     private static final OrderService orderService = new OrderServiceImpl();
@@ -21,7 +27,7 @@ public class RejectOrderCommand implements CustomCommand {
         String page;
         String orderId = request.getParameter(RequestParameter.ORDER_ID);
         try {
-            if (orderService.reject(orderId)) {
+            if (orderService.rejectOrder(orderId)) {
                 request.setAttribute(RequestParameter.ORDER_REJECT_SUCCESS_MESSAGE, true);
             } else {
                 request.setAttribute(RequestParameter.ORDER_REJECT_ERROR_MESSAGE, true);

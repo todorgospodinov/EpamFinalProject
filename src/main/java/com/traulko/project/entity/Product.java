@@ -1,5 +1,11 @@
 package com.traulko.project.entity;
 
+/**
+ * The {@code Product} class represents Product entity.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class Product {
     private Integer productId;
     private String title;
@@ -7,9 +13,21 @@ public class Product {
     private String description;
     private CustomImage image;
 
+    /**
+     * Instantiates a new Product.
+     */
     public Product() {
     }
 
+    /**
+     * Instantiates a new CustomImage.
+     *
+     * @param productId the product index
+     * @param description the description
+     * @param image the image
+     * @param title the title
+     * @param price the price
+     */
     public Product(Integer productId, String title, double price, String description, CustomImage image) {
         this.productId = productId;
         this.title = title;
@@ -18,42 +36,92 @@ public class Product {
         this.image = image;
     }
 
+    /**
+     * Gets Product id.
+     *
+     * @return the Product id
+     */
     public CustomImage getImage() {
         return image;
     }
 
+    /**
+     * Sets Product image.
+     *
+     * @param image the Product image
+     */
     public void setImage(CustomImage image) {
         this.image = image;
     }
 
+    /**
+     * Gets Product id.
+     *
+     * @return the Product id
+     */
     public Integer getProductId() {
         return productId;
     }
 
+    /**
+     * Sets Product product index.
+     *
+     * @param productId the Product product index
+     */
     public void setProductId(Integer productId) {
         this.productId = productId;
     }
 
+    /**
+     * Gets Product title.
+     *
+     * @return the Product title
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Sets Product title.
+     *
+     * @param title the Product title
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /**
+     * Gets Product price.
+     *
+     * @return the Product price
+     */
     public double getPrice() {
         return price;
     }
 
+    /**
+     * Sets Product price.
+     *
+     * @param price the Product price
+     */
     public void setPrice(double price) {
         this.price = price;
     }
 
+    /**
+     * Gets Product description.
+     *
+     * @return the Product description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Sets Product description.
+     *
+     * @param description the Product description
+     */
     public void setDescription(String description) {
         this.description = description;
     }

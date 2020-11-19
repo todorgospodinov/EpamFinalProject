@@ -14,6 +14,12 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * The {@code ChangePasswordCommand} class represents change password command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class ChangePasswordCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(ChangePasswordCommand.class);
     private static final UserService userService = new UserServiceImpl();

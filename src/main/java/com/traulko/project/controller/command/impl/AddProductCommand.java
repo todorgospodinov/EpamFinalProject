@@ -12,6 +12,12 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The {@code AddProductCommand} class represents add product command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class AddProductCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final ProductService productService = new ProductServiceImpl();
@@ -24,7 +30,7 @@ public class AddProductCommand implements CustomCommand {
         String description = request.getParameter(RequestParameter.DESCRIPTION);
         String photoName = (String) request.getAttribute(RequestParameter.PHOTO_NAME);
         try {
-            if (productService.add(title, price, description, photoName)) {
+            if (productService.addProduct(title, price, description, photoName)) {
                 request.setAttribute(RequestParameter.ADD_PRODUCT_SUCCESS, true);
             } else {
                 request.setAttribute(RequestParameter.ADD_PRODUCT_ERROR, true);

@@ -1,39 +1,85 @@
 package com.traulko.project.entity;
 
+/**
+ * The {@code UserBasketProduct} class represents UserBasketProduct entity.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class UserBasketProduct {
     private Integer basketId;
     private User user;
     private Product product;
 
+    /**
+     * Instantiates a new UserBasketProduct.
+     */
     public UserBasketProduct() {
     }
 
+    /**
+     * Instantiates a new CustomImage.
+     *
+     * @param basketId the basket index
+     * @param product the product
+     * @param user the user
+     */
     public UserBasketProduct(Integer basketId, User user, Product product) {
         this.basketId = basketId;
         this.user = user;
         this.product = product;
     }
 
+    /**
+     * Gets UserBasketProduct id.
+     *
+     * @return the UserBasketProduct id
+     */
     public Integer getBasketId() {
         return basketId;
     }
 
+    /**
+     * Sets UserBasketProduct basket index.
+     *
+     * @param basketId the UserBasketProduct basket index
+     */
     public void setBasketId(Integer basketId) {
         this.basketId = basketId;
     }
 
+    /**
+     * Gets UserBasketProduct user.
+     *
+     * @return the UserBasketProduct user
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Sets UserBasketProduct user.
+     *
+     * @param user the UserBasketProduct user
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
+    /**
+     * Gets UserBasketProduct product.
+     *
+     * @return the UserBasketProduct product
+     */
     public Product getProduct() {
         return product;
     }
 
+    /**
+     * Sets UserBasketProduct product.
+     *
+     * @param product the UserBasketProduct product
+     */
     public void setProduct(Product product) {
         this.product = product;
     }

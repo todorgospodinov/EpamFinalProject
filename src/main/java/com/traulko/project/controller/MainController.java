@@ -13,6 +13,12 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * The {@code MainController} class represents main controller.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class MainController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

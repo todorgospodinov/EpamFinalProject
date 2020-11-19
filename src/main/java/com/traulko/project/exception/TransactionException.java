@@ -1,19 +1,20 @@
 package com.traulko.project.exception;
 
+/**
+ * The {@code TransactionException} class represents transaction exception.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class TransactionException extends Exception {
-    public TransactionException() {
-        super();
-    }
 
-    public TransactionException(String message) {
-        super(message);
-    }
-
+    /**
+     * Instantiates a new TransactionException.
+     *
+     * @param message the message
+     * @param throwable the throwable
+     */
     public TransactionException(String message, Throwable throwable) {
         super(message, throwable);
-    }
-
-    public TransactionException(Throwable throwable) {
-        super(throwable);
     }
 }

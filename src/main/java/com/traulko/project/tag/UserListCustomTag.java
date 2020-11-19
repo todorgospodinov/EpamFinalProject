@@ -15,6 +15,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * The {@code UserListCustomTag} class represents user list custom tag for admin.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class UserListCustomTag extends TagSupport {
     private static final String LOCAL = "property/local";
     private static final String SHOW_HISTORY = "admin_users_page.show_history";

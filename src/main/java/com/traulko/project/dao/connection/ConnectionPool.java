@@ -11,6 +11,12 @@ import java.sql.SQLException;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
+/**
+ * The {@code ConnectionPool} enum represents connection pool.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class ConnectionPool {
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
     private static final int POOL_SIZE = 8;
@@ -19,6 +25,9 @@ public class ConnectionPool {
     private BlockingQueue<ProxyConnection> freeConnections;
     private BlockingQueue<ProxyConnection> proxyConnections;
 
+    /**
+     * Instance connection pool.
+     */
     public static ConnectionPool getInstance() {
         return connectionPool;
     }
@@ -40,6 +49,11 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * Gets connection.
+     *
+     * @return the connection
+     */
     public Connection getConnection() throws ConnectionDatabaseException {
         ProxyConnection connection;
         try {
@@ -53,6 +67,11 @@ public class ConnectionPool {
         return connection;
     }
 
+    /**
+     * Release connection.
+     *
+     * @param connection the connection
+     */
     public void releaseConnection(Connection connection) {
         if (connection.getClass() == ProxyConnection.class) {
             if (proxyConnections.remove(connection)) {
@@ -64,6 +83,9 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * Destroy pool.
+     */
     public void destroyPool() {
         try {
             for (int i = 0; i < POOL_SIZE; i++) {

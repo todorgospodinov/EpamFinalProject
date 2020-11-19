@@ -8,6 +8,12 @@ import com.traulko.project.entity.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * The {@code MainPageCommand} class represents browse mail page command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class MainPageCommand implements CustomCommand {
     private static final String ENG_LOCALE = "en";
 

@@ -1,5 +1,11 @@
 package com.traulko.project.controller;
 
+/**
+ * The {@code RequestParameter} class represents request parameter.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class RequestParameter {
     public static final String COMMAND_NAME = "commandName";
     public static final String EMAIL = "email";

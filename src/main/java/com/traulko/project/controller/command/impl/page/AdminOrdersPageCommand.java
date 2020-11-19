@@ -11,6 +11,12 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * The {@code AdminOrdersPageCommand} class represents browse admin orders page command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -22,7 +28,7 @@ public class AdminOrdersPageCommand implements CustomCommand {
     public String execute(HttpServletRequest request) {
         String page;
         try {
-            List<CustomOrder> orderList = orderService.findAll();
+            List<CustomOrder> orderList = orderService.findAllOrders();
             request.setAttribute(RequestParameter.ORDERS, orderList);
             page = PagePath.ADMIN_ORDERS_PAGE;
         } catch (ServiceException e) {

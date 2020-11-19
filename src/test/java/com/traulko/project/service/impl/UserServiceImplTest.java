@@ -55,7 +55,7 @@ public class UserServiceImplTest {
             expected.put(RequestParameter.PATRONYMIC, "Patronymic");
             expected.put(RequestParameter.PASSWORD, "12345a");
             expected.put(RequestParameter.PASSWORD_REPEAT, "12345a");
-            userService.add(actual);
+            userService.addUser(actual);
             assertEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -81,7 +81,7 @@ public class UserServiceImplTest {
             expected.put(RequestParameter.PATRONYMIC, "Patronymic");
             expected.put(RequestParameter.PASSWORD, "12345a");
             expected.put(RequestParameter.PASSWORD_REPEAT, "12345a");
-            userService.add(actual);
+            userService.addUser(actual);
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -121,7 +121,7 @@ public class UserServiceImplTest {
         try {
             User expected = new User();
             when(userDao.findById(any(Integer.class))).thenReturn(Optional.of(new User()));
-            Optional<User> actual = userService.findById("1");
+            Optional<User> actual = userService.findUserById("1");
             assertEquals(actual.get(), expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -133,7 +133,7 @@ public class UserServiceImplTest {
         try {
             Optional<User> expected = Optional.of(new User());
             when(userDao.findById(any(Integer.class))).thenReturn(Optional.of(new User()));
-            Optional<User> actual = userService.findById(" ");
+            Optional<User> actual = userService.findUserById(" ");
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -145,7 +145,7 @@ public class UserServiceImplTest {
         try {
             User expected = new User();
             when(userDao.findByEmail(any(String.class))).thenReturn(Optional.of(new User()));
-            Optional<User> actual = userService.findByEmail("example@gmail.com");
+            Optional<User> actual = userService.findUserByEmail("example@gmail.com");
             assertEquals(actual.get(), expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -157,7 +157,7 @@ public class UserServiceImplTest {
         try {
             Optional<User> expected = Optional.of(new User());
             when(userDao.findByEmail(any(String.class))).thenReturn(Optional.of(new User()));
-            Optional<User> actual = userService.findById(" ");
+            Optional<User> actual = userService.findUserById(" ");
             assertNotEquals(actual, expected);
         } catch (ServiceException | DaoException e) {
             fail("Incorrect data", e);
@@ -199,7 +199,7 @@ public class UserServiceImplTest {
     public void removePositiveTest() {
         try {
             when(userDao.remove(any(String.class))).thenReturn(true);
-            boolean actual = userService.remove("admin@gmail.com");
+            boolean actual = userService.removeUser("admin@gmail.com");
             assertTrue(actual);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -210,7 +210,7 @@ public class UserServiceImplTest {
     public void removeNegativeTest() {
         try {
             when(userDao.remove(any(String.class))).thenReturn(true);
-            boolean actual = userService.remove(" ");
+            boolean actual = userService.removeUser(" ");
             assertFalse(actual);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -221,7 +221,7 @@ public class UserServiceImplTest {
     public void blockPositiveTest() {
         try {
             when(userDao.block(any(String.class))).thenReturn(true);
-            boolean actual = userService.block("admin@gmail.com");
+            boolean actual = userService.blockUser("admin@gmail.com");
             assertTrue(actual);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -232,7 +232,7 @@ public class UserServiceImplTest {
     public void blockNegativeTest() {
         try {
             when(userDao.block(any(String.class))).thenReturn(true);
-            boolean actual = userService.block(" ");
+            boolean actual = userService.blockUser(" ");
             assertFalse(actual);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -243,7 +243,7 @@ public class UserServiceImplTest {
     public void unblockPositiveTest() {
         try {
             when(userDao.unblock(any(String.class))).thenReturn(true);
-            boolean actual = userService.unblock("admin@gmail.com");
+            boolean actual = userService.unblockUser("admin@gmail.com");
             assertTrue(actual);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -254,7 +254,7 @@ public class UserServiceImplTest {
     public void unblockNegativeTest() {
         try {
             when(userDao.unblock(any(String.class))).thenReturn(true);
-            boolean actual = userService.unblock(" ");
+            boolean actual = userService.unblockUser(" ");
             assertFalse(actual);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -314,7 +314,7 @@ public class UserServiceImplTest {
         try {
             List<User> expected = new ArrayList<>();
             when(userDao.findAll()).thenReturn(new ArrayList<>());
-            List<User> actual = userService.findAll();
+            List<User> actual = userService.findAllUsers();
             assertEquals(actual, expected);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -326,7 +326,7 @@ public class UserServiceImplTest {
         try {
             List<User> expected = null;
             when(userDao.findAll()).thenReturn(new ArrayList<>());
-            List<User> actual = userService.findAll();
+            List<User> actual = userService.findAllUsers();
             assertNotEquals(actual, expected);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -338,7 +338,7 @@ public class UserServiceImplTest {
         try {
             List<User> expected = new ArrayList<>();
             when(userDao.findBySearchQuery(any(String.class))).thenReturn(new ArrayList<>());
-            List<User> actual = userService.findBySearchQuery("1");
+            List<User> actual = userService.findUsersBySearchQuery("1");
             assertEquals(actual, expected);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);
@@ -350,7 +350,7 @@ public class UserServiceImplTest {
         try {
             List<User> expected = null;
             when(userDao.findBySearchQuery(any(String.class))).thenReturn(new ArrayList<>());
-            List<User> actual = userService.findBySearchQuery("1");
+            List<User> actual = userService.findUsersBySearchQuery("1");
             assertNotEquals(actual, expected);
         } catch (DaoException | ServiceException e) {
             fail("Incorrect data", e);

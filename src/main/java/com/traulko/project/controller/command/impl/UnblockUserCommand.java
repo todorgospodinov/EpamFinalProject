@@ -12,6 +12,12 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The {@code UnblockUserCommand} class represents unblock user command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class UnblockUserCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(UnblockUserCommand.class);
     private static final UserService userService = new UserServiceImpl();
@@ -21,7 +27,7 @@ public class UnblockUserCommand implements CustomCommand {
         String page;
         String email = request.getParameter(RequestParameter.EMAIL);
         try {
-            if (userService.unblock(email)) {
+            if (userService.unblockUser(email)) {
                 request.setAttribute(RequestParameter.USER_UNBLOCK_SUCCESS_MESSAGE, true);
             } else {
                 request.setAttribute(RequestParameter.USER_UNBLOCK_ERROR_MESSAGE, true);

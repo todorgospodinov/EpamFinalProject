@@ -14,11 +14,17 @@ import com.traulko.project.validator.UserValidator;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The {@code UserBasketProductServiceImpl} class represents user basket product service implementation.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class UserBasketProductServiceImpl implements UserBasketProductService {
     private final UserBasketProductDao userBasketProductDao = UserBasketProductDaoImpl.getInstance();
 
     @Override
-    public boolean add(String userId, String productId) throws ServiceException {
+    public boolean addUserBasketProduct(String userId, String productId) throws ServiceException {
         boolean result = false;
         try {
             if (UserValidator.isIdValid(userId) &&
@@ -51,7 +57,7 @@ public class UserBasketProductServiceImpl implements UserBasketProductService {
     }
 
     @Override
-    public boolean remove(String userId, String productId) throws ServiceException {
+    public boolean removeUserBasketProduct(String userId, String productId) throws ServiceException {
         boolean result = false;
         try {
             if (UserValidator.isIdValid(userId) &&
@@ -74,7 +80,7 @@ public class UserBasketProductServiceImpl implements UserBasketProductService {
     }
 
     @Override
-    public List<UserBasketProduct> getUserBasketProductsByUserId(String id) throws ServiceException {
+    public List<UserBasketProduct> findUserBasketProductsByUserId(String id) throws ServiceException {
         List<UserBasketProduct> userBasketProductList = new ArrayList<>();
         try {
             if (UserBasketProductValidator.isIdValid(id)) {

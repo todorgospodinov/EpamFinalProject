@@ -15,6 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The {@code RegisterCommand} class represents register command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class RegisterCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(RegisterCommand.class);
     private static final UserService userService = new UserServiceImpl();
@@ -36,8 +42,8 @@ public class RegisterCommand implements CustomCommand {
         registrationParameters.put(RequestParameter.PASSWORD, password);
         registrationParameters.put(RequestParameter.PASSWORD_REPEAT, passwordRepeat);
         try {
-            if (userService.add(registrationParameters)) {
-                User user = userService.findByEmail(email).get();
+            if (userService.addUser(registrationParameters)) {
+                User user = userService.findUserByEmail(email).get();
                 userService.sendLetter(user, request.getRequestURL().toString());
                 request.setAttribute(RequestParameter.USER_CONFIRM_REGISTRATION_LETTER, true);
                 page = PagePath.MESSAGE;

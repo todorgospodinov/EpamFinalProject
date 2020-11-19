@@ -18,12 +18,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The {@code OrderServiceImpl} class represents order service implementation.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class OrderServiceImpl implements OrderService {
     private final OrderDao orderDao = OrderDaoImpl.getInstance();
     private final CustomTransaction customTransaction = CustomTransaction.getInstance();
 
     @Override
-    public boolean add(String userId, List<UserBasketProduct> userBasketProductList) throws ServiceException {
+    public boolean addOrder(String userId, List<UserBasketProduct> userBasketProductList) throws ServiceException {
         boolean result = false;
         try {
             if (UserValidator.isIdValid(userId) && userBasketProductList != null) {
@@ -45,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean remove(String orderId) throws ServiceException {
+    public boolean removeOrder(String orderId) throws ServiceException {
         boolean result = false;
         try {
             if (OrderValidator.isIdValid(orderId)) {
@@ -73,7 +79,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<CustomOrder> findBySearchQuery(String searchQuery) throws ServiceException {
+    public List<CustomOrder> findOrdersBySearchQuery(String searchQuery) throws ServiceException {
         try {
             return orderDao.findBySearchQuery(searchQuery);
         } catch (DaoException e) {
@@ -82,7 +88,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<CustomOrder> findAll() throws ServiceException {
+    public List<CustomOrder> findAllOrders() throws ServiceException {
         try {
             return orderDao.findAll();
         } catch (DaoException e) {
@@ -91,7 +97,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean produce(String orderId) throws ServiceException {
+    public boolean produceOrder(String orderId) throws ServiceException {
         boolean isProduced = false;
         try {
             if (OrderValidator.isIdValid(orderId)) {
@@ -106,7 +112,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean reject(String orderId) throws ServiceException {
+    public boolean rejectOrder(String orderId) throws ServiceException {
         boolean isRejected = false;
         try {
             if (OrderValidator.isIdValid(orderId)) {
@@ -121,7 +127,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Optional<CustomOrder> findById(String id) throws ServiceException {
+    public Optional<CustomOrder> findOrderById(String id) throws ServiceException {
         Optional<CustomOrder> orderOptional = Optional.empty();
         try {
             if (OrderValidator.isIdValid(id)) {

@@ -14,6 +14,12 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * The {@code ForgotPasswordCommand} class represents forgot password command.
+ *
+ * @author Yan Traulko
+ * @version 1.0
+ */
 public class ForgotPasswordCommand implements CustomCommand {
     private static final Logger LOGGER = LogManager.getLogger(RegisterCommand.class);
     private static final UserService userService = new UserServiceImpl();
@@ -23,7 +29,7 @@ public class ForgotPasswordCommand implements CustomCommand {
         String page;
         String email = request.getParameter(RequestParameter.EMAIL);
         try {
-            Optional<User> optionalUser = userService.findByEmail(email);
+            Optional<User> optionalUser = userService.findUserByEmail(email);
             if (optionalUser.isPresent()) {
                 User user = optionalUser.get();
                 userService.sendLetter(user, request.getRequestURL().toString());
